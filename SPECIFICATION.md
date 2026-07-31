@@ -2,7 +2,7 @@
 
 ## 1. Document status
 
-- Specification version: `0.2.0`
+- Specification version: `0.3.0`
 - Status: `draft`
 - Normative language: English
 - Schema dialect: JSON Schema Draft 2020-12

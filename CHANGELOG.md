@@ -4,6 +4,10 @@ All notable changes to the foundation package are documented here.
 
 ## [Unreleased]
 
+No changes yet.
+
+## [0.3.0] — 2026-07-31
+
 ### Added
 
 - deterministic Orchestrator MVP with repository evidence detection, confidence-preserving context

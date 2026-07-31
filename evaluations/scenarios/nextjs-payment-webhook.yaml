@@ -1,4 +1,4 @@
-schema_version: 0.2.0
+schema_version: 0.3.0
 id: nextjs-payment-webhook
 description: Verify strict runtime parsing, idempotency, and rejection of speculative CQRS for a Next.js
   payment webhook.
