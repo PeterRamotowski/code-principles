@@ -121,14 +121,19 @@ External resources MAY be cited for history or further reading, but:
 
 ```bash
 python3 -m pip install -r requirements-dev.txt
-python3 tools/generate_compendium.py
-python3 tools/validate.py
+make validate
 ```
 
-Or:
+The validation command parses every distributed YAML and JSON document with duplicate-key detection,
+validates schemas and known instances, checks identifier uniqueness, verifies references and dependency
+graphs, confirms generated output and manifest freshness, and validates local Markdown links. It does not
+rewrite the repository. The same command runs negative fixtures that prove malformed documents, schema
+violations, duplicate identifiers, dependency cycles, broken references, and broken links are rejected.
+
+To additionally reject inconsistently cased normative keywords:
 
 ```bash
-make generate validate
+make validate-normative
 ```
 
 Before creating a release archive, regenerate the content and manifest, validate them, and package the controlled distribution set:

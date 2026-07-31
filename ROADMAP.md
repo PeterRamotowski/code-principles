@@ -33,7 +33,7 @@ Exit criteria:
 
 ## Milestone 2 — Validation Tooling
 
-Status: `in progress`
+Status: `complete`
 
 Goal: make repository consistency testable.
 

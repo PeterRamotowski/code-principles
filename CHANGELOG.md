@@ -2,6 +2,19 @@
 
 All notable changes to the foundation package are documented here.
 
+## [Unreleased]
+
+### Added
+
+- repository-wide reference, identifier, dependency-cycle, duplicate-key, and Markdown-anchor validation;
+- optional normative-keyword linting and continuous integration validation;
+- negative fixtures covering malformed documents, schema violations, duplicate identifiers, dependency
+  cycles, broken references, broken Markdown links, and normative-keyword casing.
+
+### Fixed
+
+- resolved-policy examples now use canonical Core Skill, mode, and principle identifiers.
+
 ## [0.2.0] — 2026-07-30
 
 ### Added

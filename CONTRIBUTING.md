@@ -344,3 +344,10 @@ Do not contribute:
 Edit `principles/entries/*.yaml`, not generated compendium Markdown. Every new or materially changed entry must pass `schemas/principle.schema.json`, update relationships where needed, regenerate documentation, and include an evaluation impact review.
 
 A contribution must preserve self-containment. It may add supplementary references but may not introduce a normative external Skill dependency.
+
+## Repository validation
+
+Install `requirements-dev.txt` and run `make validate` before submitting a change. This single command
+checks syntax, schemas, identifiers, references, dependency cycles, generated content, the release
+manifest, local Markdown links, and the negative validation fixtures. Run `make validate-normative` when
+changing normative prose to also check RFC 2119-style keyword casing. The same commands run in CI.
