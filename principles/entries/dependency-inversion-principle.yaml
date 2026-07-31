@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: dependency-inversion-principle
+name: Dependency Inversion Principle
+aliases: []
+classification: principle
+category: architecture-and-dependencies
+status: candidate
+summary: High-level policy should not depend directly on volatile low-level details.
+canonical_statement: Both policy and details should meet at an abstraction justified by an independent
+  evolution boundary.
+intent: High-level policy should not depend directly on volatile low-level details.
+applies_when:
+- High-level policy must evolve independently from volatile infrastructure.
+- Dependency direction affects testability, deployability, or independent ownership.
+does_not_mean:
+- Do not create an interface for every class.
+- Do not invert stable language or framework primitives without value.
+trade_offs:
+- Indirection and adapters have a maintenance cost.
+- Framework isolation is valuable only where independent evolution is required.
+conflicts_with:
+- kiss
+- performance-budgeting
+reinforces:
+- information-hiding
+- open-closed-principle
+primary_core_skill: dependencies-and-boundaries
+example: A billing use case depends on a payment port because providers vary independently.
+counterexample: A private date formatter gets an interface, factory, and container registration.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- framework-native-design
+supports_concerns: []

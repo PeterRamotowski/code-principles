@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: locality-of-behaviour
+name: Locality of Behaviour
+aliases: []
+classification: principle
+category: modularity-and-object-design
+status: candidate
+summary: Place behavior near the data, UI, or concept it primarily affects.
+canonical_statement: Optimize for local understanding while preserving meaningful module boundaries.
+intent: Place behavior near the data, UI, or concept it primarily affects.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not duplicate authoritative business rules in every caller.
+- Do not use locality to bypass encapsulation or security boundaries.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- dry
+- separation-of-concerns
+- small-functions
+reinforces:
+- high-cohesion-low-coupling
+primary_core_skill: modular-design
+example: Keep component-specific state transitions with the component or its composable.
+counterexample: Move every small behavior into a distant global utility package.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

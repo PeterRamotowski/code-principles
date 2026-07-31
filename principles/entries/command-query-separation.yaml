@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: command-query-separation
+name: Command–Query Separation
+aliases: []
+classification: principle
+category: state-data-and-distribution
+status: candidate
+summary: An operation should either change state or return information, with exceptions made explicit.
+canonical_statement: Separate observation from mutation so callers can reason about effects.
+intent: An operation should either change state or return information, with exceptions made explicit.
+applies_when:
+- State changes, retries, concurrency, or distribution can affect correctness.
+- The system needs explicit semantics for commands, queries, and consistency.
+does_not_mean:
+- Do not prohibit useful atomic operations that must return a result.
+- Do not confuse CQS with CQRS.
+trade_offs:
+- Immutability and separation can increase allocation or coordination cost.
+- Distributed guarantees usually require operational complexity and failure handling.
+conflicts_with:
+- tell-dont-ask
+reinforces:
+- explicit-over-implicit
+primary_core_skill: state-and-side-effects
+example: A query retrieves account status; a command changes it.
+counterexample: A method named `getStatus` mutates persistence and sends notifications.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- atomic-update-result
+supports_concerns: []

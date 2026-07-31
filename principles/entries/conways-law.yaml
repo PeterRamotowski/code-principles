@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: conways-law
+name: Conway’s Law
+aliases: []
+classification: law
+category: change-and-engineering-systems
+status: candidate
+summary: System structures tend to reflect communication structures of their organizations.
+canonical_statement: Use organizational boundaries as an architectural input and review misalignment between
+  ownership and dependencies.
+intent: System structures tend to reflect communication structures of their organizations.
+applies_when:
+- The project is being evolved, modernized, reviewed, or reorganized.
+- Organizational and historical context affects technical outcomes.
+does_not_mean:
+- Do not treat the law as deterministic.
+- Do not restructure teams solely to mimic a fashionable architecture.
+trade_offs:
+- Local improvement can enlarge the scope and risk of a change.
+- Organizational laws are diagnostic lenses, not deterministic commands.
+conflicts_with: []
+reinforces:
+- high-cohesion-low-coupling
+- package-by-feature
+primary_core_skill: engineering-review-lenses
+example: Align module ownership with teams that can change and deploy it coherently.
+counterexample: Design tightly coupled services owned by teams that cannot coordinate effectively.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- idealized-architecture
+supports_concerns: []

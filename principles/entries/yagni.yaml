@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: yagni
+name: YAGNI
+aliases: []
+classification: heuristic
+category: simplicity-and-clarity
+status: candidate
+summary: Avoid implementing capabilities that are not required by current evidence.
+canonical_statement: Do not pay present complexity for speculative future needs.
+intent: Avoid implementing capabilities that are not required by current evidence.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not ignore known near-term requirements.
+- Do not use YAGNI to avoid inexpensive compatibility seams at public boundaries.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with:
+- dry
+- open-closed-principle
+reinforces:
+- kiss
+- premature-optimization
+primary_core_skill: abstraction-and-reuse
+example: Keep one concrete storage implementation until a second implementation or boundary is real.
+counterexample: Design a generic distributed storage abstraction for a local prototype.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- public-api-extensibility
+supports_concerns: []

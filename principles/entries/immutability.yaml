@@ -1,0 +1,38 @@
+schema_version: 0.2.0
+id: immutability
+name: Immutability
+aliases: []
+classification: design-property
+category: state-data-and-distribution
+status: candidate
+summary: Prefer values that do not change after construction where this reduces reasoning and concurrency
+  risk.
+canonical_statement: Use immutability selectively for values, messages, and shared state; controlled mutation
+  may be clearer or more efficient for entities and hot paths.
+intent: Prefer values that do not change after construction where this reduces reasoning and concurrency
+  risk.
+applies_when:
+- State changes, retries, concurrency, or distribution can affect correctness.
+- The system needs explicit semantics for commands, queries, and consistency.
+does_not_mean:
+- Do not clone large structures blindly.
+- Do not pretend mutable frameworks or ORMs are immutable through superficial wrappers.
+trade_offs:
+- Immutability and separation can increase allocation or coordination cost.
+- Distributed guarantees usually require operational complexity and failure handling.
+conflicts_with:
+- performance-budgeting
+reinforces:
+- command-query-separation
+- make-illegal-states-unrepresentable
+primary_core_skill: state-and-side-effects
+example: Use an immutable Money value and replace it as a whole.
+counterexample: Copy a multi-gigabyte buffer for every small update without a budget.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- orm-conventions
+supports_concerns: []

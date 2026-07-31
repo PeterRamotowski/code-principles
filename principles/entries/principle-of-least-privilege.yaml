@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: principle-of-least-privilege
+name: Principle of Least Privilege
+aliases: []
+classification: security-principle
+category: contracts-errors-and-security
+status: candidate
+summary: Grant only the permissions and capabilities required for the task.
+canonical_statement: Limit authority by default and expand it deliberately for verified needs.
+intent: Grant only the permissions and capabilities required for the task.
+applies_when:
+- Data or control crosses a trust, process, module, or API boundary.
+- Invalid state could threaten correctness, security, or recoverability.
+does_not_mean:
+- Do not break required operations by removing essential access without analysis.
+- Do not treat application-level checks as a replacement for infrastructure permissions.
+trade_offs:
+- Stricter contracts can reduce compatibility with inconsistent external producers.
+- Defensive checks can duplicate validation if trust boundaries are not explicit.
+conflicts_with: []
+reinforces:
+- defensive-programming
+- information-hiding
+primary_core_skill: contracts-and-errors
+example: Give a worker read access only to the bucket prefix it processes.
+counterexample: Run every service with administrative database credentials.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- operational-convenience
+supports_concerns: []

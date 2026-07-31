@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: performance-budgeting
+name: Performance Budgets
+aliases: []
+classification: engineering-practice
+category: performance-and-resources
+status: candidate
+summary: Define acceptable latency, throughput, memory, and determinism limits.
+canonical_statement: A budget turns performance from vague preference into a verifiable requirement.
+intent: Define acceptable latency, throughput, memory, and determinism limits.
+applies_when:
+- Measured behavior violates a budget or known scale constraint.
+- Memory, latency, throughput, or determinism is a first-class requirement.
+does_not_mean:
+- Do not choose arbitrary numbers without user or operational relevance.
+- Do not optimize every component equally when only end-to-end budgets matter.
+trade_offs:
+- Optimization usually increases complexity and narrows implementation freedom.
+- Benchmarks can mislead when they do not represent production workloads.
+conflicts_with: []
+reinforces:
+- measure-dont-guess
+primary_core_skill: performance-and-resources
+example: Set a p95 response and memory ceiling for a worker and test against it.
+counterexample: Call a system “fast” without a workload or target.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- clarity
+- portability
+supports_concerns: []

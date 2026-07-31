@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: postels-law
+name: Postel’s Law / Robustness Principle
+aliases: []
+classification: heuristic
+category: contracts-errors-and-security
+status: candidate
+summary: 'Historically: be conservative in output and liberal in accepted input; modern use requires caution.'
+canonical_statement: Tolerate harmless representational variation only when semantics remain unambiguous
+  and interoperability benefits outweigh long-term ambiguity.
+intent: 'Historically: be conservative in output and liberal in accepted input; modern use requires caution.'
+applies_when:
+- Data or control crosses a trust, process, module, or API boundary.
+- Invalid state could threaten correctness, security, or recoverability.
+does_not_mean:
+- Do not accept malformed or ambiguous semantics.
+- Do not normalize security-sensitive input in surprising ways.
+trade_offs:
+- Stricter contracts can reduce compatibility with inconsistent external producers.
+- Defensive checks can duplicate validation if trust boundaries are not explicit.
+conflicts_with:
+- fail-fast
+- parse-dont-validate
+reinforces:
+- principle-of-least-astonishment
+primary_core_skill: contracts-and-errors
+example: Accept equivalent whitespace variants while producing one canonical format.
+counterexample: Guess which account an ambiguous identifier refers to.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- api-evolution
+supports_concerns: []

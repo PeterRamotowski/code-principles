@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: eventual-consistency
+name: Eventual Consistency
+aliases: []
+classification: system-property
+category: state-data-and-distribution
+status: candidate
+summary: Replicated or derived state may be temporarily inconsistent but converges under defined conditions.
+canonical_statement: Use eventual consistency only with explicit convergence, conflict, observability,
+  and user-experience semantics.
+intent: Replicated or derived state may be temporarily inconsistent but converges under defined conditions.
+applies_when:
+- State changes, retries, concurrency, or distribution can affect correctness.
+- The system needs explicit semantics for commands, queries, and consistency.
+does_not_mean:
+- Do not use the phrase to excuse indefinite or silent divergence.
+- Do not choose it when atomic consistency is affordable and required.
+trade_offs:
+- Immutability and separation can increase allocation or coordination cost.
+- Distributed guarantees usually require operational complexity and failure handling.
+conflicts_with:
+- principle-of-least-astonishment
+- single-source-of-truth
+reinforces:
+- idempotency
+primary_core_skill: distributed-reliability
+example: A search index updates asynchronously with visible freshness expectations and retries.
+counterexample: Return contradictory balances with no reconciliation or stale-data indication.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- immediate-consistency
+supports_concerns:
+- distributed-reliability

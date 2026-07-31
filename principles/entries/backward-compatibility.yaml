@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: backward-compatibility
+name: Backward Compatibility
+aliases: []
+classification: evolution-principle
+category: api-and-evolution
+status: candidate
+summary: Preserve existing consumer behavior across compatible releases.
+canonical_statement: Protect intentional public contracts and provide migration or deprecation paths for
+  necessary breaking changes.
+intent: Preserve existing consumer behavior across compatible releases.
+applies_when:
+- Consumers cannot be updated atomically with the implementation.
+- Observable behavior or data formats form an external contract.
+does_not_mean:
+- Do not preserve every internal implementation detail.
+- Do not keep unsafe behavior indefinitely without a security transition plan.
+trade_offs:
+- Compatibility limits refactoring freedom.
+- Preserving accidental behavior can accumulate long-term complexity.
+conflicts_with:
+- kiss
+reinforces:
+- hyrums-law
+- semantic-versioning
+primary_core_skill: api-and-compatibility
+example: Add a field without changing existing response semantics and document deprecation before removal.
+counterexample: Rename a public field in a patch release without migration.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- refactoring-freedom
+- security-hardening
+supports_concerns: []

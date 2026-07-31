@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: brooks-law
+name: Brooks’s Law
+aliases: []
+classification: law
+category: change-and-engineering-systems
+status: candidate
+summary: Adding people to a late software project can make it later.
+canonical_statement: Account for onboarding and communication overhead when changing staffing under schedule
+  pressure.
+intent: Adding people to a late software project can make it later.
+applies_when:
+- The project is being evolved, modernized, reviewed, or reorganized.
+- Organizational and historical context affects technical outcomes.
+does_not_mean:
+- Do not conclude that staffing never helps.
+- Do not use the law to avoid addressing chronic understaffing.
+trade_offs:
+- Local improvement can enlarge the scope and risk of a change.
+- Organizational laws are diagnostic lenses, not deterministic commands.
+conflicts_with: []
+reinforces:
+- conways-law
+primary_core_skill: engineering-review-lenses
+example: Add contributors to separable work with onboarding capacity instead of the critical path.
+counterexample: Put many new developers into a tightly coupled late subsystem and expect immediate acceleration.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- deadline-pressure
+supports_concerns: []

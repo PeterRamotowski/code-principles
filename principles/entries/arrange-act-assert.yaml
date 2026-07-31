@@ -1,0 +1,33 @@
+schema_version: 0.2.0
+id: arrange-act-assert
+name: Arrange–Act–Assert
+aliases: []
+classification: testing-pattern
+category: testing-and-verification
+status: candidate
+summary: Structure a test around preparation, one primary action, and verification.
+canonical_statement: Use AAA to make intent and the behavior under test visible.
+intent: Structure a test around preparation, one primary action, and verification.
+applies_when:
+- Behavior must remain correct through change.
+- Risk, complexity, or public contracts justify automated verification.
+does_not_mean:
+- Do not force asynchronous or property-based tests into unnatural formatting.
+- Do not treat comments for each section as mandatory.
+trade_offs:
+- Tests can over-couple to implementation details.
+- A testing method that improves one feedback loop can slow another.
+conflicts_with:
+- given-when-then
+reinforces:
+- one-logical-behaviour-per-test
+primary_core_skill: testing-strategy
+example: Prepare an account, perform withdrawal, then verify balance and event.
+counterexample: Interleave many unrelated actions and assertions with no clear focus.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

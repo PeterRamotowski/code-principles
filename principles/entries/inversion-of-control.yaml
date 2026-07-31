@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: inversion-of-control
+name: Inversion of Control
+aliases: []
+classification: architecture-pattern
+category: architecture-and-dependencies
+status: candidate
+summary: Delegate control of lifecycle or flow to a framework, runtime, or coordinating component.
+canonical_statement: Use IoC where a host legitimately controls execution; keep application policy visible
+  and testable.
+intent: Delegate control of lifecycle or flow to a framework, runtime, or coordinating component.
+applies_when:
+- High-level policy must evolve independently from volatile infrastructure.
+- Dependency direction affects testability, deployability, or independent ownership.
+does_not_mean:
+- Do not confuse IoC with dependency injection alone.
+- Do not allow framework callbacks to scatter business policy invisibly.
+trade_offs:
+- Indirection and adapters have a maintenance cost.
+- Framework isolation is valuable only where independent evolution is required.
+conflicts_with:
+- explicit-over-implicit
+reinforces:
+- dependency-injection
+primary_core_skill: dependencies-and-boundaries
+example: A web framework invokes request handlers while the handler delegates to an explicit use case.
+counterexample: Business decisions are distributed across undocumented lifecycle hooks.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- framework-native-design
+supports_concerns: []

@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: package-by-feature
+name: Package by Feature
+aliases: []
+classification: organizational-principle
+category: modularity-and-object-design
+status: candidate
+summary: Organize top-level code around capabilities or business features rather than only technical layers.
+canonical_statement: Feature-oriented grouping improves ownership and change locality when features evolve
+  independently.
+intent: Organize top-level code around capabilities or business features rather than only technical layers.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not forbid technical sublayers inside a feature.
+- Do not apply feature packaging to a small library whose public concepts are not application features.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- common-reuse-principle
+reinforces:
+- common-closure-principle
+- high-cohesion-low-coupling
+primary_core_skill: modular-design
+example: Place order use cases, policies, and adapters under an orders module.
+counterexample: Put all controllers, all services, and all repositories in global folders in a large domain
+  application.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- shared-infrastructure
+supports_concerns: []

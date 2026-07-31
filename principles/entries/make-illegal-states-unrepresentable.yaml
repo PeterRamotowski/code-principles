@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: make-illegal-states-unrepresentable
+name: Make Illegal States Unrepresentable
+aliases: []
+classification: principle
+category: contracts-errors-and-security
+status: candidate
+summary: Use types and constructors that prevent invalid combinations where practical.
+canonical_statement: Represent invariants structurally when doing so improves correctness without disproportionate
+  complexity.
+intent: Use types and constructors that prevent invalid combinations where practical.
+applies_when:
+- Data or control crosses a trust, process, module, or API boundary.
+- Invalid state could threaten correctness, security, or recoverability.
+does_not_mean:
+- Do not encode every business possibility into an unmanageable type system.
+- Do not assume compile-time types validate external runtime data.
+trade_offs:
+- Stricter contracts can reduce compatibility with inconsistent external producers.
+- Defensive checks can duplicate validation if trust boundaries are not explicit.
+conflicts_with: []
+reinforces:
+- encapsulation
+- parse-dont-validate
+primary_core_skill: contracts-and-errors
+example: Represent payment status as a closed set with state-specific required data.
+counterexample: Use independent booleans that permit mutually contradictory states.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- dynamic-schema-evolution
+- serialization
+supports_concerns: []

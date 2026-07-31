@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: single-level-of-abstraction
+name: Single Level of Abstraction
+aliases: []
+classification: heuristic
+category: simplicity-and-clarity
+status: candidate
+summary: Keep a function or section focused on one primary conceptual level.
+canonical_statement: Do not mix orchestration with low-level parsing, transport, or storage details unless
+  that combination is locally clearer.
+intent: Keep a function or section focused on one primary conceptual level.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not extract every statement into another function.
+- Do not use abstraction level as an arbitrary line-count rule.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with:
+- locality-of-behaviour
+- small-functions
+reinforces:
+- separation-of-concerns
+primary_core_skill: code-clarity
+example: A use-case function coordinates named validation, persistence, and notification operations.
+counterexample: A use-case function contains SQL formatting, HTTP retry loops, and business decisions
+  inline.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

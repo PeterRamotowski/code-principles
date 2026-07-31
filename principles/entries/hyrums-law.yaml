@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: hyrums-law
+name: Hyrum’s Law
+aliases: []
+classification: law
+category: api-and-evolution
+status: candidate
+summary: With enough users, every observable behavior will be depended on by somebody.
+canonical_statement: Treat observable behavior as potential compatibility surface while still distinguishing
+  intentional guarantees from accidental behavior.
+intent: With enough users, every observable behavior will be depended on by somebody.
+applies_when:
+- Consumers cannot be updated atomically with the implementation.
+- Observable behavior or data formats form an external contract.
+does_not_mean:
+- Do not conclude that change is impossible.
+- Do not promise all incidental timing or formatting forever.
+trade_offs:
+- Compatibility limits refactoring freedom.
+- Preserving accidental behavior can accumulate long-term complexity.
+conflicts_with:
+- semantic-versioning
+reinforces:
+- backward-compatibility
+- principle-of-least-astonishment
+primary_core_skill: engineering-review-lenses
+example: Measure ecosystem usage and stage a compatibility-sensitive change.
+counterexample: Assume an undocumented response ordering has no consumers in a mature API.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- refactoring-freedom
+supports_concerns: []

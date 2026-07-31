@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: one-logical-behaviour-per-test
+name: One Logical Behaviour per Test
+aliases: []
+classification: testing-heuristic
+category: testing-and-verification
+status: candidate
+summary: Keep each test focused on one coherent behavior, allowing multiple related assertions.
+canonical_statement: A test may assert several facets of one outcome; assertion count alone does not define
+  focus.
+intent: Keep each test focused on one coherent behavior, allowing multiple related assertions.
+applies_when:
+- Behavior must remain correct through change.
+- Risk, complexity, or public contracts justify automated verification.
+does_not_mean:
+- Do not require exactly one assertion statement.
+- Do not split one behavior into many tests that duplicate expensive setup without benefit.
+trade_offs:
+- Tests can over-couple to implementation details.
+- A testing method that improves one feedback loop can slow another.
+conflicts_with: []
+reinforces:
+- arrange-act-assert
+primary_core_skill: testing-strategy
+example: Assert status, payload, and audit event produced by one command.
+counterexample: Test successful creation, deletion, permissions, and retries in one case.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- test-runtime-cost
+supports_concerns: []

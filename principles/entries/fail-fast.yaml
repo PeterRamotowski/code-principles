@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: fail-fast
+name: Fail Fast
+aliases: []
+classification: principle
+category: contracts-errors-and-security
+status: candidate
+summary: Detect and report invalid conditions close to their source.
+canonical_statement: Do not continue with corrupted assumptions when a required contract is violated.
+intent: Detect and report invalid conditions close to their source.
+applies_when:
+- Data or control crosses a trust, process, module, or API boundary.
+- Invalid state could threaten correctness, security, or recoverability.
+does_not_mean:
+- Do not crash whole systems for recoverable external failures.
+- Do not expose sensitive diagnostics to untrusted users.
+trade_offs:
+- Stricter contracts can reduce compatibility with inconsistent external producers.
+- Defensive checks can duplicate validation if trust boundaries are not explicit.
+conflicts_with: []
+reinforces:
+- design-by-contract
+- parse-dont-validate
+primary_core_skill: contracts-and-errors
+example: Reject an invalid configuration during startup with a precise message.
+counterexample: Replace a missing required value with an arbitrary default and fail later.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- fault-tolerance
+- tolerant-input
+supports_concerns: []

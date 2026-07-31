@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: principle-of-least-astonishment
+name: Principle of Least Astonishment
+aliases: []
+classification: principle
+category: simplicity-and-clarity
+status: candidate
+summary: Design behavior and interfaces to match reasonable user expectations.
+canonical_statement: Similar operations should behave consistently, and surprising behavior should be
+  removed or made explicit.
+intent: Design behavior and interfaces to match reasonable user expectations.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not assume all users share the same expectations.
+- Do not preserve an unsafe convention solely because it is familiar.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with:
+- backward-compatibility
+reinforces:
+- explicit-over-implicit
+- meaningful-names
+primary_core_skill: code-clarity
+example: A method named `find` returns absence without mutating state.
+counterexample: A getter sends a network request and deletes expired records.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- security-hardening
+supports_concerns: []

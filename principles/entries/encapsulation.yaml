@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: encapsulation
+name: Encapsulation
+aliases: []
+classification: principle
+category: modularity-and-object-design
+status: candidate
+summary: Control access to state and preserve invariants through a deliberate interface.
+canonical_statement: Encapsulation protects valid transitions; it is not merely private fields with unrestricted
+  setters.
+intent: Control access to state and preserve invariants through a deliberate interface.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not equate encapsulation with object-oriented syntax.
+- Do not hide data that is intentionally a transparent value record.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with: []
+reinforces:
+- information-hiding
+- make-illegal-states-unrepresentable
+primary_core_skill: modular-design
+example: A domain object exposes operations that preserve its valid status transitions.
+counterexample: Private fields are paired with setters that permit every invalid state.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- data-transfer-objects
+- serialization
+supports_concerns: []

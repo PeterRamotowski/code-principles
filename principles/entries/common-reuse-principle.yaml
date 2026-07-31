@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: common-reuse-principle
+name: Common Reuse Principle
+aliases: []
+classification: principle
+category: abstraction-and-reuse
+status: candidate
+summary: Group reusable elements so consumers do not depend on things they do not use.
+canonical_statement: Package boundaries should align with actual reuse sets and release coupling.
+intent: Group reusable elements so consumers do not depend on things they do not use.
+applies_when:
+- Knowledge or policy is duplicated in ways that can diverge.
+- A stable variation axis or public extension boundary has been demonstrated.
+does_not_mean:
+- Do not split packages into tiny fragments without consumer value.
+- Do not assume code used together today will always be versioned together.
+trade_offs:
+- An abstraction introduces coupling between its consumers.
+- Premature reuse can make independently changing concepts harder to modify.
+conflicts_with:
+- common-closure-principle
+- package-by-feature
+reinforces:
+- interface-segregation-principle
+primary_core_skill: modular-design
+example: Publish a focused parsing package without unrelated storage dependencies.
+counterexample: Require consumers of one utility to install an entire application framework.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

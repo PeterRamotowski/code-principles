@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: defensive-programming
+name: Defensive Programming
+aliases: []
+classification: technique
+category: contracts-errors-and-security
+status: candidate
+summary: Anticipate invalid input, partial failure, and misuse at relevant boundaries.
+canonical_statement: Defend trust boundaries and dangerous operations without scattering redundant checks
+  through trusted internal code.
+intent: Anticipate invalid input, partial failure, and misuse at relevant boundaries.
+applies_when:
+- Data or control crosses a trust, process, module, or API boundary.
+- Invalid state could threaten correctness, security, or recoverability.
+does_not_mean:
+- Do not silently swallow errors.
+- Do not validate the same trusted invariant in every private helper.
+trade_offs:
+- Stricter contracts can reduce compatibility with inconsistent external producers.
+- Defensive checks can duplicate validation if trust boundaries are not explicit.
+conflicts_with:
+- fail-fast
+- performance-budgeting
+reinforces:
+- design-by-contract
+- principle-of-least-privilege
+primary_core_skill: contracts-and-errors
+example: Validate an external webhook signature, schema, and replay key.
+counterexample: Wrap every internal call in a catch-all that converts errors to `null`.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

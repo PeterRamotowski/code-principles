@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: semantic-versioning
+name: Semantic Versioning
+aliases: []
+classification: versioning-method
+category: api-and-evolution
+status: candidate
+summary: Communicate compatibility impact through major, minor, and patch versions.
+canonical_statement: Apply SemVer to a clearly defined public API; version numbers cannot replace documented
+  compatibility policy.
+intent: Communicate compatibility impact through major, minor, and patch versions.
+applies_when:
+- Consumers cannot be updated atomically with the implementation.
+- Observable behavior or data formats form an external contract.
+does_not_mean:
+- Do not claim SemVer when the public API is undefined.
+- Do not assume every observable bug fix is non-breaking for every consumer.
+trade_offs:
+- Compatibility limits refactoring freedom.
+- Preserving accidental behavior can accumulate long-term complexity.
+conflicts_with:
+- hyrums-law
+reinforces:
+- backward-compatibility
+primary_core_skill: api-and-compatibility
+example: Release a breaking public API change in a new major version with migration notes.
+counterexample: Ship incompatible behavior as a patch because the code change is small.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- security-fix
+supports_concerns: []

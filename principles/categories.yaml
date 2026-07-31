@@ -1,0 +1,24 @@
+schema_version: 0.2.0
+categories:
+- id: simplicity-and-clarity
+  name: Simplicity, Scope, and Code Clarity
+- id: abstraction-and-reuse
+  name: Abstraction, Reuse, and Changeability
+- id: modularity-and-object-design
+  name: Modularity, Object Design, and Locality
+- id: contracts-errors-and-security
+  name: Contracts, Errors, Validation, and Security
+- id: architecture-and-dependencies
+  name: Architecture and Dependency Direction
+- id: state-data-and-distribution
+  name: State, Side Effects, Data, and Distribution
+- id: api-and-evolution
+  name: Public APIs, Compatibility, and Evolution
+- id: testing-and-verification
+  name: Testing and Verification
+- id: performance-and-resources
+  name: Performance and Resource Efficiency
+- id: change-and-engineering-systems
+  name: Safe Change and Engineering Systems
+- id: umbrella-concepts
+  name: Umbrella Concepts and Review Vocabulary

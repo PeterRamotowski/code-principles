@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: law-of-demeter
+name: Law of Demeter
+aliases: []
+classification: heuristic
+category: modularity-and-object-design
+status: candidate
+summary: Limit knowledge of distant object structure and collaboration chains.
+canonical_statement: Collaborate through direct dependencies and stable operations rather than navigating
+  internal object graphs.
+intent: Limit knowledge of distant object structure and collaboration chains.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not wrap every property access in a forwarding method.
+- Do not apply the rule mechanically to transparent data records.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- locality-of-behaviour
+reinforces:
+- information-hiding
+primary_core_skill: modular-design
+example: Ask an order to calculate its total instead of traversing internal line-item implementation details.
+counterexample: Use `a.getB().getC().getD().execute()` across module boundaries.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- data-transfer-objects
+supports_concerns:
+- low-coupling

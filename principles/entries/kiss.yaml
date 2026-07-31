@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: kiss
+name: KISS
+aliases: []
+classification: heuristic
+category: simplicity-and-clarity
+status: candidate
+summary: Prefer the simplest design that correctly satisfies verified requirements.
+canonical_statement: Choose the least complicated solution that preserves correctness, safety, and required
+  quality attributes.
+intent: Prefer the simplest design that correctly satisfies verified requirements.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not equate simplicity with the fewest lines of code.
+- Do not remove necessary validation, error handling, or domain rules.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with:
+- backward-compatibility
+- open-closed-principle
+- performance-budgeting
+reinforces:
+- avoid-accidental-complexity
+- yagni
+primary_core_skill: code-clarity
+example: Use a direct function and explicit validation for a small stable workflow.
+counterexample: Introduce a plugin framework for one known implementation.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: clean-code
+name: Clean Code
+aliases: []
+classification: umbrella-concept
+category: umbrella-concepts
+status: candidate
+summary: A broad label for readable, maintainable, intention-revealing code.
+canonical_statement: Translate the label into precise rules such as naming, cohesion, explicit contracts,
+  and bounded complexity.
+intent: A broad label for readable, maintainable, intention-revealing code.
+applies_when:
+- A broad family of related practices needs a shared vocabulary.
+- The concept is used as an index into more precise rules.
+does_not_mean:
+- Do not treat one author’s style preferences as universal law.
+- Do not cite “clean code” instead of identifying a concrete problem.
+trade_offs:
+- Umbrella labels can hide disagreements about their actual meaning.
+- They must not replace concrete context-sensitive guidance.
+conflicts_with:
+- performance-budgeting
+reinforces:
+- boy-scout-rule
+- meaningful-names
+- small-functions
+primary_core_skill: engineering-review-lenses
+example: Explain that a method hides a side effect and propose an explicit command.
+counterexample: Reject code solely because a function exceeds an arbitrary length.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- framework-convention
+supports_concerns: []

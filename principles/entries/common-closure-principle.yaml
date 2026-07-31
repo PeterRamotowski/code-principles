@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: common-closure-principle
+name: Common Closure Principle
+aliases: []
+classification: principle
+category: abstraction-and-reuse
+status: candidate
+summary: Group elements that change for the same reasons and at the same times.
+canonical_statement: A package should concentrate the impact of a likely class of change.
+intent: Group elements that change for the same reasons and at the same times.
+applies_when:
+- Knowledge or policy is duplicated in ways that can diverge.
+- A stable variation axis or public extension boundary has been demonstrated.
+does_not_mean:
+- Do not group code only because it has the same technical layer.
+- Do not predict remote future changes without evidence.
+trade_offs:
+- An abstraction introduces coupling between its consumers.
+- Premature reuse can make independently changing concepts harder to modify.
+conflicts_with:
+- common-reuse-principle
+- package-by-feature
+reinforces:
+- high-cohesion-low-coupling
+- single-responsibility-principle
+primary_core_skill: modular-design
+example: Keep a feature’s policy, validation, and related adapters in one module when they evolve together.
+counterexample: Place all validators in one global package despite unrelated business ownership.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

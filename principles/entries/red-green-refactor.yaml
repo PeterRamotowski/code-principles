@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: red-green-refactor
+name: Red–Green–Refactor
+aliases: []
+classification: development-cycle
+category: testing-and-verification
+status: candidate
+summary: Create a failing test, make it pass minimally, then improve structure while preserving behavior.
+canonical_statement: Use the cycle as a disciplined feedback loop where TDD is active.
+intent: Create a failing test, make it pass minimally, then improve structure while preserving behavior.
+applies_when:
+- Behavior must remain correct through change.
+- Risk, complexity, or public contracts justify automated verification.
+does_not_mean:
+- Do not skip refactoring indefinitely.
+- Do not implement unsafe shortcuts in the green phase that violate nonfunctional requirements.
+trade_offs:
+- Tests can over-couple to implementation details.
+- A testing method that improves one feedback loop can slow another.
+conflicts_with:
+- performance-budgeting
+reinforces:
+- boy-scout-rule
+- test-driven-development
+primary_core_skill: testing-strategy
+example: Add a failing edge case, implement it, then remove duplication.
+counterexample: Add implementation without observing the test fail, leaving uncertainty that the test
+  is meaningful.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

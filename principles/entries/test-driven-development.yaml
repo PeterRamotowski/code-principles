@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: test-driven-development
+name: Test-Driven Development
+aliases: []
+classification: development-method
+category: testing-and-verification
+status: candidate
+summary: Use tests to drive small design and implementation increments.
+canonical_statement: Choose TDD when it improves feedback and design; it is a method, not a universal
+  moral requirement.
+intent: Use tests to drive small design and implementation increments.
+applies_when:
+- Behavior must remain correct through change.
+- Risk, complexity, or public contracts justify automated verification.
+does_not_mean:
+- Do not require test-first work for exploratory spikes or generated migrations.
+- Do not confuse TDD with comprehensive testing by itself.
+trade_offs:
+- Tests can over-couple to implementation details.
+- A testing method that improves one feedback loop can slow another.
+conflicts_with: []
+reinforces:
+- red-green-refactor
+primary_core_skill: testing-strategy
+example: Drive a parser rule through a failing example, minimal implementation, and refactoring.
+counterexample: Write brittle tests first for an interface that is still being experimentally discovered.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- exploratory-design
+- legacy-constraints
+- ui-experimentation
+supports_concerns: []

@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: design-by-contract
+name: Design by Contract
+aliases: []
+classification: method
+category: contracts-errors-and-security
+status: candidate
+summary: Specify preconditions, postconditions, and invariants for operations and types.
+canonical_statement: A contract defines obligations of callers and guarantees of implementations.
+intent: Specify preconditions, postconditions, and invariants for operations and types.
+applies_when:
+- Data or control crosses a trust, process, module, or API boundary.
+- Invalid state could threaten correctness, security, or recoverability.
+does_not_mean:
+- Do not rely only on comments when contracts can be encoded or tested.
+- Do not expose implementation details as contractual guarantees.
+trade_offs:
+- Stricter contracts can reduce compatibility with inconsistent external producers.
+- Defensive checks can duplicate validation if trust boundaries are not explicit.
+conflicts_with:
+- backward-compatibility
+reinforces:
+- fail-fast
+- liskov-substitution-principle
+primary_core_skill: contracts-and-errors
+example: Document and enforce that a transfer amount is positive and balances remain valid.
+counterexample: Accept any input and leave callers to infer failure from later state.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- tolerant-input
+supports_concerns: []

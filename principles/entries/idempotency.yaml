@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: idempotency
+name: Idempotency
+aliases: []
+classification: system-property
+category: state-data-and-distribution
+status: candidate
+summary: Repeated execution of the same operation has the same intended effect as one execution.
+canonical_statement: Design retried commands and integrations so duplicate delivery does not duplicate
+  business effects.
+intent: Repeated execution of the same operation has the same intended effect as one execution.
+applies_when:
+- State changes, retries, concurrency, or distribution can affect correctness.
+- The system needs explicit semantics for commands, queries, and consistency.
+does_not_mean:
+- Do not assume HTTP method names guarantee application idempotency.
+- Do not ignore the storage and retention policy for idempotency keys.
+trade_offs:
+- Immutability and separation can increase allocation or coordination cost.
+- Distributed guarantees usually require operational complexity and failure handling.
+conflicts_with:
+- performance-budgeting
+reinforces:
+- defensive-programming
+- eventual-consistency
+primary_core_skill: distributed-reliability
+example: Store a provider event identifier and process each payment event once.
+counterexample: Send duplicate invoices whenever a queue retries a message.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- at-least-once-delivery
+supports_concerns: []

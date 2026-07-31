@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: composition-over-inheritance
+name: Composition over Inheritance
+aliases: []
+classification: heuristic
+category: modularity-and-object-design
+status: candidate
+summary: Prefer assembling behavior from collaborators over deep implementation inheritance.
+canonical_statement: Use inheritance when there is genuine behavioral substitutability or a required framework
+  contract; otherwise prefer composition.
+intent: Prefer assembling behavior from collaborators over deep implementation inheritance.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not prohibit inheritance categorically.
+- Do not replace a simple subtype with excessive delegation ceremony.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- performance-budgeting
+reinforces:
+- information-hiding
+- liskov-substitution-principle
+primary_core_skill: modular-design
+example: Compose validation strategies into a service.
+counterexample: Create a six-level class hierarchy to share a few helper methods.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- framework-inheritance
+supports_concerns: []

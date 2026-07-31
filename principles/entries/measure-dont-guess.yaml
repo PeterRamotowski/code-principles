@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: measure-dont-guess
+name: Measure, Don’t Guess
+aliases: []
+classification: performance-principle
+category: performance-and-resources
+status: candidate
+summary: Base performance decisions on representative measurement and explicit budgets.
+canonical_statement: Use profiling, benchmarks, and production telemetry to identify bottlenecks and verify
+  improvement.
+intent: Base performance decisions on representative measurement and explicit budgets.
+applies_when:
+- Measured behavior violates a budget or known scale constraint.
+- Memory, latency, throughput, or determinism is a first-class requirement.
+does_not_mean:
+- Do not treat a microbenchmark as production truth.
+- Do not delay obvious complexity analysis until after failure.
+trade_offs:
+- Optimization usually increases complexity and narrows implementation freedom.
+- Benchmarks can mislead when they do not represent production workloads.
+conflicts_with: []
+reinforces:
+- premature-optimization
+primary_core_skill: performance-and-resources
+example: Benchmark streaming and materialized processing with representative files.
+counterexample: Rewrite code based on intuition without measuring before and after.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- limited-observability
+supports_concerns: []

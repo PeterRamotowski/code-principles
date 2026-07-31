@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: solid
+name: SOLID
+aliases: []
+classification: umbrella-concept
+category: umbrella-concepts
+status: candidate
+summary: A mnemonic grouping five object-oriented design principles.
+canonical_statement: Use the individual principles selectively; SOLID is not a universal compliance target.
+intent: A mnemonic grouping five object-oriented design principles.
+applies_when:
+- A broad family of related practices needs a shared vocabulary.
+- The concept is used as an index into more precise rules.
+does_not_mean:
+- Do not score code by counting interfaces or classes.
+- Do not apply object-oriented rules to data pipelines or functional code without translation.
+trade_offs:
+- Umbrella labels can hide disagreements about their actual meaning.
+- They must not replace concrete context-sensitive guidance.
+conflicts_with:
+- kiss
+- yagni
+reinforces:
+- open-closed-principle
+- single-responsibility-principle
+primary_core_skill: engineering-review-lenses
+example: Use LSP to review a public subtype contract where substitution is required.
+counterexample: Add interfaces and layers merely to claim that a small script is SOLID.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- data-oriented-design
+supports_concerns: []

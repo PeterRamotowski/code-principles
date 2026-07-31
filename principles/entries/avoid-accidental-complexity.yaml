@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: avoid-accidental-complexity
+name: Avoid Accidental Complexity
+aliases: []
+classification: principle
+category: simplicity-and-clarity
+status: candidate
+summary: Minimize complexity introduced by implementation choices rather than the problem itself.
+canonical_statement: Distinguish essential domain complexity from avoidable tooling, layering, and coordination
+  overhead.
+intent: Minimize complexity introduced by implementation choices rather than the problem itself.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not label difficult business rules as accidental complexity.
+- Do not remove abstractions that protect real boundaries.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with: []
+reinforces:
+- kiss
+- yagni
+primary_core_skill: code-clarity
+example: Represent a simple workflow with explicit steps rather than a generic rule engine.
+counterexample: Introduce event sourcing to avoid writing a small transactional update.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- architecture-isolation
+- extensibility
+supports_concerns: []

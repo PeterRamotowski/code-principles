@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: stable-dependencies-principle
+name: Stable Dependencies Principle
+aliases: []
+classification: principle
+category: architecture-and-dependencies
+status: candidate
+summary: Dependencies should generally point toward components that change less often.
+canonical_statement: A volatile module should not become a foundation for more stable policy without an
+  isolating boundary.
+intent: Dependencies should generally point toward components that change less often.
+applies_when:
+- High-level policy must evolve independently from volatile infrastructure.
+- Dependency direction affects testability, deployability, or independent ownership.
+does_not_mean:
+- Do not assume low change frequency automatically means good design.
+- Do not freeze unstable modules to satisfy the rule.
+trade_offs:
+- Indirection and adapters have a maintenance cost.
+- Framework isolation is valuable only where independent evolution is required.
+conflicts_with:
+- package-by-feature
+reinforces:
+- acyclic-dependencies-principle
+- dependency-inversion-principle
+primary_core_skill: dependencies-and-boundaries
+example: Domain policy does not depend on a vendor SDK that changes frequently.
+counterexample: A public library exposes experimental framework internals in its API.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: chestertons-fence
+name: Chesterton’s Fence
+aliases: []
+classification: law
+category: change-and-engineering-systems
+status: candidate
+summary: Understand why an existing rule or mechanism exists before removing it.
+canonical_statement: Investigate historical constraints, users, and failure modes before deleting apparently
+  unnecessary complexity.
+intent: Understand why an existing rule or mechanism exists before removing it.
+applies_when:
+- The project is being evolved, modernized, reviewed, or reorganized.
+- Organizational and historical context affects technical outcomes.
+does_not_mean:
+- Do not preserve obsolete code forever.
+- Do not require perfect historical knowledge before reversible experiments.
+trade_offs:
+- Local improvement can enlarge the scope and risk of a change.
+- Organizational laws are diagnostic lenses, not deterministic commands.
+conflicts_with:
+- yagni
+reinforces: []
+primary_core_skill: engineering-review-lenses
+example: Check incident history before removing a duplicated validation path.
+counterexample: Delete a strange retry guard because no current test explains it.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- simplification
+supports_concerns:
+- characterization-testing
+- safe-change

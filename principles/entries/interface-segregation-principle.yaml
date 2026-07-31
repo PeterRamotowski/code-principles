@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: interface-segregation-principle
+name: Interface Segregation Principle
+aliases: []
+classification: principle
+category: modularity-and-object-design
+status: candidate
+summary: Prefer focused consumer-oriented contracts over broad interfaces.
+canonical_statement: Consumers should not depend on operations they cannot or should not use.
+intent: Prefer focused consumer-oriented contracts over broad interfaces.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not create a separate one-method interface for every method automatically.
+- Do not fragment a cohesive protocol that is always implemented and consumed together.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- common-reuse-principle
+reinforces:
+- dependency-inversion-principle
+primary_core_skill: modular-design
+example: A reporting consumer depends only on read operations.
+counterexample: A cache client must implement unrelated queue and metrics methods.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- api-stability
+supports_concerns: []

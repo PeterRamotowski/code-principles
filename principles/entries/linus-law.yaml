@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: linus-law
+name: Linus’s Law
+aliases: []
+classification: law
+category: change-and-engineering-systems
+status: candidate
+summary: With enough qualified review, many defects become easier to identify.
+canonical_statement: Use diverse review and transparent diagnostics to improve defect discovery, while
+  preserving ownership and review quality.
+intent: With enough qualified review, many defects become easier to identify.
+applies_when:
+- The project is being evolved, modernized, reviewed, or reorganized.
+- Organizational and historical context affects technical outcomes.
+does_not_mean:
+- Do not assume more reviewers automatically produce better review.
+- Do not expose sensitive code or data indiscriminately.
+trade_offs:
+- Local improvement can enlarge the scope and risk of a change.
+- Organizational laws are diagnostic lenses, not deterministic commands.
+conflicts_with: []
+reinforces: []
+primary_core_skill: engineering-review-lenses
+example: Invite focused review from domain, security, and operations perspectives.
+counterexample: Add dozens of unfocused reviewers and assume defects will disappear.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- coordination-cost
+supports_concerns:
+- code-review

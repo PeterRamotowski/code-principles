@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: no-magic
+name: No Magic
+aliases: []
+classification: heuristic
+category: simplicity-and-clarity
+status: candidate
+summary: Avoid unexplained values, hidden side effects, and non-obvious conventions.
+canonical_statement: Behavior that materially affects correctness should be discoverable from code, types,
+  configuration, or documented conventions.
+intent: Avoid unexplained values, hidden side effects, and non-obvious conventions.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not reject metaprogramming categorically.
+- Do not replace every literal with a constant when it has no independent meaning.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with: []
+reinforces:
+- explicit-over-implicit
+primary_core_skill: code-clarity
+example: Use a named timeout constant tied to an external protocol requirement.
+counterexample: Use `86417` in several places with no explanation or unit.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- framework-convention
+supports_concerns: []

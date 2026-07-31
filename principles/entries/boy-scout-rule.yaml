@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: boy-scout-rule
+name: Boy Scout Rule
+aliases: []
+classification: change-principle
+category: change-and-engineering-systems
+status: candidate
+summary: Leave the code you touch slightly better than you found it.
+canonical_statement: Make bounded local improvements that support the task without turning every change
+  into a broad rewrite.
+intent: Leave the code you touch slightly better than you found it.
+applies_when:
+- The project is being evolved, modernized, reviewed, or reorganized.
+- Organizational and historical context affects technical outcomes.
+does_not_mean:
+- Do not expand scope into unrelated refactoring.
+- Do not change public behavior without requirement and review.
+trade_offs:
+- Local improvement can enlarge the scope and risk of a change.
+- Organizational laws are diagnostic lenses, not deterministic commands.
+conflicts_with:
+- backward-compatibility
+reinforces: []
+primary_core_skill: safe-change
+example: Rename a misleading local variable and remove dead code while fixing the related bug.
+counterexample: Reorganize the entire repository during a one-line production fix.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- minimal-change-scope
+supports_concerns:
+- safe-change

@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: premature-generalization
+name: Avoid Premature Generalization
+aliases: []
+classification: heuristic
+category: abstraction-and-reuse
+status: candidate
+summary: Delay general-purpose abstractions until commonality and variation are understood.
+canonical_statement: Prefer concrete duplication over a wrong shared abstraction when the concepts are
+  still evolving independently.
+intent: Delay general-purpose abstractions until commonality and variation are understood.
+applies_when:
+- Knowledge or policy is duplicated in ways that can diverge.
+- A stable variation axis or public extension boundary has been demonstrated.
+does_not_mean:
+- Do not ignore obvious stable platform boundaries.
+- Do not use this heuristic to avoid refactoring proven duplication.
+trade_offs:
+- An abstraction introduces coupling between its consumers.
+- Premature reuse can make independently changing concepts harder to modify.
+conflicts_with:
+- dry
+- open-closed-principle
+reinforces:
+- yagni
+primary_core_skill: abstraction-and-reuse
+example: Keep two evolving importers separate until their shared protocol is stable.
+counterexample: Build a universal importer framework from one data source.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

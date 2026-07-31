@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: make-it-work-right-fast
+name: Make It Work, Make It Right, Make It Fast
+aliases: []
+classification: process-model
+category: simplicity-and-clarity
+status: candidate
+summary: Sequence development through correctness, design quality, and measured optimization.
+canonical_statement: Establish correct behavior, improve structure, then optimize verified bottlenecks.
+intent: Sequence development through correctness, design quality, and measured optimization.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not ship unsafe or unmaintainable code as merely “working.”
+- Do not postpone known performance constraints that shape the architecture.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with: []
+reinforces:
+- measure-dont-guess
+- premature-optimization
+primary_core_skill: performance-and-resources
+example: Implement a correct parser, add tests, then profile large files.
+counterexample: Micro-optimize an unverified algorithm before its behavior is defined.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- hard-real-time-constraints
+supports_concerns: []

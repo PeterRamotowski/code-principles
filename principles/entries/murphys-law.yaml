@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: murphys-law
+name: Murphy’s Law
+aliases: []
+classification: law
+category: change-and-engineering-systems
+status: candidate
+summary: Failure paths that are possible should be expected over sufficient time and scale.
+canonical_statement: Design proportionate safeguards for plausible failures rather than assuming ideal
+  operation.
+intent: Failure paths that are possible should be expected over sufficient time and scale.
+applies_when:
+- The project is being evolved, modernized, reviewed, or reorganized.
+- Organizational and historical context affects technical outcomes.
+does_not_mean:
+- Do not attempt to defend against every imaginable scenario.
+- Do not replace risk analysis with pessimism.
+trade_offs:
+- Local improvement can enlarge the scope and risk of a change.
+- Organizational laws are diagnostic lenses, not deterministic commands.
+conflicts_with:
+- kiss
+reinforces:
+- defensive-programming
+primary_core_skill: engineering-review-lenses
+example: Handle network timeout and retry semantics in an external integration.
+counterexample: Assume a remote service will always return once and exactly once.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- cost-control
+supports_concerns:
+- observability

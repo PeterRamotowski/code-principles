@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: acyclic-dependencies-principle
+name: Acyclic Dependencies Principle
+aliases: []
+classification: principle
+category: architecture-and-dependencies
+status: candidate
+summary: Keep component dependency graphs free of cycles at meaningful architectural boundaries.
+canonical_statement: Cycles between independently evolving modules signal unclear ownership or misplaced
+  abstractions.
+intent: Keep component dependency graphs free of cycles at meaningful architectural boundaries.
+applies_when:
+- High-level policy must evolve independently from volatile infrastructure.
+- Dependency direction affects testability, deployability, or independent ownership.
+does_not_mean:
+- Do not treat every runtime object reference as an architectural cycle.
+- Do not introduce a shared junk module merely to break a cycle.
+trade_offs:
+- Indirection and adapters have a maintenance cost.
+- Framework isolation is valuable only where independent evolution is required.
+conflicts_with:
+- locality-of-behaviour
+reinforces:
+- high-cohesion-low-coupling
+- stable-dependencies-principle
+primary_core_skill: dependencies-and-boundaries
+example: Extract a stable contract or relocate ownership to remove a feature-module cycle.
+counterexample: Create mutual imports between billing and orders that require coordinated releases.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: ports-and-adapters
+name: Ports and Adapters
+aliases: []
+classification: architecture-style
+category: architecture-and-dependencies
+status: candidate
+summary: Place application policy behind explicit ports and implement external interactions through adapters.
+canonical_statement: Use the style when independent evolution from infrastructure is valuable; scale the
+  number of ports to actual boundaries.
+intent: Place application policy behind explicit ports and implement external interactions through adapters.
+applies_when:
+- High-level policy must evolve independently from volatile infrastructure.
+- Dependency direction affects testability, deployability, or independent ownership.
+does_not_mean:
+- Do not wrap every framework function in an adapter.
+- Do not force a simple CRUD application into many layers without domain or portability needs.
+trade_offs:
+- Indirection and adapters have a maintenance cost.
+- Framework isolation is valuable only where independent evolution is required.
+conflicts_with:
+- kiss
+reinforces:
+- dependency-inversion-principle
+- information-hiding
+primary_core_skill: dependencies-and-boundaries
+example: Isolate a public library’s storage integration behind a small port.
+counterexample: Create ports for string formatting, logging syntax, and every local helper.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- framework-native-design
+supports_concerns: []

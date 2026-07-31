@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: single-responsibility-principle
+name: Single Responsibility Principle
+aliases: []
+classification: principle
+category: modularity-and-object-design
+status: candidate
+summary: Give a module one cohesive responsibility or primary reason to change.
+canonical_statement: Responsibility is defined by change ownership and purpose, not by method count or
+  file size.
+intent: Give a module one cohesive responsibility or primary reason to change.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not interpret SRP as one method per class.
+- Do not split a cohesive domain concept across arbitrary layers.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- locality-of-behaviour
+- small-functions
+reinforces:
+- common-closure-principle
+- separation-of-concerns
+primary_core_skill: modular-design
+example: A pricing policy changes for pricing rules, not email formatting.
+counterexample: A `UserManager` handles authentication, billing, exports, and notifications.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

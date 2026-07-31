@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: high-cohesion-low-coupling
+name: High Cohesion, Low Coupling
+aliases: []
+classification: principle
+category: modularity-and-object-design
+status: candidate
+summary: Keep related behavior together while minimizing knowledge between modules.
+canonical_statement: A strong module owns a coherent concept and exposes a small explicit contract.
+intent: Keep related behavior together while minimizing knowledge between modules.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not eliminate all coupling; software components must collaborate.
+- Do not maximize cohesion by creating an oversized module around an entire application.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- single-source-of-truth
+reinforces:
+- information-hiding
+- separation-of-concerns
+primary_core_skill: modular-design
+example: A feature module owns its workflow and exposes a narrow application API.
+counterexample: Every class imports shared globals and reaches into other modules’ internals.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- distribution
+supports_concerns: []

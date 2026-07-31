@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: dependency-injection
+name: Dependency Injection
+aliases: []
+classification: technique
+category: architecture-and-dependencies
+status: candidate
+summary: Supply collaborators from outside a component instead of constructing hidden dependencies internally.
+canonical_statement: Use DI to make required dependencies explicit and lifecycle-controlled; do not use
+  it as ceremonial indirection.
+intent: Supply collaborators from outside a component instead of constructing hidden dependencies internally.
+applies_when:
+- High-level policy must evolve independently from volatile infrastructure.
+- Dependency direction affects testability, deployability, or independent ownership.
+does_not_mean:
+- Do not inject simple immutable values through a container when direct parameters are clearer.
+- Do not use service locators disguised as injection.
+trade_offs:
+- Indirection and adapters have a maintenance cost.
+- Framework isolation is valuable only where independent evolution is required.
+conflicts_with: []
+reinforces:
+- dependency-inversion-principle
+- explicit-over-implicit
+primary_core_skill: dependencies-and-boundaries
+example: Pass a repository into an application service constructor.
+counterexample: Resolve a global container inside every method.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- construction-simplicity
+- framework-convention
+supports_concerns: []

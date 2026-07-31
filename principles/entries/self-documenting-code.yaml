@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: self-documenting-code
+name: Self-Documenting Code
+aliases: []
+classification: heuristic
+category: simplicity-and-clarity
+status: candidate
+summary: Express intent through structure, names, types, and explicit control flow.
+canonical_statement: Code should explain its normal behavior without requiring comments that translate
+  unclear implementation.
+intent: Express intent through structure, names, types, and explicit control flow.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not eliminate comments that explain rationale, constraints, or surprising external behavior.
+- Do not assume readable code replaces public documentation.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with: []
+reinforces:
+- explicit-over-implicit
+- meaningful-names
+primary_core_skill: code-clarity
+example: Use a named domain operation and comment only why a regulatory exception exists.
+counterexample: Keep obscure bit manipulation and add a comment that paraphrases each line.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- concise-code
+supports_concerns: []

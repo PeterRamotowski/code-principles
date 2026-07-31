@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: single-source-of-truth
+name: Single Source of Truth
+aliases: []
+classification: principle
+category: abstraction-and-reuse
+status: candidate
+summary: Give each authoritative fact or policy one canonical owner.
+canonical_statement: Derived views may be duplicated, but authority and synchronization rules must be
+  explicit.
+intent: Give each authoritative fact or policy one canonical owner.
+applies_when:
+- Knowledge or policy is duplicated in ways that can diverge.
+- A stable variation axis or public extension boundary has been demonstrated.
+does_not_mean:
+- Do not require all data to live in one physical database.
+- Do not confuse caching or denormalization with multiple authorities when reconciliation is defined.
+trade_offs:
+- An abstraction introduces coupling between its consumers.
+- Premature reuse can make independently changing concepts harder to modify.
+conflicts_with:
+- eventual-consistency
+reinforces:
+- dry
+- information-hiding
+primary_core_skill: abstraction-and-reuse
+example: Store the canonical status once and derive presentation labels.
+counterexample: Allow two services to independently decide the same business status without reconciliation.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- availability
+supports_concerns: []

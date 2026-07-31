@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: given-when-then
+name: Given–When–Then
+aliases: []
+classification: testing-pattern
+category: testing-and-verification
+status: candidate
+summary: Describe behavior through context, event, and outcome.
+canonical_statement: Use the structure when scenario language improves shared understanding, especially
+  for acceptance behavior.
+intent: Describe behavior through context, event, and outcome.
+applies_when:
+- Behavior must remain correct through change.
+- Risk, complexity, or public contracts justify automated verification.
+does_not_mean:
+- Do not duplicate a verbose scenario DSL for trivial unit tests.
+- Do not mistake readable wording for complete assertions.
+trade_offs:
+- Tests can over-couple to implementation details.
+- A testing method that improves one feedback loop can slow another.
+conflicts_with:
+- arrange-act-assert
+reinforces:
+- test-behaviour-not-implementation
+primary_core_skill: testing-strategy
+example: Given an expired token, when a request is made, then access is denied.
+counterexample: Write a scenario that asserts internal method-call order rather than user-visible behavior.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: information-hiding
+name: Information Hiding
+aliases: []
+classification: principle
+category: modularity-and-object-design
+status: candidate
+summary: Hide volatile design decisions behind stable boundaries.
+canonical_statement: A module should expose what consumers need while retaining freedom to change implementation
+  details.
+intent: Hide volatile design decisions behind stable boundaries.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not hide information required for observability or correct use.
+- Do not create opaque abstractions with undocumented behavior.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with: []
+reinforces:
+- encapsulation
+- open-closed-principle
+primary_core_skill: modular-design
+example: Expose a storage contract without leaking database-specific query objects.
+counterexample: Return internal mutable collections that callers can modify freely.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- debuggability
+- performance-control
+supports_concerns: []

@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: galls-law
+name: Gall’s Law
+aliases: []
+classification: law
+category: change-and-engineering-systems
+status: candidate
+summary: Working complex systems generally evolve from working simpler systems.
+canonical_statement: Prefer evolutionary growth from validated foundations over designing a complete complex
+  system in one step.
+intent: Working complex systems generally evolve from working simpler systems.
+applies_when:
+- The project is being evolved, modernized, reviewed, or reorganized.
+- Organizational and historical context affects technical outcomes.
+does_not_mean:
+- Do not assume every simple system can evolve into any complex target.
+- Do not avoid necessary architectural preparation for known constraints.
+trade_offs:
+- Local improvement can enlarge the scope and risk of a change.
+- Organizational laws are diagnostic lenses, not deterministic commands.
+conflicts_with: []
+reinforces:
+- kiss
+- make-it-work-right-fast
+primary_core_skill: engineering-review-lenses
+example: Deliver a small working workflow and evolve it with observed needs.
+counterexample: Launch an untested platform containing every anticipated subsystem.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- big-design-up-front
+supports_concerns: []

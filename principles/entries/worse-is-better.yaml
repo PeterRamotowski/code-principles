@@ -1,0 +1,38 @@
+schema_version: 0.2.0
+id: worse-is-better
+name: Worse Is Better
+aliases: []
+classification: design-philosophy
+category: simplicity-and-clarity
+status: candidate
+summary: A simpler, sufficiently correct design can achieve wider adoption and evolve more effectively
+  than a theoretically perfect one.
+canonical_statement: Prefer a smaller coherent solution when completeness would impose disproportionate
+  implementation and adoption cost.
+intent: A simpler, sufficiently correct design can achieve wider adoption and evolve more effectively
+  than a theoretically perfect one.
+applies_when:
+- The code must be understood and changed by people other than its author.
+- A simpler implementation satisfies the current verified requirements.
+does_not_mean:
+- Do not use the phrase to justify known correctness or security defects.
+- Do not treat popularity as proof of technical quality.
+trade_offs:
+- Local simplicity can conflict with extensibility, reuse, or performance requirements.
+- Reducing visible code can increase hidden behavior; clarity is more important than terseness.
+conflicts_with:
+- clean-architecture-dependency-rule
+reinforces:
+- galls-law
+- kiss
+primary_core_skill: engineering-review-lenses
+example: Ship a narrow interoperable format that can evolve through versions.
+counterexample: Ignore data-loss cases because the simpler implementation is easier to release.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- completeness
+supports_concerns: []

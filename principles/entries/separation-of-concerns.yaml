@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: separation-of-concerns
+name: Separation of Concerns
+aliases: []
+classification: principle
+category: modularity-and-object-design
+status: candidate
+summary: Separate responsibilities that represent different concerns or change drivers.
+canonical_statement: A component should not combine unrelated policy, presentation, persistence, and infrastructure
+  decisions without a clear reason.
+intent: Separate responsibilities that represent different concerns or change drivers.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not require one layer or class per concern.
+- Do not separate code that must be understood and changed together.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- locality-of-behaviour
+- performance-budgeting
+reinforces:
+- high-cohesion-low-coupling
+- single-responsibility-principle
+primary_core_skill: modular-design
+example: Keep rendering separate from payment authorization policy.
+counterexample: Mix database queries, HTML rendering, and authorization decisions in one handler.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []

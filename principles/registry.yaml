@@ -1,0 +1,586 @@
+schema_version: 0.2.0
+status: candidate
+canonical_source: principles/entries
+generated_outputs:
+- principles/registry.yaml
+- principles/relationships.yaml
+- principles/INDEX.md
+- principles/categories
+- principles/compendium
+principles:
+- id: acyclic-dependencies-principle
+  name: Acyclic Dependencies Principle
+  classification: principle
+  category: architecture-and-dependencies
+  status: candidate
+  source: principles/entries/acyclic-dependencies-principle.yaml
+  compendium: principles/compendium/acyclic-dependencies-principle.md
+  primary_core_skill: dependencies-and-boundaries
+- id: arrange-act-assert
+  name: Arrange–Act–Assert
+  classification: testing-pattern
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/arrange-act-assert.yaml
+  compendium: principles/compendium/arrange-act-assert.md
+  primary_core_skill: testing-strategy
+- id: avoid-accidental-complexity
+  name: Avoid Accidental Complexity
+  classification: principle
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/avoid-accidental-complexity.yaml
+  compendium: principles/compendium/avoid-accidental-complexity.md
+  primary_core_skill: code-clarity
+- id: backward-compatibility
+  name: Backward Compatibility
+  classification: evolution-principle
+  category: api-and-evolution
+  status: candidate
+  source: principles/entries/backward-compatibility.yaml
+  compendium: principles/compendium/backward-compatibility.md
+  primary_core_skill: api-and-compatibility
+- id: boy-scout-rule
+  name: Boy Scout Rule
+  classification: change-principle
+  category: change-and-engineering-systems
+  status: candidate
+  source: principles/entries/boy-scout-rule.yaml
+  compendium: principles/compendium/boy-scout-rule.md
+  primary_core_skill: safe-change
+- id: brooks-law
+  name: Brooks’s Law
+  classification: law
+  category: change-and-engineering-systems
+  status: candidate
+  source: principles/entries/brooks-law.yaml
+  compendium: principles/compendium/brooks-law.md
+  primary_core_skill: engineering-review-lenses
+- id: chestertons-fence
+  name: Chesterton’s Fence
+  classification: law
+  category: change-and-engineering-systems
+  status: candidate
+  source: principles/entries/chestertons-fence.yaml
+  compendium: principles/compendium/chestertons-fence.md
+  primary_core_skill: engineering-review-lenses
+- id: clean-architecture-dependency-rule
+  name: Clean Architecture Dependency Rule
+  classification: architecture-rule
+  category: architecture-and-dependencies
+  status: candidate
+  source: principles/entries/clean-architecture-dependency-rule.yaml
+  compendium: principles/compendium/clean-architecture-dependency-rule.md
+  primary_core_skill: dependencies-and-boundaries
+- id: clean-code
+  name: Clean Code
+  classification: umbrella-concept
+  category: umbrella-concepts
+  status: candidate
+  source: principles/entries/clean-code.yaml
+  compendium: principles/compendium/clean-code.md
+  primary_core_skill: engineering-review-lenses
+- id: command-query-separation
+  name: Command–Query Separation
+  classification: principle
+  category: state-data-and-distribution
+  status: candidate
+  source: principles/entries/command-query-separation.yaml
+  compendium: principles/compendium/command-query-separation.md
+  primary_core_skill: state-and-side-effects
+- id: common-closure-principle
+  name: Common Closure Principle
+  classification: principle
+  category: abstraction-and-reuse
+  status: candidate
+  source: principles/entries/common-closure-principle.yaml
+  compendium: principles/compendium/common-closure-principle.md
+  primary_core_skill: modular-design
+- id: common-reuse-principle
+  name: Common Reuse Principle
+  classification: principle
+  category: abstraction-and-reuse
+  status: candidate
+  source: principles/entries/common-reuse-principle.yaml
+  compendium: principles/compendium/common-reuse-principle.md
+  primary_core_skill: modular-design
+- id: composition-over-inheritance
+  name: Composition over Inheritance
+  classification: heuristic
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/composition-over-inheritance.yaml
+  compendium: principles/compendium/composition-over-inheritance.md
+  primary_core_skill: modular-design
+- id: conways-law
+  name: Conway’s Law
+  classification: law
+  category: change-and-engineering-systems
+  status: candidate
+  source: principles/entries/conways-law.yaml
+  compendium: principles/compendium/conways-law.md
+  primary_core_skill: engineering-review-lenses
+- id: cqrs
+  name: Command Query Responsibility Segregation
+  classification: architecture-pattern
+  category: state-data-and-distribution
+  status: candidate
+  source: principles/entries/cqrs.yaml
+  compendium: principles/compendium/cqrs.md
+  primary_core_skill: state-and-side-effects
+- id: defensive-programming
+  name: Defensive Programming
+  classification: technique
+  category: contracts-errors-and-security
+  status: candidate
+  source: principles/entries/defensive-programming.yaml
+  compendium: principles/compendium/defensive-programming.md
+  primary_core_skill: contracts-and-errors
+- id: dependency-injection
+  name: Dependency Injection
+  classification: technique
+  category: architecture-and-dependencies
+  status: candidate
+  source: principles/entries/dependency-injection.yaml
+  compendium: principles/compendium/dependency-injection.md
+  primary_core_skill: dependencies-and-boundaries
+- id: dependency-inversion-principle
+  name: Dependency Inversion Principle
+  classification: principle
+  category: architecture-and-dependencies
+  status: candidate
+  source: principles/entries/dependency-inversion-principle.yaml
+  compendium: principles/compendium/dependency-inversion-principle.md
+  primary_core_skill: dependencies-and-boundaries
+- id: design-by-contract
+  name: Design by Contract
+  classification: method
+  category: contracts-errors-and-security
+  status: candidate
+  source: principles/entries/design-by-contract.yaml
+  compendium: principles/compendium/design-by-contract.md
+  primary_core_skill: contracts-and-errors
+- id: dry
+  name: DRY
+  classification: principle
+  category: abstraction-and-reuse
+  status: candidate
+  source: principles/entries/dry.yaml
+  compendium: principles/compendium/dry.md
+  primary_core_skill: abstraction-and-reuse
+- id: encapsulation
+  name: Encapsulation
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/encapsulation.yaml
+  compendium: principles/compendium/encapsulation.md
+  primary_core_skill: modular-design
+- id: eventual-consistency
+  name: Eventual Consistency
+  classification: system-property
+  category: state-data-and-distribution
+  status: candidate
+  source: principles/entries/eventual-consistency.yaml
+  compendium: principles/compendium/eventual-consistency.md
+  primary_core_skill: distributed-reliability
+- id: explicit-over-implicit
+  name: Explicit Is Better Than Implicit
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/explicit-over-implicit.yaml
+  compendium: principles/compendium/explicit-over-implicit.md
+  primary_core_skill: code-clarity
+- id: fail-fast
+  name: Fail Fast
+  classification: principle
+  category: contracts-errors-and-security
+  status: candidate
+  source: principles/entries/fail-fast.yaml
+  compendium: principles/compendium/fail-fast.md
+  primary_core_skill: contracts-and-errors
+- id: first-tests
+  name: FIRST Tests
+  classification: umbrella-concept
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/first-tests.yaml
+  compendium: principles/compendium/first-tests.md
+  primary_core_skill: testing-strategy
+- id: galls-law
+  name: Gall’s Law
+  classification: law
+  category: change-and-engineering-systems
+  status: candidate
+  source: principles/entries/galls-law.yaml
+  compendium: principles/compendium/galls-law.md
+  primary_core_skill: engineering-review-lenses
+- id: given-when-then
+  name: Given–When–Then
+  classification: testing-pattern
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/given-when-then.yaml
+  compendium: principles/compendium/given-when-then.md
+  primary_core_skill: testing-strategy
+- id: high-cohesion-low-coupling
+  name: High Cohesion, Low Coupling
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/high-cohesion-low-coupling.yaml
+  compendium: principles/compendium/high-cohesion-low-coupling.md
+  primary_core_skill: modular-design
+- id: hyrums-law
+  name: Hyrum’s Law
+  classification: law
+  category: api-and-evolution
+  status: candidate
+  source: principles/entries/hyrums-law.yaml
+  compendium: principles/compendium/hyrums-law.md
+  primary_core_skill: engineering-review-lenses
+- id: idempotency
+  name: Idempotency
+  classification: system-property
+  category: state-data-and-distribution
+  status: candidate
+  source: principles/entries/idempotency.yaml
+  compendium: principles/compendium/idempotency.md
+  primary_core_skill: distributed-reliability
+- id: immutability
+  name: Immutability
+  classification: design-property
+  category: state-data-and-distribution
+  status: candidate
+  source: principles/entries/immutability.yaml
+  compendium: principles/compendium/immutability.md
+  primary_core_skill: state-and-side-effects
+- id: information-hiding
+  name: Information Hiding
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/information-hiding.yaml
+  compendium: principles/compendium/information-hiding.md
+  primary_core_skill: modular-design
+- id: interface-segregation-principle
+  name: Interface Segregation Principle
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/interface-segregation-principle.yaml
+  compendium: principles/compendium/interface-segregation-principle.md
+  primary_core_skill: modular-design
+- id: inversion-of-control
+  name: Inversion of Control
+  classification: architecture-pattern
+  category: architecture-and-dependencies
+  status: candidate
+  source: principles/entries/inversion-of-control.yaml
+  compendium: principles/compendium/inversion-of-control.md
+  primary_core_skill: dependencies-and-boundaries
+- id: kiss
+  name: KISS
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/kiss.yaml
+  compendium: principles/compendium/kiss.md
+  primary_core_skill: code-clarity
+- id: law-of-demeter
+  name: Law of Demeter
+  classification: heuristic
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/law-of-demeter.yaml
+  compendium: principles/compendium/law-of-demeter.md
+  primary_core_skill: modular-design
+- id: linus-law
+  name: Linus’s Law
+  classification: law
+  category: change-and-engineering-systems
+  status: candidate
+  source: principles/entries/linus-law.yaml
+  compendium: principles/compendium/linus-law.md
+  primary_core_skill: engineering-review-lenses
+- id: liskov-substitution-principle
+  name: Liskov Substitution Principle
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/liskov-substitution-principle.yaml
+  compendium: principles/compendium/liskov-substitution-principle.md
+  primary_core_skill: modular-design
+- id: locality-of-behaviour
+  name: Locality of Behaviour
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/locality-of-behaviour.yaml
+  compendium: principles/compendium/locality-of-behaviour.md
+  primary_core_skill: modular-design
+- id: make-illegal-states-unrepresentable
+  name: Make Illegal States Unrepresentable
+  classification: principle
+  category: contracts-errors-and-security
+  status: candidate
+  source: principles/entries/make-illegal-states-unrepresentable.yaml
+  compendium: principles/compendium/make-illegal-states-unrepresentable.md
+  primary_core_skill: contracts-and-errors
+- id: make-it-work-right-fast
+  name: Make It Work, Make It Right, Make It Fast
+  classification: process-model
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/make-it-work-right-fast.yaml
+  compendium: principles/compendium/make-it-work-right-fast.md
+  primary_core_skill: performance-and-resources
+- id: meaningful-names
+  name: Meaningful Names
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/meaningful-names.yaml
+  compendium: principles/compendium/meaningful-names.md
+  primary_core_skill: code-clarity
+- id: measure-dont-guess
+  name: Measure, Don’t Guess
+  classification: performance-principle
+  category: performance-and-resources
+  status: candidate
+  source: principles/entries/measure-dont-guess.yaml
+  compendium: principles/compendium/measure-dont-guess.md
+  primary_core_skill: performance-and-resources
+- id: murphys-law
+  name: Murphy’s Law
+  classification: law
+  category: change-and-engineering-systems
+  status: candidate
+  source: principles/entries/murphys-law.yaml
+  compendium: principles/compendium/murphys-law.md
+  primary_core_skill: engineering-review-lenses
+- id: no-magic
+  name: No Magic
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/no-magic.yaml
+  compendium: principles/compendium/no-magic.md
+  primary_core_skill: code-clarity
+- id: one-logical-behaviour-per-test
+  name: One Logical Behaviour per Test
+  classification: testing-heuristic
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/one-logical-behaviour-per-test.yaml
+  compendium: principles/compendium/one-logical-behaviour-per-test.md
+  primary_core_skill: testing-strategy
+- id: open-closed-principle
+  name: Open/Closed Principle
+  classification: principle
+  category: abstraction-and-reuse
+  status: candidate
+  source: principles/entries/open-closed-principle.yaml
+  compendium: principles/compendium/open-closed-principle.md
+  primary_core_skill: abstraction-and-reuse
+- id: package-by-feature
+  name: Package by Feature
+  classification: organizational-principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/package-by-feature.yaml
+  compendium: principles/compendium/package-by-feature.md
+  primary_core_skill: modular-design
+- id: parse-dont-validate
+  name: Parse, Don’t Validate
+  classification: principle
+  category: contracts-errors-and-security
+  status: candidate
+  source: principles/entries/parse-dont-validate.yaml
+  compendium: principles/compendium/parse-dont-validate.md
+  primary_core_skill: contracts-and-errors
+- id: performance-budgeting
+  name: Performance Budgets
+  classification: engineering-practice
+  category: performance-and-resources
+  status: candidate
+  source: principles/entries/performance-budgeting.yaml
+  compendium: principles/compendium/performance-budgeting.md
+  primary_core_skill: performance-and-resources
+- id: ports-and-adapters
+  name: Ports and Adapters
+  classification: architecture-style
+  category: architecture-and-dependencies
+  status: candidate
+  source: principles/entries/ports-and-adapters.yaml
+  compendium: principles/compendium/ports-and-adapters.md
+  primary_core_skill: dependencies-and-boundaries
+- id: postels-law
+  name: Postel’s Law / Robustness Principle
+  classification: heuristic
+  category: contracts-errors-and-security
+  status: candidate
+  source: principles/entries/postels-law.yaml
+  compendium: principles/compendium/postels-law.md
+  primary_core_skill: contracts-and-errors
+- id: premature-generalization
+  name: Avoid Premature Generalization
+  classification: heuristic
+  category: abstraction-and-reuse
+  status: candidate
+  source: principles/entries/premature-generalization.yaml
+  compendium: principles/compendium/premature-generalization.md
+  primary_core_skill: abstraction-and-reuse
+- id: premature-optimization
+  name: Avoid Premature Optimization
+  classification: heuristic
+  category: performance-and-resources
+  status: candidate
+  source: principles/entries/premature-optimization.yaml
+  compendium: principles/compendium/premature-optimization.md
+  primary_core_skill: performance-and-resources
+- id: principle-of-least-astonishment
+  name: Principle of Least Astonishment
+  classification: principle
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/principle-of-least-astonishment.yaml
+  compendium: principles/compendium/principle-of-least-astonishment.md
+  primary_core_skill: code-clarity
+- id: principle-of-least-privilege
+  name: Principle of Least Privilege
+  classification: security-principle
+  category: contracts-errors-and-security
+  status: candidate
+  source: principles/entries/principle-of-least-privilege.yaml
+  compendium: principles/compendium/principle-of-least-privilege.md
+  primary_core_skill: contracts-and-errors
+- id: red-green-refactor
+  name: Red–Green–Refactor
+  classification: development-cycle
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/red-green-refactor.yaml
+  compendium: principles/compendium/red-green-refactor.md
+  primary_core_skill: testing-strategy
+- id: self-documenting-code
+  name: Self-Documenting Code
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/self-documenting-code.yaml
+  compendium: principles/compendium/self-documenting-code.md
+  primary_core_skill: code-clarity
+- id: semantic-versioning
+  name: Semantic Versioning
+  classification: versioning-method
+  category: api-and-evolution
+  status: candidate
+  source: principles/entries/semantic-versioning.yaml
+  compendium: principles/compendium/semantic-versioning.md
+  primary_core_skill: api-and-compatibility
+- id: separation-of-concerns
+  name: Separation of Concerns
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/separation-of-concerns.yaml
+  compendium: principles/compendium/separation-of-concerns.md
+  primary_core_skill: modular-design
+- id: single-level-of-abstraction
+  name: Single Level of Abstraction
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/single-level-of-abstraction.yaml
+  compendium: principles/compendium/single-level-of-abstraction.md
+  primary_core_skill: code-clarity
+- id: single-responsibility-principle
+  name: Single Responsibility Principle
+  classification: principle
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/single-responsibility-principle.yaml
+  compendium: principles/compendium/single-responsibility-principle.md
+  primary_core_skill: modular-design
+- id: single-source-of-truth
+  name: Single Source of Truth
+  classification: principle
+  category: abstraction-and-reuse
+  status: candidate
+  source: principles/entries/single-source-of-truth.yaml
+  compendium: principles/compendium/single-source-of-truth.md
+  primary_core_skill: abstraction-and-reuse
+- id: small-functions
+  name: Small Functions
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/small-functions.yaml
+  compendium: principles/compendium/small-functions.md
+  primary_core_skill: code-clarity
+- id: solid
+  name: SOLID
+  classification: umbrella-concept
+  category: umbrella-concepts
+  status: candidate
+  source: principles/entries/solid.yaml
+  compendium: principles/compendium/solid.md
+  primary_core_skill: engineering-review-lenses
+- id: stable-dependencies-principle
+  name: Stable Dependencies Principle
+  classification: principle
+  category: architecture-and-dependencies
+  status: candidate
+  source: principles/entries/stable-dependencies-principle.yaml
+  compendium: principles/compendium/stable-dependencies-principle.md
+  primary_core_skill: dependencies-and-boundaries
+- id: tell-dont-ask
+  name: Tell, Don’t Ask
+  classification: heuristic
+  category: modularity-and-object-design
+  status: candidate
+  source: principles/entries/tell-dont-ask.yaml
+  compendium: principles/compendium/tell-dont-ask.md
+  primary_core_skill: modular-design
+- id: test-behaviour-not-implementation
+  name: Test Behaviour, Not Implementation
+  classification: testing-principle
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/test-behaviour-not-implementation.yaml
+  compendium: principles/compendium/test-behaviour-not-implementation.md
+  primary_core_skill: testing-strategy
+- id: test-driven-development
+  name: Test-Driven Development
+  classification: development-method
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/test-driven-development.yaml
+  compendium: principles/compendium/test-driven-development.md
+  primary_core_skill: testing-strategy
+- id: test-pyramid
+  name: Test Pyramid
+  classification: testing-strategy
+  category: testing-and-verification
+  status: candidate
+  source: principles/entries/test-pyramid.yaml
+  compendium: principles/compendium/test-pyramid.md
+  primary_core_skill: testing-strategy
+- id: worse-is-better
+  name: Worse Is Better
+  classification: design-philosophy
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/worse-is-better.yaml
+  compendium: principles/compendium/worse-is-better.md
+  primary_core_skill: engineering-review-lenses
+- id: yagni
+  name: YAGNI
+  classification: heuristic
+  category: simplicity-and-clarity
+  status: candidate
+  source: principles/entries/yagni.yaml
+  compendium: principles/compendium/yagni.md
+  primary_core_skill: abstraction-and-reuse

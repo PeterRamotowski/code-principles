@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: tell-dont-ask
+name: Tell, Don’t Ask
+aliases: []
+classification: heuristic
+category: modularity-and-object-design
+status: candidate
+summary: Ask behavior-owning objects to perform operations instead of extracting state and deciding externally.
+canonical_statement: Use this heuristic for objects that protect behavior and invariants, not automatically
+  for DTOs or query results.
+intent: Ask behavior-owning objects to perform operations instead of extracting state and deciding externally.
+applies_when:
+- Responsibilities change for different reasons or at different rates.
+- A boundary can reduce coupling or protect an invariant.
+does_not_mean:
+- Do not hide orchestration inside entities.
+- Do not force behavior into passive data structures used by multiple independent operations.
+trade_offs:
+- More modules and interfaces increase navigation and integration cost.
+- A boundary that does not protect independent change can become ceremony.
+conflicts_with:
+- command-query-separation
+reinforces:
+- encapsulation
+- locality-of-behaviour
+primary_core_skill: modular-design
+example: Tell an account to withdraw so it can enforce its invariant.
+counterexample: Read private balance fields, calculate externally, then set the balance.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- data-oriented-design
+supports_concerns: []

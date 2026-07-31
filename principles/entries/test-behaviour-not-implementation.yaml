@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: test-behaviour-not-implementation
+name: Test Behaviour, Not Implementation
+aliases: []
+classification: testing-principle
+category: testing-and-verification
+status: candidate
+summary: Prefer assertions on observable contracts over private structure.
+canonical_statement: Tests should protect behavior while allowing safe refactoring of implementation details.
+intent: Prefer assertions on observable contracts over private structure.
+applies_when:
+- Behavior must remain correct through change.
+- Risk, complexity, or public contracts justify automated verification.
+does_not_mean:
+- Do not avoid verifying important interactions at architectural boundaries.
+- Do not interpret “behavior” as only UI output.
+trade_offs:
+- Tests can over-couple to implementation details.
+- A testing method that improves one feedback loop can slow another.
+conflicts_with: []
+reinforces:
+- backward-compatibility
+- hyrums-law
+primary_core_skill: testing-strategy
+example: Verify returned value, persisted state, and published event.
+counterexample: Assert the exact sequence of private helper calls in a pure calculation.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- interaction-testing
+- white-box-performance-testing
+supports_concerns: []

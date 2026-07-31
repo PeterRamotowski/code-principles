@@ -1,0 +1,35 @@
+schema_version: 0.2.0
+id: premature-optimization
+name: Avoid Premature Optimization
+aliases: []
+classification: heuristic
+category: performance-and-resources
+status: candidate
+summary: Do not add complexity for unmeasured or irrelevant performance gains.
+canonical_statement: Optimize when evidence, scale analysis, or explicit budgets identify a real constraint.
+intent: Do not add complexity for unmeasured or irrelevant performance gains.
+applies_when:
+- Measured behavior violates a budget or known scale constraint.
+- Memory, latency, throughput, or determinism is a first-class requirement.
+does_not_mean:
+- Do not ignore known algorithmic explosions or hard real-time requirements.
+- Do not use the maxim to dismiss inexpensive efficient choices.
+trade_offs:
+- Optimization usually increases complexity and narrows implementation freedom.
+- Benchmarks can mislead when they do not represent production workloads.
+conflicts_with: []
+reinforces:
+- make-it-work-right-fast
+- measure-dont-guess
+primary_core_skill: performance-and-resources
+example: Profile a request path before introducing cache invalidation complexity.
+counterexample: Add caching layers everywhere because they might be faster.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- hard-real-time-constraints
+- memory-limits
+supports_concerns: []

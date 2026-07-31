@@ -1,0 +1,34 @@
+schema_version: 0.2.0
+id: first-tests
+name: FIRST Tests
+aliases: []
+classification: umbrella-concept
+category: testing-and-verification
+status: candidate
+summary: Tests should be fast, independent, repeatable, self-verifying, and timely.
+canonical_statement: Use FIRST as a quality lens while recognizing that some integration tests are necessarily
+  slower.
+intent: Tests should be fast, independent, repeatable, self-verifying, and timely.
+applies_when:
+- Behavior must remain correct through change.
+- Risk, complexity, or public contracts justify automated verification.
+does_not_mean:
+- Do not reject valuable tests because they are not unit-fast.
+- Do not interpret independence as forbidding shared fixture construction.
+trade_offs:
+- Tests can over-couple to implementation details.
+- A testing method that improves one feedback loop can slow another.
+conflicts_with: []
+reinforces:
+- test-pyramid
+primary_core_skill: testing-strategy
+example: A test controls its data, reports a clear result, and can run repeatedly.
+counterexample: A test depends on execution order and a developer’s local clock.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- real-system-integration
+supports_concerns: []

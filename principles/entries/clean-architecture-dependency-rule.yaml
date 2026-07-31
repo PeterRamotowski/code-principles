@@ -1,0 +1,36 @@
+schema_version: 0.2.0
+id: clean-architecture-dependency-rule
+name: Clean Architecture Dependency Rule
+aliases: []
+classification: architecture-rule
+category: architecture-and-dependencies
+status: candidate
+summary: Source-code dependencies should point toward higher-level policy.
+canonical_statement: Use inward dependency direction where protecting policy from frameworks and infrastructure
+  provides measurable independence.
+intent: Source-code dependencies should point toward higher-level policy.
+applies_when:
+- High-level policy must evolve independently from volatile infrastructure.
+- Dependency direction affects testability, deployability, or independent ownership.
+does_not_mean:
+- Do not require the complete Clean Architecture template.
+- Do not prohibit useful framework types from all application code by default.
+trade_offs:
+- Indirection and adapters have a maintenance cost.
+- Framework isolation is valuable only where independent evolution is required.
+conflicts_with:
+- yagni
+reinforces:
+- dependency-inversion-principle
+- ports-and-adapters
+primary_core_skill: dependencies-and-boundaries
+example: Keep complex domain rules independent of a specific database driver.
+counterexample: Build five layers around a simple framework-native form handler.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- framework-native-design
+supports_concerns: []

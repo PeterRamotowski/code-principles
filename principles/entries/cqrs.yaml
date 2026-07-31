@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: cqrs
+name: Command Query Responsibility Segregation
+aliases: []
+classification: architecture-pattern
+category: state-data-and-distribution
+status: candidate
+summary: Use different models or paths for reads and writes when their requirements materially diverge.
+canonical_statement: Adopt CQRS only when scale, security, workflow, or representation differences justify
+  operational complexity.
+intent: Use different models or paths for reads and writes when their requirements materially diverge.
+applies_when:
+- State changes, retries, concurrency, or distribution can affect correctness.
+- The system needs explicit semantics for commands, queries, and consistency.
+does_not_mean:
+- Do not apply CQRS to every CRUD application.
+- Do not assume CQRS requires event sourcing.
+trade_offs:
+- Immutability and separation can increase allocation or coordination cost.
+- Distributed guarantees usually require operational complexity and failure handling.
+conflicts_with:
+- kiss
+reinforces:
+- command-query-separation
+primary_core_skill: state-and-side-effects
+example: Use a dedicated read model for a high-volume analytical view with different authorization.
+counterexample: Split every table operation into command buses and projections without a demonstrated
+  need.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- immediate-consistency
+- transactional-simplicity
+supports_concerns: []

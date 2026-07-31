@@ -1,0 +1,37 @@
+schema_version: 0.2.0
+id: dry
+name: DRY
+aliases: []
+classification: principle
+category: abstraction-and-reuse
+status: candidate
+summary: Avoid duplicating authoritative knowledge, policy, and decisions.
+canonical_statement: Each important rule should have one authoritative representation, while similar syntax
+  may remain separate when it represents different concepts.
+intent: Avoid duplicating authoritative knowledge, policy, and decisions.
+applies_when:
+- Knowledge or policy is duplicated in ways that can diverge.
+- A stable variation axis or public extension boundary has been demonstrated.
+does_not_mean:
+- Do not eliminate every repeated code shape.
+- Do not create an abstraction after the first duplication.
+- Do not merge concepts that are expected to change independently.
+trade_offs:
+- An abstraction introduces coupling between its consumers.
+- Premature reuse can make independently changing concepts harder to modify.
+conflicts_with:
+- locality-of-behaviour
+- yagni
+reinforces:
+- single-source-of-truth
+primary_core_skill: abstraction-and-reuse
+example: Centralize one tax rule used by several entry points.
+counterexample: Force unrelated address formats through one generic mapper because their fields look similar.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with:
+- independent-changeability
+supports_concerns: []

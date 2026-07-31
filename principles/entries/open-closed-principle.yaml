@@ -1,0 +1,38 @@
+schema_version: 0.2.0
+id: open-closed-principle
+name: Open/Closed Principle
+aliases: []
+classification: principle
+category: abstraction-and-reuse
+status: candidate
+summary: Allow known variation through stable extension points without repeatedly editing stable policy.
+canonical_statement: Design for extension where evidence identifies a durable axis of variation; do not
+  generalize for imaginary cases.
+intent: Allow known variation through stable extension points without repeatedly editing stable policy.
+applies_when:
+- Knowledge or policy is duplicated in ways that can diverge.
+- A stable variation axis or public extension boundary has been demonstrated.
+does_not_mean:
+- Do not make every class extensible.
+- Do not forbid modification of internal code.
+- Do not use inheritance as the default extension mechanism.
+trade_offs:
+- An abstraction introduces coupling between its consumers.
+- Premature reuse can make independently changing concepts harder to modify.
+conflicts_with:
+- backward-compatibility
+- kiss
+- yagni
+reinforces:
+- dependency-inversion-principle
+- information-hiding
+primary_core_skill: abstraction-and-reuse
+example: A public formatter accepts registered output strategies with a stable contract.
+counterexample: Add factories, registries, and hooks to a private one-case helper.
+ai_guidance:
+- Apply this guidance only after considering the active project profile, constraints, and architecture
+  authority.
+- State the concrete design consequence instead of citing the principle name as sufficient justification.
+notes: []
+tensions_with: []
+supports_concerns: []
