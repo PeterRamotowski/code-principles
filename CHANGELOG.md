@@ -4,7 +4,19 @@ All notable changes to the foundation package are documented here.
 
 ## [Unreleased]
 
-No changes yet.
+### Added
+
+- six language-independent Core Skill MVP packages covering clarity, abstraction and reuse, modular
+  design, contracts and errors, testing strategy, and safe change;
+- documented selection behavior for every supported mode, concrete conflict-resolution rules, positive
+  and negative decision examples, and eighteen evaluation scenarios;
+- validation of Core Skill package layout, catalogue consistency, conflict counts, documented modes,
+  example polarity, and evaluation coverage.
+
+### Changed
+
+- repository status now reflects completion of Milestone 4, and Core Skills are included in controlled
+  distributions.
 
 ## [0.3.0] — 2026-07-31
 

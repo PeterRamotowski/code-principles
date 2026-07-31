@@ -23,9 +23,17 @@
 - `orchestrator/principle-selection.md` — activation and interpretation of principles.
 - `tools/orchestrate.py` — command-line policy resolution and visible summaries.
 
+## Core Skills
+
+- `core/README.md` — implemented Core Skill index and package conventions.
+- `core/*/SKILL.md` — language-independent decision procedures and mode behavior.
+- `core/*/skill.yaml` — machine-readable activation, conflicts, modes, outputs, and principle selection.
+- `core/*/examples/` — positive and negative decisions.
+- `evaluations/scenarios/` — policy-selection and forbidden-behavior scenarios.
+
 ## Development
 
 - `CONTRIBUTING.md` — contribution requirements.
 - `ROADMAP.md` — implementation milestones.
-- `catalogs/` — controlled component blueprints.
+- `catalogs/` — controlled component identifiers, modes, and remaining blueprints.
 - `schemas/` — machine-readable contracts.

@@ -90,7 +90,7 @@ The orchestrator metadata is stored in `orchestrator/skill.yaml`, while normativ
 
 ## 3.2 Core skills
 
-Planned path:
+Path:
 
 ```text
 core/<skill-id>/

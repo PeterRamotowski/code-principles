@@ -105,7 +105,7 @@ Implementation notes:
 
 ## Milestone 4 — Core Skills MVP
 
-Status: `planned`
+Status: `complete`
 
 Implement:
 
@@ -128,6 +128,16 @@ Exit criteria for each skill:
 - positive and negative examples exist;
 - at least three evaluation scenarios exist;
 - no language-specific rules appear.
+
+Implementation notes:
+
+- each Skill is implemented under `core/<skill-id>/` with schema-validated metadata, a normative
+  `SKILL.md`, and decision examples;
+- all catalogue modes have operational selection rules and mode-specific constraints;
+- conflict sections state the decision, protected qualities, default resolution, and evidence that changes
+  the resolution;
+- each Skill has a positive case, a boundary case, and an overengineering evaluation scenario;
+- repository validation enforces the Milestone 4 package structure and minimum scenario/conflict counts.
 
 ## Milestone 5 — Project Profiles MVP
 

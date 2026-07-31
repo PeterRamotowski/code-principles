@@ -21,15 +21,15 @@ The repository is a useful human-readable compendium and the foundation of a pla
 ## Status
 
 - Foundation version: `0.3.0`
-- Status: `Orchestrator MVP`
+- Status: `Core Skills MVP`
 - Content language: English
 - Schema dialect: JSON Schema Draft 2020-12
 - External Skill dependencies: none
 - Repository name: `code-principles`
 
-This release defines the knowledge model, canonical principle catalogue, component blueprints, schemas,
-examples, validation tooling, and an executable deterministic orchestrator. Full Core Skill, profile, and
-adapter guidance follows in later milestones.
+This repository defines the knowledge model, canonical principle catalogue, schemas, validation tooling,
+an executable deterministic orchestrator, and six production-shaped, language-independent Core Skills.
+Full profile and adapter guidance follows in later milestones.
 
 ## Resolution model
 
@@ -115,6 +115,7 @@ External resources MAY be cited for history or further reading, but:
 │   └── frameworks.yaml
 ├── schemas/
 ├── orchestrator/
+├── core/                 # implemented Core Skills
 ├── tools/
 └── requirements-dev.txt
 ```
@@ -172,10 +173,9 @@ make package
 
 ## Important scope boundary
 
-Not every blueprint is a finished production Skill. The Orchestrator MVP resolves controlled identifiers
-and modes, while the detailed Core Skill, profile, and adapter guidance remains scheduled for later
-milestones. The canonical principle catalogue is usable immediately as a compendium and as the source for
-later Skill behavior.
+Not every blueprint is a finished production component. The six Milestone 4 Core Skills and orchestrator
+have detailed guidance; profiles and adapters remain scheduled for later milestones. The canonical
+principle catalogue is usable immediately as a compendium and as the source for resolved Skill behavior.
 
 ## License
 

@@ -2,4 +2,6 @@
 
 Evaluation scenarios test policy selection and rejected behavior, not only output wording. Each scenario should identify active, constrained, and suppressed principles plus forbidden decisions.
 
-The foundation contains one representative scenario. Later milestones should add coverage for Python pipelines, public libraries, Go services, C++ real-time systems, browser applications, plugins, and legacy modernization.
+The suite contains one cross-cutting orchestrator scenario and three scenarios for every Milestone 4 Core
+Skill: a positive case, a conflict or boundary case, and an overengineering counterexample. Later
+milestones should add profile- and adapter-specific coverage.
