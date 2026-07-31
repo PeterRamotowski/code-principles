@@ -1,4 +1,4 @@
-.PHONY: generate test validate validate-normative manifest package
+.PHONY: generate test validate validate-normative manifest package resolve
 
 PYTHON ?= python3
 
@@ -20,3 +20,6 @@ manifest:
 
 package: generate manifest validate
 	$(PYTHON) tools/package.py
+
+resolve:
+	$(PYTHON) tools/orchestrate.py --repository . $(RESOLVE_FLAGS)

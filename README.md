@@ -21,13 +21,15 @@ The repository is a useful human-readable compendium and the foundation of a pla
 ## Status
 
 - Foundation version: `0.2.0`
-- Status: `candidate foundation`
+- Status: `Orchestrator MVP`
 - Content language: English
 - Schema dialect: JSON Schema Draft 2020-12
 - External Skill dependencies: none
 - Repository name: `code-principles`
 
-This release defines the knowledge model, canonical principle catalogue, component blueprints, orchestrator contract, schemas, examples, validation tooling, and development roadmap. Full Core Skill and adapter implementations follow in later milestones.
+This release defines the knowledge model, canonical principle catalogue, component blueprints, schemas,
+examples, validation tooling, and an executable deterministic orchestrator. Full Core Skill, profile, and
+adapter guidance follows in later milestones.
 
 ## Resolution model
 
@@ -136,6 +138,32 @@ To additionally reject inconsistently cased normative keywords:
 make validate-normative
 ```
 
+## Resolve a policy
+
+The Orchestrator MVP inspects bounded repository evidence, automatically loads
+`engineering-context.yaml` when present, and accepts a higher-precedence partial user context:
+
+```bash
+python3 tools/orchestrate.py \
+  --repository . \
+  --task "Implement a payment webhook" \
+  --user-context user-context.yaml
+```
+
+Use `--format summary` for the compact visible result, or `--format json` for JSON instead of the
+default schema-validated YAML. Direct user overrides are also available for common manual cases:
+
+```bash
+python3 tools/orchestrate.py \
+  --profile reusable-library \
+  --modifier public-api \
+  --skill-mode abstraction-and-reuse=conservative
+```
+
+Merge precedence is detected evidence, repository context, then user context. Explicit user skill-mode
+overrides therefore take precedence over repository skill-mode overrides. The base profile is selected
+from artifact and lifecycle evidence; detected languages and frameworks only select refinements.
+
 Before creating a release archive, regenerate the content and manifest, validate them, and package the controlled distribution set:
 
 ```bash
@@ -144,7 +172,10 @@ make package
 
 ## Important scope boundary
 
-This foundation does not yet claim that every blueprint is a finished production Skill. It establishes the controlled knowledge and contracts required to implement those Skills consistently. The canonical principle catalogue is usable immediately as a compendium and as the source for later Skill behavior.
+Not every blueprint is a finished production Skill. The Orchestrator MVP resolves controlled identifiers
+and modes, while the detailed Core Skill, profile, and adapter guidance remains scheduled for later
+milestones. The canonical principle catalogue is usable immediately as a compendium and as the source for
+later Skill behavior.
 
 ## License
 

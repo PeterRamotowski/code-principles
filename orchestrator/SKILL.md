@@ -72,6 +72,26 @@ For a non-trivial task, the orchestrator MUST internally produce:
 
 The output SHOULD conform to `schemas/resolved-policy.schema.json`.
 
+## Executable MVP
+
+`tools/orchestrate.py` implements this procedure for the Milestone 3 artifact set. It combines inputs in
+the following order:
+
+```text
+detected repository evidence
+→ repository engineering context
+→ current user context and command-line overrides
+```
+
+Repository context defaults to `engineering-context.yaml` at the inspected repository root. A partial
+user context may be supplied with `--user-context`. The resolver validates normalized context against
+`schemas/project-context.schema.json` and validates its output against
+`schemas/resolved-policy.schema.json` before emitting YAML or JSON.
+
+The implementation MUST remain deterministic for the same repository evidence, task statement, and
+explicit contexts. Lists in an explicit higher-precedence context replace the corresponding lower-level
+list; mapping fields merge by key. Explicit user skill modes override repository skill modes.
+
 ## Selection modes
 
 ### Automatic with visible result

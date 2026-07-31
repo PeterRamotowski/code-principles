@@ -6,6 +6,11 @@ All notable changes to the foundation package are documented here.
 
 ### Added
 
+- deterministic Orchestrator MVP with repository evidence detection, confidence-preserving context
+  normalization, artifact-driven profile selection, modifier and adapter activation, override merging,
+  conflict records, schema-validated resolved policies, and compact visible summaries;
+- `tools/orchestrate.py` CLI with YAML, JSON, and summary output plus repository and user context inputs;
+- conservative `general-software` fallback profile for materially uncertain artifact evidence;
 - repository-wide reference, identifier, dependency-cycle, duplicate-key, and Markdown-anchor validation;
 - optional normative-keyword linting and continuous integration validation;
 - negative fixtures covering malformed documents, schema violations, duplicate identifiers, dependency

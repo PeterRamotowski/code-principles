@@ -1,6 +1,9 @@
 schema_version: 0.2.0
 status: blueprint
 profiles:
+- id: general-software
+  name: General Software
+  focus: conservative local change when the primary artifact remains uncertain
 - id: browser-web-application
   name: Browser Web Application
   focus: browser UI, client state, accessibility, rendering, and user-facing behavior

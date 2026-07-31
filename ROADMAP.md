@@ -61,7 +61,7 @@ Exit criteria:
 
 ## Milestone 3 — Orchestrator MVP
 
-Status: `planned`
+Status: `complete`
 
 Goal: convert requests and repository evidence into a deterministic resolved policy.
 
@@ -91,6 +91,17 @@ Exit criteria:
 - low-risk tasks do not require unnecessary confirmation;
 - user overrides take precedence;
 - the orchestrator does not select architecture from language alone.
+
+Implementation notes:
+
+- `tools/orchestrate.py` is the command-line entry point;
+- `orchestrator/resolver.py` contains bounded evidence detection, precedence-aware merging, deterministic
+  profile and modifier selection, adapter selection, conflict records, and visible summaries;
+- automatic resolution supports browser applications, full-stack applications, backend services,
+  reusable libraries, and legacy modernization;
+- uncertain artifact evidence uses the conservative `general-software` profile and remains visible as an
+  unresolved uncertainty;
+- all emitted policies are checked against `schemas/resolved-policy.schema.json` before output.
 
 ## Milestone 4 — Core Skills MVP
 

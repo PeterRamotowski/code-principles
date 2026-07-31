@@ -19,7 +19,9 @@
 
 - `CONFLICT-RESOLUTION.md` — conflict matrix and precedence.
 - `orchestrator/SKILL.md` — orchestrator behavior.
+- `orchestrator/resolver.py` — deterministic context and policy resolver implementation.
 - `orchestrator/principle-selection.md` — activation and interpretation of principles.
+- `tools/orchestrate.py` — command-line policy resolution and visible summaries.
 
 ## Development
 
