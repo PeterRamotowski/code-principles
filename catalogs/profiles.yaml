@@ -1,0 +1,33 @@
+schema_version: 0.2.0
+status: blueprint
+profiles:
+- id: browser-web-application
+  name: Browser Web Application
+  focus: browser UI, client state, accessibility, rendering, and user-facing behavior
+- id: fullstack-web-application
+  name: Full-stack Web Application
+  focus: browser/server boundaries, APIs, security, rendering modes, and persistence
+- id: backend-service
+  name: Backend Service
+  focus: server contracts, transactions, reliability, observability, and integrations
+- id: reusable-library
+  name: Reusable Library
+  focus: small stable public API, compatibility, portability, and low dependency cost
+- id: plugin-or-extension
+  name: Plugin or Extension
+  focus: host lifecycle, compatibility, extension points, and safe coexistence
+- id: data-pipeline
+  name: Data Pipeline
+  focus: explicit transformation stages, throughput, restartability, and bounded memory
+- id: distributed-system
+  name: Distributed System
+  focus: partial failure, retries, idempotency, ordering, and consistency
+- id: real-time-system
+  name: Real-time or Embedded System
+  focus: determinism, ownership, bounded resources, and reliability
+- id: prototype
+  name: Prototype
+  focus: fast learning, reversibility, minimal abstraction, and explicit instability
+- id: legacy-modernization
+  name: Legacy Modernization
+  focus: behavior preservation, characterization, bounded change, and historical constraints

@@ -1,0 +1,126 @@
+specification_version: 0.2.0
+policy_version: 0.2.0
+selection_mode: automatic-with-visible-result
+context:
+  artifact_type: data-pipeline
+  secondary_artifact_types:
+  - cli-application
+  project_stage: greenfield
+  exposure:
+  - team-internal
+  domain_complexity: low
+  architecture_authority: greenfield
+  state_model:
+  - mostly-stateless
+  runtime:
+  - server
+  constraints:
+    security: normal
+    reliability: elevated
+    backward_compatibility: normal
+    latency_sensitivity: normal
+    throughput_sensitivity: high
+    memory_sensitivity: high
+    determinism: elevated
+    accessibility: normal
+base_profile: data-pipeline
+modifiers:
+- memory-sensitive
+- high-throughput
+language_adapters:
+- id: python
+  scope:
+  - pipeline
+  - cli
+framework_adapters: []
+active_core_skills:
+- id: code-clarity
+  mode: pipeline-readable
+  source: profile
+- id: abstraction-and-reuse
+  mode: conservative
+  source: profile
+- id: modular-design
+  mode: staged-pipeline
+  source: profile
+- id: contracts-and-errors
+  mode: strict-ingress
+  source: profile
+- id: performance
+  mode: budget-constrained
+  source: modifier
+  rationale: Input files may exceed available memory and must be processed within a batch deadline.
+- id: testing-strategy
+  mode: transformation-and-integration
+  source: profile
+- id: safe-change
+  mode: restartable-operations
+  source: profile
+conflicts:
+- id: rich-domain-model-vs-data-pipeline
+  decision: prefer-transparent-records
+  principles:
+  - rich-domain-model
+  - data-oriented-design
+  protected_attributes:
+  - simplicity
+  - memory-efficiency
+  - maintainability
+  rationale: The pipeline performs explicit record transformations with low domain complexity. Rich behavior-heavy
+    entities would add allocation and indirection without protecting complex invariants.
+  reconsider_when:
+  - business invariants become complex and span multiple pipeline stages
+- id: materialization-vs-streaming
+  decision: stream-records
+  principles:
+  - local-simplicity
+  - memory-efficiency
+  protected_attributes:
+  - memory-efficiency
+  - reliability
+  - performance
+  rationale: Known input sizes exceed safe in-memory materialization. Iterators and generators should
+    preserve bounded memory use.
+  reconsider_when:
+  - verified input limits become small enough for simpler materialization
+significant_decisions:
+- id: stream-large-inputs
+  statement: Process large inputs through iterators or generators with bounded buffering.
+  rationale: Memory sensitivity is high and full materialization is unsafe.
+  scope:
+  - ingestion
+  - transformation
+- id: explicit-pipeline-stages
+  statement: Keep parsing, validation, transformation, and output as explicit stages.
+  rationale: Clear stages improve restartability, testing, and failure diagnosis.
+  scope:
+  - pipeline
+- id: runtime-validate-external-records
+  statement: Parse and validate input records at the ingestion boundary.
+  rationale: Python type hints do not establish runtime validity of file data.
+  scope:
+  - ingestion
+unresolved_uncertainties:
+- question: Is output ordering required to match input ordering?
+  impact: Parallel processing strategy may depend on this guarantee.
+  default_action: Preserve input ordering until requirements state otherwise.
+prohibited_decisions:
+- load complete input files into memory without a verified size bound
+- introduce async execution without an I/O concurrency requirement
+- treat Python type hints as runtime input validation
+visible_summary:
+  show: true
+  items:
+  - Data pipeline with high throughput and memory sensitivity.
+  - Use explicit stages and streaming records.
+  - Preserve ordering conservatively until requirements say otherwise.
+active_principles:
+- id: measure-dont-guess
+  interpretation: Use representative files and memory measurements for pipeline decisions.
+  source: performance-and-resources
+  status: active
+- id: immutability
+  interpretation: Prefer immutable records when cheap; allow controlled streaming state for bounded memory.
+  source: state-and-side-effects
+  status: constrained
+external_skill_dependencies: []

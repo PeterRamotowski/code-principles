@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:code-principles:schema:adapter:0.2.0",
+  "title": "Software Engineering Adapter Metadata",
+  "description": "Metadata contract for language and framework adapters.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "version",
+    "type",
+    "status",
+    "description",
+    "normative_document",
+    "technology",
+    "activation",
+    "refines",
+    "non_goals",
+    "self_contained"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.2.0"
+    },
+    "id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "language-adapter",
+        "framework-adapter"
+      ]
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 1000
+    },
+    "normative_document": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/-]+\\.md$"
+    },
+    "technology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "names"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "language",
+            "framework"
+          ]
+        },
+        "names": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "default": []
+        }
+      }
+    },
+    "activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signals"
+      ],
+      "properties": {
+        "signals": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
+        },
+        "file_patterns": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
+        },
+        "manifest_dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
+        }
+      }
+    },
+    "extends": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "default": []
+    },
+    "requires": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "default": []
+    },
+    "refines": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "skill",
+          "topics"
+        ],
+        "properties": {
+          "skill": {
+            "$ref": "#/$defs/identifier"
+          },
+          "topics": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/identifier"
+            }
+          },
+          "supported_modes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/identifier"
+            },
+            "default": []
+          }
+        }
+      }
+    },
+    "runtime_constraints": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 8
+      },
+      "default": []
+    },
+    "common_misuse": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 8
+      },
+      "default": []
+    },
+    "non_goals": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 8
+      }
+    },
+    "self_contained": {
+      "const": true
+    },
+    "principle_refinements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "principle",
+          "interpretation"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "principle": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "interpretation": {
+            "type": "string",
+            "minLength": 20
+          },
+          "cannot_change_canonical_meaning": {
+            "const": true
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "draft",
+        "candidate",
+        "stable",
+        "deprecated"
+      ]
+    }
+  }
+}

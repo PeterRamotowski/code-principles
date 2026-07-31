@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:code-principles:schema:relationships:0.2.0",
+  "title": "Principle Relationships",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "relationships"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "from",
+          "type",
+          "to",
+          "context_required"
+        ],
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "type": {
+            "enum": [
+              "may-conflict-with",
+              "reinforces",
+              "refines",
+              "implements",
+              "broader-than",
+              "narrower-than",
+              "related-to"
+            ]
+          },
+          "context_required": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

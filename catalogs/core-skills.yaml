@@ -1,0 +1,99 @@
+schema_version: 0.2.0
+status: blueprint
+skills:
+- id: code-clarity
+  name: Code Clarity and Simplicity
+  purpose: Guide readable, explicit, proportionate implementation at local code scope.
+  modes:
+  - minimal
+  - balanced
+  - explicit-critical-path
+- id: abstraction-and-reuse
+  name: Abstraction and Reuse
+  purpose: Balance DRY, YAGNI, reuse, extensibility, and independent changeability.
+  modes:
+  - conservative
+  - balanced
+  - extensible-public-library
+  - legacy-preservation
+- id: modular-design
+  name: Modular and Object Design
+  purpose: Define cohesive responsibilities, boundaries, collaboration, and object/data modeling choices.
+  modes:
+  - feature-oriented
+  - domain-oriented
+  - service-oriented
+  - data-oriented
+  - library-oriented
+- id: contracts-and-errors
+  name: Contracts, Validation, Errors, and Security
+  purpose: Define trust boundaries, invalid-state handling, error semantics, and authority limits.
+  modes:
+  - strict-boundaries
+  - tolerant-syntax-strict-semantics
+  - trusted-internal-pipeline
+  - safety-critical
+- id: dependencies-and-boundaries
+  name: Dependencies and Architecture Boundaries
+  purpose: Resolve dependency direction and the degree of framework or infrastructure isolation.
+  modes:
+  - framework-native
+  - modular-monolith
+  - domain-centric
+  - component-based
+- id: state-and-side-effects
+  name: State and Side Effects
+  purpose: Control mutation, commands, queries, ownership, and consistency semantics.
+  modes:
+  - pragmatic-mutable
+  - immutable-core
+  - localized-state
+  - single-owner-mutation
+  - cqrs-event-driven
+- id: api-and-compatibility
+  name: API and Compatibility
+  purpose: Protect intentional public contracts and govern evolution.
+  modes:
+  - internal-application
+  - public-library
+  - external-api
+  - stable-abi
+- id: testing-strategy
+  name: Testing Strategy
+  purpose: Select test levels, behavior focus, feedback loops, and development methods.
+  modes:
+  - unit-focused
+  - integration-balanced
+  - characterization-first
+  - hardware-integration
+- id: performance-and-resources
+  name: Performance and Resource Efficiency
+  purpose: Apply budgets, measurement, algorithms, and resource constraints without premature complexity.
+  modes:
+  - clarity-first
+  - budget-constrained
+  - hot-path-optimized
+  - hard-real-time
+- id: safe-change
+  name: Safe Change and Legacy Modernization
+  purpose: Control scope, preserve behavior, understand history, and evolve systems safely.
+  modes:
+  - local-safe-change
+  - incremental-modernization
+  - compatibility-first
+  - redesign-authorized
+- id: distributed-reliability
+  name: Distributed Reliability
+  purpose: Handle retries, duplication, ordering, partial failure, and convergence.
+  modes:
+  - synchronous-transactional
+  - idempotent-ingress
+  - eventually-consistent
+  - high-reliability
+- id: engineering-review-lenses
+  name: Engineering Review Lenses
+  purpose: Use broad laws and umbrella concepts as diagnostic questions rather than universal commands.
+  modes:
+  - lightweight
+  - architecture-review
+  - organizational-review

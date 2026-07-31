@@ -1,0 +1,583 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:code-principles:schema:resolved-policy:0.2.0",
+  "title": "Resolved Software Engineering Policy",
+  "description": "Task-scoped output produced by the engineering policy orchestrator.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specification_version",
+    "policy_version",
+    "selection_mode",
+    "context",
+    "base_profile",
+    "active_core_skills",
+    "significant_decisions"
+  ],
+  "properties": {
+    "specification_version": {
+      "type": "string",
+      "const": "0.2.0"
+    },
+    "policy_version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "selection_mode": {
+      "type": "string",
+      "enum": [
+        "automatic-with-visible-result",
+        "propose",
+        "manual"
+      ]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_type",
+        "architecture_authority"
+      ],
+      "properties": {
+        "artifact_type": {
+          "$ref": "#/$defs/artifactType"
+        },
+        "secondary_artifact_types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/artifactType"
+          },
+          "default": []
+        },
+        "project_stage": {
+          "$ref": "#/$defs/projectStage"
+        },
+        "exposure": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/exposure"
+          },
+          "default": []
+        },
+        "domain_complexity": {
+          "$ref": "#/$defs/domainComplexity"
+        },
+        "architecture_authority": {
+          "$ref": "#/$defs/architectureAuthority"
+        },
+        "state_model": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stateModel"
+          },
+          "default": []
+        },
+        "runtime": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/runtimeValue"
+          },
+          "default": []
+        },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "security": {
+              "$ref": "#/$defs/level"
+            },
+            "reliability": {
+              "$ref": "#/$defs/level"
+            },
+            "backward_compatibility": {
+              "$ref": "#/$defs/level"
+            },
+            "latency_sensitivity": {
+              "$ref": "#/$defs/level"
+            },
+            "throughput_sensitivity": {
+              "$ref": "#/$defs/level"
+            },
+            "memory_sensitivity": {
+              "$ref": "#/$defs/level"
+            },
+            "determinism": {
+              "$ref": "#/$defs/level"
+            },
+            "accessibility": {
+              "$ref": "#/$defs/level"
+            }
+          },
+          "default": {}
+        }
+      }
+    },
+    "base_profile": {
+      "$ref": "#/$defs/identifier"
+    },
+    "modifiers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "default": []
+    },
+    "language_adapters": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/identifier"
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "scope": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "default": []
+          }
+        }
+      },
+      "default": []
+    },
+    "framework_adapters": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/identifier"
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "scope": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "default": []
+          }
+        }
+      },
+      "default": []
+    },
+    "active_core_skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "mode",
+          "source"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/identifier"
+          },
+          "mode": {
+            "$ref": "#/$defs/identifier"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "profile",
+              "modifier",
+              "language-adapter",
+              "framework-adapter",
+              "repository-override",
+              "user-override",
+              "orchestrator-default"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 5
+          }
+        }
+      }
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source",
+          "target",
+          "value"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "user",
+              "repository",
+              "organization",
+              "safety",
+              "runtime"
+            ]
+          },
+          "target": {
+            "type": "string",
+            "minLength": 2
+          },
+          "value": {},
+          "rationale": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      },
+      "default": []
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "decision",
+          "rationale"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/identifier"
+          },
+          "decision": {
+            "$ref": "#/$defs/identifier"
+          },
+          "principles": {
+            "type": "array",
+            "minItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2
+            }
+          },
+          "protected_attributes": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/qualityAttribute"
+            }
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 15
+          },
+          "reconsider_when": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 5
+            },
+            "default": []
+          }
+        }
+      },
+      "default": []
+    },
+    "significant_decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "statement",
+          "rationale"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/identifier"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 10
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 10
+          },
+          "scope": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "default": []
+          }
+        }
+      }
+    },
+    "unresolved_uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question",
+          "impact"
+        ],
+        "properties": {
+          "question": {
+            "type": "string",
+            "minLength": 5
+          },
+          "impact": {
+            "type": "string",
+            "minLength": 5
+          },
+          "default_action": {
+            "type": "string",
+            "minLength": 5
+          }
+        }
+      },
+      "default": []
+    },
+    "prohibited_decisions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 5
+      },
+      "default": []
+    },
+    "visible_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "show": {
+          "type": "boolean",
+          "default": true
+        },
+        "items": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 5
+          },
+          "default": []
+        }
+      }
+    },
+    "active_principles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "interpretation",
+          "source"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "interpretation": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "constrained",
+              "suppressed"
+            ]
+          }
+        }
+      }
+    },
+    "external_skill_dependencies": {
+      "type": "array",
+      "maxItems": 0
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "artifactType": {
+      "type": "string",
+      "enum": [
+        "web-application",
+        "frontend-application",
+        "fullstack-application",
+        "backend-service",
+        "reusable-library",
+        "cli-application",
+        "desktop-application",
+        "mobile-application",
+        "embedded-system",
+        "data-pipeline",
+        "background-worker",
+        "distributed-system",
+        "plugin-or-extension",
+        "infrastructure-tool",
+        "test-tooling",
+        "unknown"
+      ]
+    },
+    "projectStage": {
+      "type": "string",
+      "enum": [
+        "prototype",
+        "greenfield",
+        "active-product",
+        "mature-system",
+        "legacy-modernization",
+        "maintenance-only",
+        "unknown"
+      ]
+    },
+    "exposure": {
+      "type": "string",
+      "enum": [
+        "private-local",
+        "team-internal",
+        "organization-internal",
+        "external-integration",
+        "public-api",
+        "public-library",
+        "extension-platform",
+        "unknown"
+      ]
+    },
+    "domainComplexity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "moderate",
+        "high",
+        "unknown"
+      ]
+    },
+    "architectureAuthority": {
+      "type": "string",
+      "enum": [
+        "preserve-existing",
+        "incremental-improvement",
+        "redesign-allowed",
+        "greenfield",
+        "unknown"
+      ]
+    },
+    "stateModel": {
+      "type": "string",
+      "enum": [
+        "mostly-stateless",
+        "request-scoped",
+        "transactional",
+        "shared-mutable",
+        "event-driven",
+        "eventually-consistent",
+        "real-time",
+        "offline-synchronized",
+        "unknown"
+      ]
+    },
+    "runtimeValue": {
+      "type": "string",
+      "enum": [
+        "browser",
+        "nodejs",
+        "server",
+        "edge",
+        "serverless",
+        "container",
+        "desktop",
+        "mobile",
+        "embedded",
+        "native",
+        "wasm",
+        "unknown"
+      ]
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "elevated",
+        "high",
+        "critical",
+        "unknown"
+      ]
+    },
+    "qualityAttribute": {
+      "type": "string",
+      "enum": [
+        "correctness",
+        "safety",
+        "security",
+        "data-integrity",
+        "compatibility",
+        "reliability",
+        "determinism",
+        "usability",
+        "accessibility",
+        "maintainability",
+        "simplicity",
+        "readability",
+        "testability",
+        "operability",
+        "performance",
+        "memory-efficiency",
+        "extensibility",
+        "portability",
+        "delivery-speed",
+        "implementation-convenience"
+      ]
+    }
+  }
+}

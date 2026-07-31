@@ -1,0 +1,70 @@
+schema_version: 0.2.0
+id: software-engineering-orchestrator
+name: Code Principles Orchestrator
+version: 0.2.0
+type: orchestrator
+status: draft
+description: Detects project context, selects controlled profiles and Core Skill modes, activates canonical
+  principles, applies language and framework refinements, resolves conflicts, and produces an explainable
+  self-contained engineering policy.
+normative_document: orchestrator/SKILL.md
+applies_to:
+- web-application
+- frontend-application
+- fullstack-application
+- backend-service
+- reusable-library
+- cli-application
+- desktop-application
+- mobile-application
+- embedded-system
+- data-pipeline
+- background-worker
+- distributed-system
+- plugin-or-extension
+- infrastructure-tool
+- test-tooling
+- unknown
+activation:
+  default: always
+  signals:
+  - software creation, modification, review, planning, or explanation
+  - repository-aware coding task
+  - architecture or engineering-policy decision
+  exclusions:
+  - non-software tasks without engineering implications
+requires: []
+conflicts_with: []
+modes:
+- id: automatic-with-visible-result
+  description: Select and apply policy automatically while reporting significant decisions.
+- id: propose
+  description: Propose the intended policy before high-impact and difficult-to-reverse decisions.
+- id: manual
+  description: Use explicitly configured profiles, modes, modifiers, and adapters.
+default_mode: automatic-with-visible-result
+priority: 1000
+outputs:
+- normalized-project-context
+- selected-base-profile
+- active-modifiers
+- selected-language-adapters
+- selected-framework-adapters
+- resolved-engineering-policy
+- visible-policy-summary
+- active-principles
+- principle-interpretations
+- suppressed-behaviours
+tags:
+- orchestration
+- context-detection
+- profile-selection
+- conflict-resolution
+principles:
+  primary: []
+  supporting:
+  - kiss
+  - yagni
+  - principle-of-least-astonishment
+  constrains: []
+self_contained: true

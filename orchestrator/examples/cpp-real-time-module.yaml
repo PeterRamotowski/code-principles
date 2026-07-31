@@ -1,0 +1,134 @@
+specification_version: 0.2.0
+policy_version: 0.2.0
+selection_mode: manual
+context:
+  artifact_type: embedded-system
+  secondary_artifact_types:
+  - reusable-library
+  project_stage: greenfield
+  exposure:
+  - organization-internal
+  domain_complexity: moderate
+  architecture_authority: greenfield
+  state_model:
+  - real-time
+  - shared-mutable
+  runtime:
+  - embedded
+  - native
+  constraints:
+    security: elevated
+    reliability: critical
+    backward_compatibility: elevated
+    latency_sensitivity: critical
+    throughput_sensitivity: elevated
+    memory_sensitivity: critical
+    determinism: critical
+    accessibility: normal
+base_profile: real-time-system
+modifiers:
+- real-time
+- memory-sensitive
+language_adapters:
+- id: cpp
+  scope:
+  - communication-module
+framework_adapters: []
+active_core_skills:
+- id: code-clarity
+  mode: explicit-resource-lifecycle
+  source: language-adapter
+- id: modular-design
+  mode: component-boundaries
+  source: profile
+- id: contracts-and-errors
+  mode: explicit-status-policy
+  source: repository-override
+  rationale: Exceptions are prohibited in the real-time execution path.
+- id: state-and-side-effects
+  mode: single-owner-mutable-state
+  source: profile
+- id: performance
+  mode: hard-budget
+  source: modifier
+- id: testing-strategy
+  mode: deterministic-and-hardware-integration
+  source: profile
+- id: api-and-compatibility
+  mode: stable-internal-abi
+  source: repository-override
+overrides:
+- source: repository
+  target: errors.real-time-path
+  value: explicit-status-no-exceptions
+  rationale: The deployment profile disables exceptions in the hard real-time path.
+- source: repository
+  target: memory.dynamic-allocation
+  value: prohibited-after-initialization
+  rationale: Runtime allocation jitter violates the timing budget.
+conflicts:
+- id: immutable-design-vs-bounded-performance
+  decision: controlled-preallocated-mutation
+  principles:
+  - immutability
+  - deterministic-performance
+  protected_attributes:
+  - determinism
+  - memory-efficiency
+  - correctness
+  rationale: Preallocated state with single-owner mutation provides deterministic behavior. Ownership
+    and invariants must remain explicit.
+  reconsider_when:
+  - the execution environment permits bounded immutable copies within the deadline
+- id: exception-convenience-vs-real-time-policy
+  decision: explicit-status-in-real-time-path
+  principles:
+  - exception-based-errors
+  - deterministic-failure-handling
+  protected_attributes:
+  - determinism
+  - reliability
+  - safety
+  rationale: Repository policy prohibits exceptions in the hard real-time path. Error status must be explicit
+    and exhaustively handled.
+  reconsider_when:
+  - the runtime and toolchain policy changes with verified timing analysis
+significant_decisions:
+- id: raai-for-resources
+  statement: Use RAII for resource ownership and cleanup outside prohibited dynamic-allocation paths.
+  rationale: Deterministic ownership prevents leaks and ambiguous lifetime.
+  scope:
+  - communication-module
+- id: no-runtime-allocation
+  statement: Prohibit dynamic allocation after initialization in the real-time execution path.
+  rationale: Allocation latency and fragmentation violate deterministic resource budgets.
+  scope:
+  - real-time-loop
+- id: explicit-concurrency-ownership
+  statement: Assign one owner to mutable communication state and make synchronization boundaries explicit.
+  rationale: Shared uncontrolled mutation threatens correctness and timing predictability.
+  scope:
+  - concurrency
+unresolved_uncertainties: []
+prohibited_decisions:
+- allocate dynamically in the hard real-time loop
+- use unbounded blocking operations in the real-time path
+- use exceptions in the configured real-time path
+- introduce shared mutable state without explicit ownership and synchronization
+visible_summary:
+  show: true
+  items:
+  - Embedded real-time module with critical determinism and memory constraints.
+  - Use explicit ownership, bounded resources, and no runtime allocation in the critical path.
+  - Repository error policy requires explicit status handling instead of exceptions.
+active_principles:
+- id: performance-budgeting
+  interpretation: Hard timing and memory budgets govern the real-time path.
+  source: performance-and-resources
+  status: active
+- id: immutability
+  interpretation: Use single-owner preallocated mutation where immutable copying violates deterministic
+    budgets.
+  source: state-and-side-effects
+  status: constrained
+external_skill_dependencies: []

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:code-principles:schema:principle-registry:0.2.0",
+  "title": "Principle Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "canonical_source",
+    "generated_outputs",
+    "principles"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "draft",
+        "candidate",
+        "stable",
+        "deprecated"
+      ]
+    },
+    "canonical_source": {
+      "type": "string"
+    },
+    "generated_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "principles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "classification",
+          "category",
+          "status",
+          "source",
+          "compendium",
+          "primary_core_skill"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "name": {
+            "type": "string"
+          },
+          "classification": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "experimental",
+              "draft",
+              "candidate",
+              "stable",
+              "deprecated"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "compendium": {
+            "type": "string"
+          },
+          "primary_core_skill": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 100
+          }
+        }
+      }
+    }
+  }
+}

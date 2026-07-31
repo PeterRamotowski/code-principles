@@ -1,0 +1,29 @@
+schema_version: 0.2.0
+status: blueprint
+languages:
+- id: javascript
+  name: JavaScript
+  scope: runtime validation, coercion, modules, promises, mutation, and dynamic contracts
+  extends: []
+- id: typescript
+  name: TypeScript
+  scope: strict typing, unknown input, discriminated unions, public types, and runtime validation
+  extends:
+  - javascript
+- id: python
+  name: Python
+  scope: type hints, Protocols, dataclasses, exceptions, iterators, async boundaries, and packaging
+  extends: []
+- id: php
+  name: PHP
+  scope: strict types, value objects, interfaces, Composer packages, exceptions, and long-running processes
+  extends: []
+- id: go
+  name: Go
+  scope: consumer-defined interfaces, explicit errors, context, goroutines, ownership, and simple packages
+  extends: []
+- id: cpp
+  name: C++
+  scope: RAII, ownership, value semantics, const correctness, templates, ABI, concurrency, and deterministic
+    resources
+  extends: []

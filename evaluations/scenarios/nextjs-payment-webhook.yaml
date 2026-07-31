@@ -1,0 +1,29 @@
+schema_version: 0.2.0
+id: nextjs-payment-webhook
+description: Verify strict runtime parsing, idempotency, and rejection of speculative CQRS for a Next.js
+  payment webhook.
+input:
+  artifact_type: fullstack-application
+  language: typescript
+  framework: nextjs
+  exposure:
+  - public-api
+  - external-integration
+  task: Implement a payment webhook.
+expected:
+  active_principles:
+  - parse-dont-validate
+  - idempotency
+  constrained_principles:
+  - postels-law
+  suppressed_principles:
+  - cqrs
+forbidden:
+- Trust TypeScript types as runtime validation.
+- Process duplicate provider events twice.
+- Introduce CQRS without demonstrated need.
+principles_under_test:
+- parse-dont-validate
+- idempotency
+- cqrs
+- yagni

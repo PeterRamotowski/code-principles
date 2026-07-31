@@ -1,0 +1,33 @@
+schema_version: 0.2.0
+status: blueprint
+modifiers:
+- id: public-api
+  name: Public API
+  effect: Activates explicit compatibility, documentation, and deprecation rules.
+- id: strict-backward-compatibility
+  name: Strict Backward Compatibility
+  effect: Raises the cost of observable changes and requires migration paths.
+- id: security-sensitive
+  name: Security Sensitive
+  effect: Raises trust-boundary, privilege, secret, and audit requirements.
+- id: high-throughput
+  name: High Throughput
+  effect: Activates throughput budgets, batching, backpressure, and measurement.
+- id: memory-sensitive
+  name: Memory Sensitive
+  effect: Activates streaming, bounded buffers, ownership, and allocation review.
+- id: latency-sensitive
+  name: Latency Sensitive
+  effect: Activates end-to-end latency budgets and hot-path analysis.
+- id: real-time
+  name: Real Time
+  effect: Requires deterministic timing and bounded operations in critical paths.
+- id: multi-tenant
+  name: Multi-tenant
+  effect: Strengthens isolation, authorization, data ownership, and noisy-neighbor controls.
+- id: accessibility-required
+  name: Accessibility Required
+  effect: Treats accessibility as a correctness requirement for user interfaces.
+- id: offline-first
+  name: Offline First
+  effect: Activates synchronization, conflict, local persistence, and recovery semantics.

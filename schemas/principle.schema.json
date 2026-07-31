@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:code-principles:schema:principle:0.2.0",
+  "title": "Canonical Principle Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "classification",
+    "category",
+    "status",
+    "summary",
+    "canonical_statement",
+    "intent",
+    "applies_when",
+    "does_not_mean",
+    "trade_offs",
+    "conflicts_with",
+    "reinforces",
+    "primary_core_skill",
+    "example",
+    "counterexample",
+    "ai_guidance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 100
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "architecture-pattern",
+        "architecture-rule",
+        "architecture-style",
+        "change-principle",
+        "design-philosophy",
+        "design-property",
+        "development-cycle",
+        "development-method",
+        "engineering-practice",
+        "evolution-principle",
+        "heuristic",
+        "law",
+        "method",
+        "organizational-principle",
+        "performance-principle",
+        "principle",
+        "process-model",
+        "security-principle",
+        "system-property",
+        "technique",
+        "testing-heuristic",
+        "testing-pattern",
+        "testing-principle",
+        "testing-strategy",
+        "umbrella-concept",
+        "versioning-method"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "abstraction-and-reuse",
+        "api-and-evolution",
+        "architecture-and-dependencies",
+        "change-and-engineering-systems",
+        "contracts-errors-and-security",
+        "modularity-and-object-design",
+        "performance-and-resources",
+        "simplicity-and-clarity",
+        "state-data-and-distribution",
+        "testing-and-verification",
+        "umbrella-concepts"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "draft",
+        "candidate",
+        "stable",
+        "deprecated"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20
+    },
+    "canonical_statement": {
+      "type": "string",
+      "minLength": 30
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 20
+    },
+    "applies_when": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 10
+      }
+    },
+    "does_not_mean": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 10
+      }
+    },
+    "trade_offs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 10
+      }
+    },
+    "conflicts_with": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+        "minLength": 2,
+        "maxLength": 100
+      },
+      "uniqueItems": true
+    },
+    "reinforces": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+        "minLength": 2,
+        "maxLength": 100
+      },
+      "uniqueItems": true
+    },
+    "primary_core_skill": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 100
+    },
+    "example": {
+      "type": "string",
+      "minLength": 15
+    },
+    "counterexample": {
+      "type": "string",
+      "minLength": 15
+    },
+    "ai_guidance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 15
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tensions_with": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "uniqueItems": true
+    },
+    "supports_concerns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 100
+    }
+  }
+}

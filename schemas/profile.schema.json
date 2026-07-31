@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:code-principles:schema:profile:0.2.0",
+  "title": "Software Engineering Profile or Modifier Metadata",
+  "description": "Metadata contract for language-independent project profiles and cross-cutting modifiers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "version",
+    "type",
+    "status",
+    "description",
+    "normative_document",
+    "selection",
+    "priority_order",
+    "skill_modes",
+    "non_goals"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.2.0"
+    },
+    "id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "project-profile",
+        "modifier"
+      ]
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 1000
+    },
+    "normative_document": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/-]+\\.md$"
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_types",
+        "signals"
+      ],
+      "properties": {
+        "artifact_types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/artifactType"
+          }
+        },
+        "project_stages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/projectStage"
+          },
+          "default": []
+        },
+        "exposure": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/exposure"
+          },
+          "default": []
+        },
+        "signals": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 5
+          }
+        },
+        "exclusions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 5
+          },
+          "default": []
+        }
+      }
+    },
+    "priority_order": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/qualityAttribute"
+      }
+    },
+    "skill_modes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/identifier"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/identifier"
+      }
+    },
+    "recommended_modifiers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "default": []
+    },
+    "prohibited_defaults": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 8
+      },
+      "default": []
+    },
+    "non_goals": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 8
+      }
+    },
+    "requires": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "default": []
+    },
+    "conflicts_with": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "default": []
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "draft",
+        "candidate",
+        "stable",
+        "deprecated"
+      ]
+    },
+    "artifactType": {
+      "type": "string",
+      "enum": [
+        "web-application",
+        "frontend-application",
+        "fullstack-application",
+        "backend-service",
+        "reusable-library",
+        "cli-application",
+        "desktop-application",
+        "mobile-application",
+        "embedded-system",
+        "data-pipeline",
+        "background-worker",
+        "distributed-system",
+        "plugin-or-extension",
+        "infrastructure-tool",
+        "test-tooling",
+        "unknown"
+      ]
+    },
+    "projectStage": {
+      "type": "string",
+      "enum": [
+        "prototype",
+        "greenfield",
+        "active-product",
+        "mature-system",
+        "legacy-modernization",
+        "maintenance-only",
+        "unknown"
+      ]
+    },
+    "exposure": {
+      "type": "string",
+      "enum": [
+        "private-local",
+        "team-internal",
+        "organization-internal",
+        "external-integration",
+        "public-api",
+        "public-library",
+        "extension-platform",
+        "unknown"
+      ]
+    },
+    "qualityAttribute": {
+      "type": "string",
+      "enum": [
+        "correctness",
+        "safety",
+        "security",
+        "data-integrity",
+        "compatibility",
+        "reliability",
+        "determinism",
+        "usability",
+        "accessibility",
+        "maintainability",
+        "simplicity",
+        "readability",
+        "testability",
+        "operability",
+        "performance",
+        "memory-efficiency",
+        "extensibility",
+        "portability",
+        "delivery-speed",
+        "implementation-convenience"
+      ]
+    }
+  }
+}

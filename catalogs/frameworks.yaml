@@ -1,0 +1,41 @@
+schema_version: 0.2.0
+status: blueprint
+frameworks:
+- id: react
+  name: React
+  scope: component responsibility, composition, state locality, effects, and behavior-focused tests
+  requires:
+  - javascript
+- id: nextjs
+  name: Next.js
+  scope: client/server boundaries, rendering, caching, server actions, routing, and secret handling
+  requires:
+  - typescript
+  - react
+- id: angular
+  name: Angular
+  scope: framework DI, standalone components, signals/RxJS, forms, and service boundaries
+  requires:
+  - typescript
+- id: vue
+  name: Vue
+  scope: reactivity, composables, component scope, state locality, and effects
+  requires:
+  - javascript
+- id: nuxt
+  name: Nuxt
+  scope: SSR, server/client boundaries, data fetching, caching, routing, and auto-import conventions
+  requires:
+  - typescript
+  - vue
+- id: symfony
+  name: Symfony
+  scope: container conventions, HTTP/kernel lifecycle, Messenger, Doctrine boundaries, and configuration
+  requires:
+  - php
+- id: drupal
+  name: Drupal
+  scope: extension APIs, plugins, hooks, entities, cacheability metadata, configuration, and host compatibility
+  requires:
+  - php
+  - symfony

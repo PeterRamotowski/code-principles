@@ -1,0 +1,126 @@
+specification_version: 0.2.0
+selection_mode: automatic-with-visible-result
+project:
+  artifact_type:
+    value: fullstack-application
+    confidence: explicit
+    evidence:
+    - repository owner classification
+  secondary_artifact_types:
+  - value: backend-service
+    confidence: observed
+    evidence:
+    - server route handlers
+  project_stage:
+    value: active-product
+    confidence: explicit
+    evidence:
+    - repository owner classification
+  exposure:
+  - value: organization-internal
+    confidence: explicit
+    evidence:
+    - internal application
+  - value: public-api
+    confidence: explicit
+    evidence:
+    - documented external API consumers
+  domain_complexity:
+    value: moderate
+    confidence: explicit
+    evidence:
+    - business workflows contain several cross-entity invariants
+  architecture_authority:
+    value: incremental-improvement
+    confidence: explicit
+    evidence:
+    - bounded refactoring is allowed during feature work
+  state_model:
+  - value: transactional
+    confidence: observed
+    evidence:
+    - relational database transactions
+constraints:
+  security:
+    value: high
+    confidence: explicit
+    evidence:
+    - authentication, authorization, and payment data
+  reliability:
+    value: elevated
+    confidence: explicit
+    evidence:
+    - production service objective
+  backward_compatibility:
+    value: high
+    confidence: explicit
+    evidence:
+    - external API consumers
+  latency_sensitivity:
+    value: elevated
+    confidence: explicit
+    evidence:
+    - interactive application response budget
+  throughput_sensitivity:
+    value: normal
+    confidence: explicit
+    evidence: []
+  memory_sensitivity:
+    value: normal
+    confidence: explicit
+    evidence: []
+  determinism:
+    value: normal
+    confidence: explicit
+    evidence: []
+  accessibility:
+    value: elevated
+    confidence: explicit
+    evidence:
+    - user interface accessibility requirement
+runtime:
+- value: browser
+  confidence: observed
+  evidence:
+  - client components
+- value: nodejs
+  confidence: observed
+  evidence:
+  - server runtime configuration
+languages:
+- value: typescript
+  version: 5.x
+  confidence: observed
+  evidence:
+  - tsconfig.json
+frameworks:
+- value: react
+  confidence: observed
+  evidence:
+  - react dependency
+- value: nextjs
+  confidence: observed
+  evidence:
+  - next dependency
+  - next.config.ts
+technologies:
+- value: postgresql
+  confidence: observed
+  evidence:
+  - database configuration
+profiles:
+  base: fullstack-web-application
+  modifiers:
+  - public-api
+  - security-sensitive
+overrides:
+  skill_modes:
+    abstraction-and-reuse: conservative
+  required_patterns:
+  - authoritative server-side validation for external input
+  - idempotent processing for retried webhook operations
+  prohibited_patterns:
+  - microservices without explicit architecture approval
+  - full CQRS without demonstrated need
+  notes:
+  - Preserve existing feature-oriented module boundaries.

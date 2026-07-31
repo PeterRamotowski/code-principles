@@ -1,0 +1,137 @@
+specification_version: 0.2.0
+policy_version: 0.2.0
+selection_mode: automatic-with-visible-result
+context:
+  artifact_type: fullstack-application
+  secondary_artifact_types:
+  - backend-service
+  project_stage: active-product
+  exposure:
+  - organization-internal
+  - public-api
+  - external-integration
+  domain_complexity: moderate
+  architecture_authority: incremental-improvement
+  state_model:
+  - transactional
+  - request-scoped
+  runtime:
+  - browser
+  - nodejs
+  constraints:
+    security: high
+    reliability: elevated
+    backward_compatibility: high
+    latency_sensitivity: elevated
+    throughput_sensitivity: normal
+    memory_sensitivity: normal
+    determinism: normal
+    accessibility: elevated
+base_profile: fullstack-web-application
+modifiers:
+- public-api
+- security-sensitive
+language_adapters:
+- id: typescript
+  scope:
+  - application
+framework_adapters:
+- id: react
+  scope:
+  - browser-ui
+- id: nextjs
+  scope:
+  - application-runtime
+active_core_skills:
+- id: code-clarity
+  mode: balanced
+  source: profile
+- id: abstraction-and-reuse
+  mode: balanced
+  source: profile
+- id: modular-design
+  mode: feature-oriented
+  source: profile
+- id: contracts-and-errors
+  mode: strict-boundaries
+  source: modifier
+  rationale: Public API and payment webhooks require authoritative runtime validation.
+- id: api-and-compatibility
+  mode: external-api
+  source: modifier
+- id: testing-strategy
+  mode: integration-balanced
+  source: profile
+- id: distributed-reliability
+  mode: idempotent-ingress
+  source: modifier
+  rationale: Payment providers may retry webhook delivery.
+overrides: []
+conflicts:
+- id: static-types-vs-runtime-validation
+  decision: require-runtime-validation
+  principles:
+  - static-typing
+  - boundary-validation
+  protected_attributes:
+  - correctness
+  - security
+  - data-integrity
+  rationale: TypeScript types do not validate webhook payloads at runtime. External data must be parsed
+    into a trusted internal representation.
+  reconsider_when: []
+- id: cqrs-vs-application-simplicity
+  decision: do-not-introduce-cqrs
+  principles:
+  - cqrs
+  - kiss
+  protected_attributes:
+  - simplicity
+  - maintainability
+  rationale: No demonstrated read/write scaling, authorization, or workflow requirement justifies separate
+    models.
+  reconsider_when:
+  - read and write models acquire materially different scale or authorization requirements
+significant_decisions:
+- id: authoritative-server-validation
+  statement: Treat server-side validation as authoritative for all external input.
+  rationale: Browser checks improve usability but cannot establish trust.
+  scope:
+  - api
+  - server-actions
+  - webhooks
+- id: idempotent-payment-webhooks
+  statement: Make payment webhook processing idempotent and safe to retry.
+  rationale: External providers may deliver duplicate events.
+  scope:
+  - payments
+- id: preserve-public-api
+  statement: Preserve public API compatibility or use an explicit deprecation path.
+  rationale: External consumers cannot be updated atomically.
+  scope:
+  - public-api
+unresolved_uncertainties: []
+prohibited_decisions:
+- expose server secrets to browser-executed code
+- trust TypeScript types as runtime validation of external data
+- introduce CQRS without a demonstrated need
+visible_summary:
+  show: true
+  items:
+  - Full-stack web application with public API and security-sensitive payment integration.
+  - Runtime validation and idempotent webhook handling are required.
+  - Existing modular architecture should be improved incrementally, not replaced.
+active_principles:
+- id: parse-dont-validate
+  interpretation: Parse untrusted webhook and API input into trusted runtime representations.
+  source: contracts-and-errors
+  status: active
+- id: idempotency
+  interpretation: Duplicate payment events must not duplicate business effects.
+  source: distributed-reliability
+  status: active
+- id: cqrs
+  interpretation: Do not introduce separate read and write models without demonstrated divergence.
+  source: state-and-side-effects
+  status: suppressed
+external_skill_dependencies: []
