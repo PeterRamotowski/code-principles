@@ -1,0 +1,57 @@
+schema_version: 0.3.0
+id: testing-strategy
+name: Testing Strategy
+version: 0.3.0
+type: core-skill
+status: candidate
+description: Selects evidence-producing test levels, behavior focus, feedback loops, and change-appropriate verification.
+normative_document: core/testing-strategy/SKILL.md
+applies_to: [implementation, modification, refactoring, verification, review]
+activation:
+  default: task-relevant
+  signals:
+  - behavior is added, changed, fixed, or preserved
+  - a verification approach or test boundary is being selected
+  exclusions:
+  - changes whose correctness can be fully established by deterministic static validation
+requires: []
+conflicts_with:
+- id: modular-design
+  resolution: Test observable behavior at the narrowest stable boundary that provides useful failure localization.
+  escalate_when: [the only observable boundary is operationally expensive]
+- id: safe-change
+  resolution: Characterize relied-upon behavior before restructuring and add focused tests for the intended change.
+  escalate_when: [existing behavior is unknown and destructive change is unavoidable]
+- id: performance-and-resources
+  resolution: Keep the suite reliable and representative while separating fast feedback from explicitly budgeted system verification.
+  escalate_when: [real hardware or production-scale conditions are required for credible evidence]
+modes:
+- id: unit-focused
+  description: Favor fast focused tests at stable public units, with broader tests only for material integration risks.
+  emphasizes: [first-tests, test-behaviour-not-implementation, one-logical-behaviour-per-test]
+  constrains: [test-pyramid, arrange-act-assert]
+  suppressed_behaviours: [private-structure assertions, broad tests for isolated logic]
+- id: integration-balanced
+  description: Combine focused tests with boundary and workflow tests according to the location of credible failure risk.
+  emphasizes: [test-behaviour-not-implementation, test-pyramid, first-tests]
+  constrains: [arrange-act-assert, given-when-then]
+  suppressed_behaviours: [test-level quotas, end-to-end-only verification]
+- id: characterization-first
+  description: Capture relied-upon current behavior before risky changes, then distinguish preservation from intentional correction.
+  emphasizes: [test-behaviour-not-implementation, first-tests, chestertons-fence]
+  constrains: [test-driven-development, red-green-refactor]
+  suppressed_behaviours: [encoding every accident forever, refactoring before observing behavior]
+- id: hardware-integration
+  description: Separate deterministic fast tests from representative integration evidence for behavior dependent on physical or specialized environments.
+  emphasizes: [first-tests, test-behaviour-not-implementation, measure-dont-guess]
+  constrains: [test-pyramid, red-green-refactor]
+  suppressed_behaviours: [claiming simulation proves physical behavior, making all feedback depend on scarce environments]
+default_mode: integration-balanced
+priority: 760
+outputs: [risk-to-test-map, test-levels, behavior-oracles, verification-gaps]
+principles:
+  primary: [test-behaviour-not-implementation, first-tests, one-logical-behaviour-per-test, test-pyramid]
+  supporting: [arrange-act-assert, given-when-then, red-green-refactor, test-driven-development]
+  constrains: [chestertons-fence, measure-dont-guess, performance-budgeting]
+self_contained: true
+tags: [testing, verification, feedback]

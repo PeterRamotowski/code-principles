@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: code-clarity-balanced-local-change
+description: Verify that a routine local change improves comprehension without expanding into unrelated cleanup.
+input:
+  skill: code-clarity
+  mode: balanced
+  task: Add one rule to an established workflow with misleading local names.
+expected:
+  active_principles: [meaningful-names, explicit-over-implicit, kiss]
+  constrained_principles: [boy-scout-rule]
+  suppressed_principles: []
+forbidden:
+- Reorganize unrelated modules.
+- Replace meaningful control flow with clever compression.
+principles_under_test: [meaningful-names, explicit-over-implicit, kiss, boy-scout-rule]

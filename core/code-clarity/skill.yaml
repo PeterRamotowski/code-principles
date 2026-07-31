@@ -1,0 +1,52 @@
+schema_version: 0.3.0
+id: code-clarity
+name: Code Clarity and Simplicity
+version: 0.3.0
+type: core-skill
+status: candidate
+description: Guides proportionate local structure, naming, explicitness, and simplicity without prescribing language syntax.
+normative_document: core/code-clarity/SKILL.md
+applies_to: [implementation, modification, refactoring, review]
+activation:
+  default: task-relevant
+  signals:
+  - code is created or locally changed
+  - readability, naming, control flow, or accidental complexity is material
+  exclusions:
+  - generated artifacts that are not intended for manual maintenance
+requires: []
+conflicts_with:
+- id: abstraction-and-reuse
+  resolution: Preserve local clarity unless duplicated knowledge or a demonstrated variation axis justifies shared indirection.
+  escalate_when: [the proposed abstraction changes a public contract]
+- id: modular-design
+  resolution: Prefer the smallest boundary that improves comprehension and preserves cohesive ownership.
+  escalate_when: [the local simplification changes module responsibilities]
+- id: performance-and-resources
+  resolution: Keep the clear implementation unless a verified budget requires a measured complexity trade-off.
+  escalate_when: [a hard resource or timing limit cannot be met]
+modes:
+- id: minimal
+  description: Make only clarity changes required to complete a narrow, low-risk task.
+  emphasizes: [kiss, meaningful-names, avoid-accidental-complexity]
+  constrains: [boy-scout-rule]
+  suppressed_behaviours: [unrelated cleanup, speculative helpers]
+- id: balanced
+  description: Improve names, structure, and explicitness within the touched behavior and verified scope.
+  emphasizes: [kiss, meaningful-names, explicit-over-implicit, single-level-of-abstraction]
+  constrains: [small-functions]
+  suppressed_behaviours: [arbitrary size limits, clever compression]
+- id: explicit-critical-path
+  description: Favor visible control flow, dependencies, state transitions, defaults, and failure semantics on consequential paths.
+  emphasizes: [explicit-over-implicit, no-magic, principle-of-least-astonishment]
+  constrains: [self-documenting-code, small-functions]
+  suppressed_behaviours: [hidden side effects, implicit security or data-integrity decisions]
+default_mode: balanced
+priority: 700
+outputs: [clarity-decisions, suppressed-complexity, review-checks]
+principles:
+  primary: [kiss, meaningful-names, explicit-over-implicit, avoid-accidental-complexity]
+  supporting: [no-magic, principle-of-least-astonishment, self-documenting-code, single-level-of-abstraction, small-functions]
+  constrains: [boy-scout-rule, performance-budgeting]
+self_contained: true
+tags: [clarity, simplicity, readability]

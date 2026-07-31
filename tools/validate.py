@@ -25,6 +25,14 @@ SEMANTIC_VERSION_RE = re.compile(
     r"^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)"
     r"(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$"
 )
+MILESTONE_4_SKILLS = {
+    "code-clarity",
+    "abstraction-and-reuse",
+    "modular-design",
+    "contracts-and-errors",
+    "testing-strategy",
+    "safe-change",
+}
 
 
 class DuplicateKeyError(ValueError):
@@ -350,6 +358,12 @@ class RepositoryValidator:
                         )
         self.check_cycle(skill_graph, "skill metadata")
 
+        self.check_core_skill_mvp(
+            skill_items,
+            implemented_skills,
+            languages | frameworks,
+        )
+
         self.check_component_metadata(
             profiles, modifiers, adapters, skills, skill_modes, principles
         )
@@ -358,6 +372,95 @@ class RepositoryValidator:
         )
         self.check_profiles_are_language_independent(profile_items, adapters)
         return len(principles)
+
+    def check_core_skill_mvp(self, catalogue_items, implemented_skills, technologies) -> None:
+        """Enforce the Milestone 4 Definition of Done for implemented Core Skills."""
+        catalogue = {
+            item.get("id"): item
+            for item in catalogue_items
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+        implemented = {
+            data.get("id"): (path, data)
+            for path, data in implemented_skills
+            if data.get("type") == "core-skill" and isinstance(data.get("id"), str)
+        }
+        missing = sorted(MILESTONE_4_SKILLS - set(implemented))
+        if missing:
+            self.error(f"Milestone 4: missing implemented Core Skills: {', '.join(missing)}")
+
+        scenarios_by_skill = defaultdict(list)
+        for path in sorted((ROOT / "evaluations/scenarios").glob("*.yaml")):
+            data = self.documents.get(path)
+            if not isinstance(data, dict):
+                continue
+            skill = data.get("input", {}).get("skill")
+            if isinstance(skill, str):
+                scenarios_by_skill[skill].append((path, data))
+
+        technology_re = re.compile(
+            r"\b(?:" + "|".join(re.escape(item) for item in sorted(technologies)) + r")\b",
+            re.IGNORECASE,
+        )
+        for identifier in sorted(MILESTONE_4_SKILLS & set(implemented)):
+            path, data = implemented[identifier]
+            expected_path = ROOT / "core" / identifier / "skill.yaml"
+            if path != expected_path:
+                self.error(
+                    f"{self.relative(path)}: Core Skill metadata must be at "
+                    f"core/{identifier}/skill.yaml"
+                )
+            catalogue_item = catalogue.get(identifier, {})
+            catalogue_modes = set(catalogue_item.get("modes", []))
+            metadata_modes = {
+                mode.get("id") for mode in data.get("modes", []) if isinstance(mode, dict)
+            }
+            if catalogue_modes != metadata_modes:
+                self.error(
+                    f"{self.relative(path)}: modes do not match catalogs/core-skills.yaml"
+                )
+            if len(data.get("conflicts_with", [])) < 3:
+                self.error(f"{self.relative(path)}: Core Skill must define at least three conflicts")
+
+            normative = ROOT / data.get("normative_document", "")
+            if not normative.is_file():
+                continue
+            text = normative.read_text(encoding="utf-8")
+            for mode in sorted(metadata_modes):
+                if f"`{mode}`" not in text:
+                    self.error(
+                        f"{self.relative(normative)}: mode is not documented: {mode}"
+                    )
+            match = technology_re.search(text)
+            if match:
+                self.error(
+                    f"{self.relative(normative)}: Core Skill contains technology-specific rule: "
+                    f"{match.group(0)}"
+                )
+
+            examples = sorted((ROOT / "core" / identifier / "examples").glob("*.md"))
+            example_text = "\n".join(item.read_text(encoding="utf-8") for item in examples)
+            if "Positive example" not in example_text or "Negative example" not in example_text:
+                self.error(
+                    f"core/{identifier}/examples: positive and negative examples are required"
+                )
+
+            scenarios = scenarios_by_skill.get(identifier, [])
+            if len(scenarios) < 3:
+                self.error(
+                    f"core/{identifier}: at least three evaluation scenarios are required"
+                )
+            modes_under_evaluation = {
+                scenario.get("input", {}).get("mode") for _, scenario in scenarios
+            }
+            unknown_modes = sorted(
+                mode for mode in modes_under_evaluation if mode not in metadata_modes
+            )
+            if unknown_modes:
+                self.error(
+                    f"core/{identifier}: evaluation scenarios reference unknown modes: "
+                    f"{', '.join(unknown_modes)}"
+                )
 
     def check_duplicate_metadata(self, metadata, label: str) -> None:
         paths_by_id = defaultdict(list)

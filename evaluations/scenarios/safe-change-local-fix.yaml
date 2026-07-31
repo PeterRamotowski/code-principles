@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: safe-change-local-fix
+description: Keep a production fix behaviorally bounded while allowing directly supporting local improvement.
+input:
+  skill: safe-change
+  mode: local-safe-change
+  task: Fix one known failure in an unfamiliar subsystem with a narrow reproduction.
+expected:
+  active_principles: [boy-scout-rule, test-behaviour-not-implementation]
+  constrained_principles: [chestertons-fence, backward-compatibility]
+  suppressed_principles: []
+forbidden:
+- Reorganize the subsystem before applying the fix.
+- Change unrelated public behavior.
+principles_under_test: [boy-scout-rule, test-behaviour-not-implementation, chestertons-fence, backward-compatibility]

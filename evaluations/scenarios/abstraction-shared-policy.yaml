@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: abstraction-shared-policy
+description: Centralize one diverging policy while retaining consumer-specific representations at their boundaries.
+input:
+  skill: abstraction-and-reuse
+  mode: balanced
+  task: Three entry points implement the same policy but format their results differently.
+expected:
+  active_principles: [dry, single-source-of-truth]
+  constrained_principles: [locality-of-behaviour]
+  suppressed_principles: []
+forbidden:
+- Keep separate authoritative policy copies.
+- Force all representations into one generic format.
+principles_under_test: [dry, single-source-of-truth, locality-of-behaviour]

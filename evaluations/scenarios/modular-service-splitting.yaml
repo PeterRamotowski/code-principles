@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: modular-service-splitting
+description: Reject independently operated services when only naming and repository size suggest separation.
+input:
+  skill: modular-design
+  mode: service-oriented
+  task: Split a cohesive single-lifecycle module into services without isolation or scaling evidence.
+expected:
+  active_principles: [high-cohesion-low-coupling, information-hiding]
+  constrained_principles: [separation-of-concerns]
+  suppressed_principles: []
+forbidden:
+- Create one service per domain noun.
+- Infer deployment boundaries from codebase size.
+principles_under_test: [high-cohesion-low-coupling, information-hiding, separation-of-concerns, avoid-accidental-complexity]

@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: contracts-tolerant-legacy-syntax
+description: Preserve harmless legacy syntax while rejecting ambiguous meaning and normalizing one contract.
+input:
+  skill: contracts-and-errors
+  mode: tolerant-syntax-strict-semantics
+  task: Continue accepting two documented spellings that map losslessly to one value.
+expected:
+  active_principles: [parse-dont-validate, design-by-contract]
+  constrained_principles: [postels-law, fail-fast]
+  suppressed_principles: []
+forbidden:
+- Guess between conflicting semantic interpretations.
+- Propagate both representations into trusted code.
+principles_under_test: [parse-dont-validate, design-by-contract, postels-law, fail-fast]

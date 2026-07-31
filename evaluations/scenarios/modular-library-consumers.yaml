@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: modular-library-consumers
+description: Shape reusable boundaries around focused consumer dependencies and hidden volatile implementation.
+input:
+  skill: modular-design
+  mode: library-oriented
+  task: Split a reusable package whose consumers use distinct capability subsets.
+expected:
+  active_principles: [common-reuse-principle, interface-segregation-principle, information-hiding]
+  constrained_principles: [common-closure-principle]
+  suppressed_principles: []
+forbidden:
+- Require every consumer to depend on unrelated capabilities.
+- Expose volatile implementation details for convenience.
+principles_under_test: [common-reuse-principle, interface-segregation-principle, information-hiding, common-closure-principle]

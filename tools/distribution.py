@@ -24,6 +24,7 @@ ROOT_FILES = {
 
 DISTRIBUTION_DIRECTORIES = {
     "catalogs",
+    "core",
     "evaluations",
     "orchestrator",
     "principles",

@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: testing-characterization-change
+description: Capture relied-upon legacy behavior before restructuring while allowing an explicit defect correction.
+input:
+  skill: testing-strategy
+  mode: characterization-first
+  task: Refactor an uncertain workflow and correct one requirement-confirmed defect.
+expected:
+  active_principles: [test-behaviour-not-implementation, first-tests, chestertons-fence]
+  constrained_principles: [test-driven-development, red-green-refactor]
+  suppressed_principles: []
+forbidden:
+- Refactor before observing current outcomes.
+- Preserve the confirmed defect as permanent behavior.
+principles_under_test: [test-behaviour-not-implementation, first-tests, chestertons-fence, test-driven-development]

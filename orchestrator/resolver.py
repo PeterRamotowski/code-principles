@@ -438,6 +438,25 @@ def _skill_modes(
     ]
 
 
+def _core_skill_policy(skill: str, mode: str) -> tuple[list[str], list[str], str] | None:
+    """Load the implemented, mode-specific policy for a Core Skill when available."""
+    metadata_path = ROOT / "core" / skill / "skill.yaml"
+    if not metadata_path.is_file():
+        return None
+    metadata = _load_yaml(metadata_path)
+    selected = next(
+        (item for item in metadata.get("modes", []) if item.get("id") == mode),
+        None,
+    )
+    if selected is None:
+        raise OrchestrationError(f"implemented Core Skill {skill} has no mode {mode}")
+    return (
+        list(selected.get("emphasizes", [])),
+        list(selected.get("suppressed_behaviours", [])),
+        selected["description"],
+    )
+
+
 def _record_overrides(overrides: dict[str, Any], source: str) -> list[dict[str, Any]]:
     records = []
     for skill, mode in sorted(overrides.get("skill_modes", {}).items()):
@@ -578,20 +597,31 @@ def resolve_policy(
     user_overrides = user_context.get("overrides", {})
     active_skills = _skill_modes(profile, modifiers, repository_overrides, user_overrides)
 
-    active_principles = []
+    principles_by_id: dict[str, dict[str, str]] = {}
+    skill_prohibitions = []
     for skill in active_skills:
-        for principle in SKILL_PRINCIPLES.get(skill["id"], ()):
-            active_principles.append({
+        core_policy = _core_skill_policy(skill["id"], skill["mode"])
+        if core_policy:
+            principles, suppressed, mode_description = core_policy
+            skill_prohibitions.extend(suppressed)
+        else:
+            principles = list(SKILL_PRINCIPLES.get(skill["id"], ()))
+            suppressed = []
+            mode_description = f"Apply the selected {skill['mode']} mode to the current task scope."
+        for principle in principles:
+            principles_by_id.setdefault(principle, {
                 "id": principle,
-                "interpretation": f"Apply {principle} within the selected {skill['mode']} mode and current task scope.",
+                "interpretation": mode_description,
                 "source": skill["id"],
                 "status": "active",
             })
+    active_principles = [principles_by_id[item] for item in sorted(principles_by_id)]
     language_ids = {item["id"] for item in languages}
     authority = normalized["project"]["architecture_authority"]["value"]
     prohibited = list(dict.fromkeys(
         repository_overrides.get("prohibited_patterns", [])
         + user_overrides.get("prohibited_patterns", [])
+        + skill_prohibitions
     ))
     decisions = _decisions(
         profile, modifiers, authority, explicitly_configured=bool(explicit_profile)

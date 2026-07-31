@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: code-clarity-helper-overengineering
+description: Reject helper extraction driven only by arbitrary size limits in one cohesive local operation.
+input:
+  skill: code-clarity
+  mode: minimal
+  task: Fix one branch in a cohesive operation that has no independent reusable steps.
+expected:
+  active_principles: [kiss, avoid-accidental-complexity]
+  constrained_principles: [small-functions, single-level-of-abstraction]
+  suppressed_principles: []
+forbidden:
+- Extract generic helpers solely to reduce line count.
+- Rename unrelated concepts.
+principles_under_test: [kiss, avoid-accidental-complexity, small-functions, single-level-of-abstraction]

@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: abstraction-public-variation
+description: Permit a narrow extension seam when verified public consumers require stable behavioral variation.
+input:
+  skill: abstraction-and-reuse
+  mode: extensible-public-library
+  task: Support two documented consumer policies that vary at one stable decision point.
+expected:
+  active_principles: [open-closed-principle, single-source-of-truth]
+  constrained_principles: [yagni, premature-generalization]
+  suppressed_principles: []
+forbidden:
+- Expose internal machinery as the extension contract.
+- Add hooks for hypothetical variation axes.
+principles_under_test: [open-closed-principle, single-source-of-truth, yagni, premature-generalization]

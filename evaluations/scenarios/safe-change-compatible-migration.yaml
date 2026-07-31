@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: safe-change-compatible-migration
+description: Sequence a long-lived contract migration through observable compatible intermediate states.
+input:
+  skill: safe-change
+  mode: compatibility-first
+  task: Replace a contract used by independently migrating consumers and persisted data.
+expected:
+  active_principles: [backward-compatibility, semantic-versioning, chestertons-fence]
+  constrained_principles: [boy-scout-rule]
+  suppressed_principles: []
+forbidden:
+- Remove the old contract before adoption evidence.
+- Assume undocumented consumers do not exist.
+principles_under_test: [backward-compatibility, semantic-versioning, chestertons-fence, boy-scout-rule]

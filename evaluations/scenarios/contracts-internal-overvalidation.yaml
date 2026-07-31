@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: contracts-internal-overvalidation
+description: Avoid duplicating boundary parsing at every controlled handoff once construction owns invariants.
+input:
+  skill: contracts-and-errors
+  mode: trusted-internal-pipeline
+  task: Pass validated semantic values through controlled transformation stages.
+expected:
+  active_principles: [design-by-contract, fail-fast]
+  constrained_principles: [defensive-programming, parse-dont-validate]
+  suppressed_principles: []
+forbidden:
+- Reparse values at every local call.
+- Catch and conceal internal invariant violations.
+principles_under_test: [design-by-contract, fail-fast, defensive-programming, parse-dont-validate]

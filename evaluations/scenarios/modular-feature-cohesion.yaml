@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: modular-feature-cohesion
+description: Keep one capability's validation, state transition, and presentation ownership cohesively discoverable.
+input:
+  skill: modular-design
+  mode: feature-oriented
+  task: Add a capability whose behavior and data change together.
+expected:
+  active_principles: [package-by-feature, high-cohesion-low-coupling, locality-of-behaviour]
+  constrained_principles: [separation-of-concerns]
+  suppressed_principles: []
+forbidden:
+- Scatter the capability across top-level technical layers by default.
+- Create a boundary without a responsibility.
+principles_under_test: [package-by-feature, high-cohesion-low-coupling, locality-of-behaviour, separation-of-concerns]

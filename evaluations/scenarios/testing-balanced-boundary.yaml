@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: testing-balanced-boundary
+description: Match focused and integration tests to decision logic and persistent boundary risks respectively.
+input:
+  skill: testing-strategy
+  mode: integration-balanced
+  task: Verify pure decisions plus persistence mapping and transaction behavior.
+expected:
+  active_principles: [test-behaviour-not-implementation, test-pyramid, first-tests]
+  constrained_principles: [arrange-act-assert]
+  suppressed_principles: []
+forbidden:
+- Test every decision only through an end-to-end environment.
+- Mock away the persistence behavior under test.
+principles_under_test: [test-behaviour-not-implementation, test-pyramid, first-tests, arrange-act-assert]

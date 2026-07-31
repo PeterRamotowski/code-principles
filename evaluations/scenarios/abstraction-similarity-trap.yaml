@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: abstraction-similarity-trap
+description: Reject a generic abstraction for two syntactically similar concepts with independent ownership.
+input:
+  skill: abstraction-and-reuse
+  mode: conservative
+  task: Deduplicate two mappings owned by unrelated workflows with different consumers.
+expected:
+  active_principles: [yagni, premature-generalization]
+  constrained_principles: [dry]
+  suppressed_principles: [open-closed-principle]
+forbidden:
+- Introduce a configurable universal mapper.
+- Treat visual similarity as shared knowledge.
+principles_under_test: [yagni, premature-generalization, dry, open-closed-principle]

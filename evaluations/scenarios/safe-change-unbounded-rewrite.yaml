@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: safe-change-unbounded-rewrite
+description: Reject a rewrite that lacks bounded outcomes, migration evidence, rollout, and rollback criteria.
+input:
+  skill: safe-change
+  mode: redesign-authorized
+  task: Redesign an existing subsystem whose consumers and persisted state remain active.
+expected:
+  active_principles: [galls-law, test-behaviour-not-implementation]
+  constrained_principles: [chestertons-fence, backward-compatibility]
+  suppressed_principles: []
+forbidden:
+- Treat redesign authority as permission for an unbounded rewrite.
+- Delete the old path before replacement evidence.
+principles_under_test: [galls-law, test-behaviour-not-implementation, chestertons-fence, backward-compatibility]

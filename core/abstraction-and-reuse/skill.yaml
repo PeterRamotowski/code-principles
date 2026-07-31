@@ -1,0 +1,57 @@
+schema_version: 0.3.0
+id: abstraction-and-reuse
+name: Abstraction and Reuse
+version: 0.3.0
+type: core-skill
+status: candidate
+description: Resolves duplication, reuse, extension points, and independent changeability from demonstrated evidence.
+normative_document: core/abstraction-and-reuse/SKILL.md
+applies_to: [implementation, refactoring, library-design, review]
+activation:
+  default: task-relevant
+  signals:
+  - shared code or a new abstraction is proposed
+  - duplicated knowledge, reuse, or extensibility is material
+  exclusions:
+  - purely mechanical changes with no ownership or reuse decision
+requires: []
+conflicts_with:
+- id: code-clarity
+  resolution: Accept repetition of syntax when extracting it would obscure meaning; centralize authoritative knowledge that can diverge.
+  escalate_when: [neither ownership nor independent changeability can be established]
+- id: modular-design
+  resolution: Align reuse boundaries with cohesive change and consumer needs rather than visual similarity.
+  escalate_when: [consumers require incompatible stability or release cycles]
+- id: api-and-compatibility
+  resolution: Add extension seams only for verified public variation and keep the supported surface minimal.
+  escalate_when: [a published contract would become difficult to reverse]
+modes:
+- id: conservative
+  description: Delay extraction until repeated knowledge, common change, and a stable variation axis are demonstrated.
+  emphasizes: [yagni, premature-generalization, kiss]
+  constrains: [dry, open-closed-principle]
+  suppressed_behaviours: [single-use abstractions, speculative configuration]
+- id: balanced
+  description: Centralize authoritative knowledge while allowing separate representations for independently changing concepts.
+  emphasizes: [dry, single-source-of-truth, yagni]
+  constrains: [open-closed-principle, premature-generalization]
+  suppressed_behaviours: [similarity-only extraction, universal utilities]
+- id: extensible-public-library
+  description: Provide small stable extension points for verified consumer variation while minimizing irreversible public surface.
+  emphasizes: [open-closed-principle, single-source-of-truth, dry]
+  constrains: [yagni, premature-generalization]
+  suppressed_behaviours: [internal details exposed as extension contracts, hypothetical hooks]
+- id: legacy-preservation
+  description: Preserve behavior and existing seams first, extracting only when characterization and change evidence support it.
+  emphasizes: [premature-generalization, yagni, chestertons-fence]
+  constrains: [dry, open-closed-principle]
+  suppressed_behaviours: [repository-wide deduplication, abstraction-led rewrites]
+default_mode: conservative
+priority: 720
+outputs: [knowledge-ownership, abstraction-decisions, extension-policy]
+principles:
+  primary: [dry, yagni, open-closed-principle, premature-generalization, single-source-of-truth]
+  supporting: [kiss, locality-of-behaviour, common-reuse-principle]
+  constrains: [backward-compatibility, chestertons-fence]
+self_contained: true
+tags: [abstraction, reuse, extensibility]

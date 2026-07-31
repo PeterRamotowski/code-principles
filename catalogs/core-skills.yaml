@@ -1,5 +1,5 @@
 schema_version: 0.3.0
-status: blueprint
+status: core-skills-mvp
 skills:
 - id: code-clarity
   name: Code Clarity and Simplicity

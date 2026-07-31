@@ -1,0 +1,57 @@
+schema_version: 0.3.0
+id: safe-change
+name: Safe Change and Legacy Modernization
+version: 0.3.0
+type: core-skill
+status: candidate
+description: Controls change scope, behavioral preservation, historical investigation, compatibility, and authorized redesign.
+normative_document: core/safe-change/SKILL.md
+applies_to: [modification, bug-fix, refactoring, migration, modernization]
+activation:
+  default: task-relevant
+  signals:
+  - existing behavior or architecture is being changed
+  - legacy constraints, compatibility, migration, or cleanup are material
+  exclusions:
+  - isolated greenfield work with no existing consumers or behavior
+requires: []
+conflicts_with:
+- id: code-clarity
+  resolution: Make bounded clarity improvements only where they support the requested change and preserve behavior.
+  escalate_when: [cleanup obscures the functional diff or expands rollback scope]
+- id: abstraction-and-reuse
+  resolution: Preserve known behavior and seams before consolidating duplication whose historical purpose is uncertain.
+  escalate_when: [duplication may encode compatibility or failure isolation]
+- id: api-and-compatibility
+  resolution: Treat observed consumer reliance and explicit compatibility requirements as constraints on migration sequencing.
+  escalate_when: [consumer migration cannot be coordinated or reversed]
+modes:
+- id: local-safe-change
+  description: Minimize the behavioral and structural surface of an ordinary existing-system change.
+  emphasizes: [boy-scout-rule, kiss, test-behaviour-not-implementation]
+  constrains: [chestertons-fence, backward-compatibility]
+  suppressed_behaviours: [unrelated refactoring, opportunistic public changes]
+- id: incremental-modernization
+  description: Improve one bounded seam at a time with characterization, migration checkpoints, and rollback paths.
+  emphasizes: [boy-scout-rule, chestertons-fence, test-behaviour-not-implementation]
+  constrains: [backward-compatibility, premature-generalization]
+  suppressed_behaviours: [big-bang replacement, cleanup without migration evidence]
+- id: compatibility-first
+  description: Preserve relied-upon contracts and sequence additive migration before removal or tightening.
+  emphasizes: [backward-compatibility, semantic-versioning, chestertons-fence]
+  constrains: [boy-scout-rule, fail-fast]
+  suppressed_behaviours: [silent breaking changes, assuming undocumented means unused]
+- id: redesign-authorized
+  description: Permit broad restructuring within explicit outcome, migration, verification, and rollback constraints.
+  emphasizes: [galls-law, test-behaviour-not-implementation, high-cohesion-low-coupling]
+  constrains: [chestertons-fence, backward-compatibility]
+  suppressed_behaviours: [unbounded rewrites, deletion before replacement evidence]
+default_mode: local-safe-change
+priority: 800
+outputs: [change-boundary, preservation-requirements, migration-sequence, rollback-plan]
+principles:
+  primary: [boy-scout-rule]
+  supporting: [chestertons-fence, backward-compatibility, test-behaviour-not-implementation, galls-law]
+  constrains: [kiss, premature-generalization, semantic-versioning]
+self_contained: true
+tags: [safe-change, modernization, migration]

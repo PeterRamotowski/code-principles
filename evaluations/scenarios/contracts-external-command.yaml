@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: contracts-external-command
+description: Parse an untrusted command into valid semantic values before it enters trusted application state.
+input:
+  skill: contracts-and-errors
+  mode: strict-boundaries
+  task: Accept an external command containing identifiers, quantities, and optional values.
+expected:
+  active_principles: [parse-dont-validate, fail-fast, make-illegal-states-unrepresentable]
+  constrained_principles: [postels-law]
+  suppressed_principles: []
+forbidden:
+- Trust a static declaration as runtime evidence.
+- Construct a partially valid command.
+principles_under_test: [parse-dont-validate, fail-fast, make-illegal-states-unrepresentable, postels-law]

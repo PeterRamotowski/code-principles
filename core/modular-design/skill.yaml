@@ -1,0 +1,62 @@
+schema_version: 0.3.0
+id: modular-design
+name: Modular and Object Design
+version: 0.3.0
+type: core-skill
+status: candidate
+description: Defines cohesive responsibilities, stable information boundaries, collaboration, and proportionate decomposition.
+normative_document: core/modular-design/SKILL.md
+applies_to: [implementation, refactoring, architecture, review]
+activation:
+  default: task-relevant
+  signals:
+  - module, component, service, object, or data boundaries are being changed
+  - coupling, cohesion, ownership, or collaboration is material
+  exclusions:
+  - changes wholly inside an established boundary with no responsibility decision
+requires: []
+conflicts_with:
+- id: code-clarity
+  resolution: Keep behavior locally understandable while introducing only boundaries with a concrete ownership or changeability benefit.
+  escalate_when: [locality and separation protect equally important qualities]
+- id: abstraction-and-reuse
+  resolution: Group by cohesive change and consumer dependency, not merely to maximize reuse.
+  escalate_when: [shared code serves consumers with divergent change cycles]
+- id: dependencies-and-boundaries
+  resolution: Use dependency direction to protect established policy boundaries without forcing architecture layers into every module.
+  escalate_when: [a dependency crosses a safety, deployment, or public boundary]
+modes:
+- id: feature-oriented
+  description: Organize collaborating behavior around user-visible or business capabilities while retaining local cohesion.
+  emphasizes: [package-by-feature, locality-of-behaviour, high-cohesion-low-coupling]
+  constrains: [separation-of-concerns, common-closure-principle]
+  suppressed_behaviours: [top-level technical-layer fragmentation]
+- id: domain-oriented
+  description: Center boundaries on domain concepts, invariants, and cohesive business change.
+  emphasizes: [encapsulation, information-hiding, single-responsibility-principle, high-cohesion-low-coupling]
+  constrains: [tell-dont-ask, law-of-demeter]
+  suppressed_behaviours: [anemic boundaries without demonstrated benefit, framework-shaped domain policy]
+- id: service-oriented
+  description: Define explicit service responsibilities and contracts around independently operated capabilities.
+  emphasizes: [high-cohesion-low-coupling, information-hiding, interface-segregation-principle]
+  constrains: [common-closure-principle, common-reuse-principle]
+  suppressed_behaviours: [distributed boundaries inferred from module names]
+- id: data-oriented
+  description: Organize transformations and ownership around data flow when object collaboration would add indirection.
+  emphasizes: [separation-of-concerns, locality-of-behaviour, information-hiding]
+  constrains: [tell-dont-ask, composition-over-inheritance]
+  suppressed_behaviours: [object hierarchies without behavioral invariants]
+- id: library-oriented
+  description: Minimize consumer dependencies and expose focused stable contracts around reusable capabilities.
+  emphasizes: [common-reuse-principle, interface-segregation-principle, information-hiding]
+  constrains: [common-closure-principle, package-by-feature]
+  suppressed_behaviours: [broad convenience interfaces, leakage of volatile internals]
+default_mode: feature-oriented
+priority: 710
+outputs: [responsibility-map, boundary-decisions, collaboration-rules]
+principles:
+  primary: [high-cohesion-low-coupling, separation-of-concerns, information-hiding, encapsulation, single-responsibility-principle]
+  supporting: [package-by-feature, locality-of-behaviour, interface-segregation-principle, composition-over-inheritance, common-closure-principle, common-reuse-principle]
+  constrains: [law-of-demeter, tell-dont-ask, liskov-substitution-principle]
+self_contained: true
+tags: [modularity, cohesion, coupling]

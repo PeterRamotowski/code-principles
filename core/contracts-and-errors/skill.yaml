@@ -1,0 +1,57 @@
+schema_version: 0.3.0
+id: contracts-and-errors
+name: Contracts, Validation, Errors, and Security
+version: 0.3.0
+type: core-skill
+status: candidate
+description: Defines trust boundaries, semantic parsing, invariant enforcement, failure behavior, and authority limits.
+normative_document: core/contracts-and-errors/SKILL.md
+applies_to: [implementation, integration, api-design, review]
+activation:
+  default: task-relevant
+  signals:
+  - data crosses a trust or component boundary
+  - invalid states, errors, permissions, or recovery are material
+  exclusions:
+  - documentation-only changes with no contract effect
+requires: []
+conflicts_with:
+- id: code-clarity
+  resolution: Make consequential contract and failure behavior explicit even when it adds local structure.
+  escalate_when: [the error policy affects public consumers]
+- id: performance-and-resources
+  resolution: Retain required safety and semantic checks; optimize validated hot paths only from measurements and preserved guarantees.
+  escalate_when: [a required check conflicts with a hard timing limit]
+- id: api-and-compatibility
+  resolution: Preserve valid contracts while rejecting ambiguity and unsafe permissiveness at the boundary.
+  escalate_when: [tightening acceptance would break relied-upon external behavior]
+modes:
+- id: strict-boundaries
+  description: Parse untrusted input into valid domain meaning and reject invalid or ambiguous values at entry boundaries.
+  emphasizes: [parse-dont-validate, fail-fast, make-illegal-states-unrepresentable]
+  constrains: [postels-law, defensive-programming]
+  suppressed_behaviours: [trusting declarations as runtime evidence, partial invalid objects]
+- id: tolerant-syntax-strict-semantics
+  description: Accept harmless representational variation while enforcing one explicit semantic contract.
+  emphasizes: [parse-dont-validate, design-by-contract, principle-of-least-astonishment]
+  constrains: [postels-law, fail-fast]
+  suppressed_behaviours: [guessing intent, silently coercing conflicting meaning]
+- id: trusted-internal-pipeline
+  description: Validate at provenance-changing boundaries and rely on established internal invariants between controlled stages.
+  emphasizes: [design-by-contract, fail-fast, information-hiding]
+  constrains: [defensive-programming, parse-dont-validate]
+  suppressed_behaviours: [revalidating every local handoff, ignoring provenance changes]
+- id: safety-critical
+  description: Make invariants, failure containment, least authority, and verification explicit for high-consequence behavior.
+  emphasizes: [defensive-programming, design-by-contract, principle-of-least-privilege, make-illegal-states-unrepresentable]
+  constrains: [postels-law, fail-fast]
+  suppressed_behaviours: [best-effort continuation after invariant loss, broad default authority]
+default_mode: strict-boundaries
+priority: 900
+outputs: [trust-boundaries, contract-rules, error-policy, authority-policy]
+principles:
+  primary: [parse-dont-validate, fail-fast, defensive-programming, design-by-contract, make-illegal-states-unrepresentable, principle-of-least-privilege]
+  supporting: [principle-of-least-astonishment, information-hiding]
+  constrains: [postels-law, performance-budgeting, backward-compatibility]
+self_contained: true
+tags: [contracts, validation, errors, security]

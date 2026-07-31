@@ -1,0 +1,15 @@
+schema_version: 0.3.0
+id: code-clarity-critical-path-boundary
+description: Verify that consequential state changes favor traceable decisions and failures over terse code.
+input:
+  skill: code-clarity
+  mode: explicit-critical-path
+  task: Implement an authorization-sensitive state transition with an audit effect.
+expected:
+  active_principles: [explicit-over-implicit, no-magic, principle-of-least-astonishment]
+  constrained_principles: [small-functions]
+  suppressed_principles: []
+forbidden:
+- Hide the state transition in an implicit callback.
+- Use unexplained defaults for authorization decisions.
+principles_under_test: [explicit-over-implicit, no-magic, principle-of-least-astonishment, small-functions]
