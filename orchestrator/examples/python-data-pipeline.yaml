@@ -35,33 +35,33 @@ language_adapters:
 framework_adapters: []
 active_core_skills:
 - id: code-clarity
-  mode: pipeline-readable
+  mode: balanced
   source: profile
 - id: abstraction-and-reuse
   mode: conservative
   source: profile
 - id: modular-design
-  mode: staged-pipeline
+  mode: data-oriented
   source: profile
 - id: contracts-and-errors
-  mode: strict-ingress
+  mode: strict-boundaries
   source: profile
-- id: performance
+- id: performance-and-resources
   mode: budget-constrained
   source: modifier
   rationale: Input files may exceed available memory and must be processed within a batch deadline.
 - id: testing-strategy
-  mode: transformation-and-integration
+  mode: integration-balanced
   source: profile
 - id: safe-change
-  mode: restartable-operations
+  mode: local-safe-change
   source: profile
 conflicts:
 - id: rich-domain-model-vs-data-pipeline
   decision: prefer-transparent-records
   principles:
-  - rich-domain-model
-  - data-oriented-design
+  - encapsulation
+  - kiss
   protected_attributes:
   - simplicity
   - memory-efficiency
@@ -73,8 +73,8 @@ conflicts:
 - id: materialization-vs-streaming
   decision: stream-records
   principles:
-  - local-simplicity
-  - memory-efficiency
+  - kiss
+  - performance-budgeting
   protected_attributes:
   - memory-efficiency
   - reliability

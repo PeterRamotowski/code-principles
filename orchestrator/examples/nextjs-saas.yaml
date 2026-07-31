@@ -71,8 +71,8 @@ conflicts:
 - id: static-types-vs-runtime-validation
   decision: require-runtime-validation
   principles:
-  - static-typing
-  - boundary-validation
+  - make-illegal-states-unrepresentable
+  - parse-dont-validate
   protected_attributes:
   - correctness
   - security

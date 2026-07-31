@@ -1,0 +1,7 @@
+dependencies:
+  component-a:
+  - component-b
+  component-b:
+  - component-c
+  component-c:
+  - component-a

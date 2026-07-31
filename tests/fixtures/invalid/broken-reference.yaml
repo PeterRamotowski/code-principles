@@ -1,0 +1,6 @@
+known:
+- known-component
+component:
+  id: example-component
+  requires:
+  - missing-component

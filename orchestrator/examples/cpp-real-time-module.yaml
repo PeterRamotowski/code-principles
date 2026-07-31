@@ -36,26 +36,26 @@ language_adapters:
 framework_adapters: []
 active_core_skills:
 - id: code-clarity
-  mode: explicit-resource-lifecycle
+  mode: explicit-critical-path
   source: language-adapter
 - id: modular-design
-  mode: component-boundaries
+  mode: library-oriented
   source: profile
 - id: contracts-and-errors
-  mode: explicit-status-policy
+  mode: safety-critical
   source: repository-override
   rationale: Exceptions are prohibited in the real-time execution path.
 - id: state-and-side-effects
-  mode: single-owner-mutable-state
+  mode: single-owner-mutation
   source: profile
-- id: performance
-  mode: hard-budget
+- id: performance-and-resources
+  mode: hard-real-time
   source: modifier
 - id: testing-strategy
-  mode: deterministic-and-hardware-integration
+  mode: hardware-integration
   source: profile
 - id: api-and-compatibility
-  mode: stable-internal-abi
+  mode: stable-abi
   source: repository-override
 overrides:
 - source: repository
@@ -71,7 +71,7 @@ conflicts:
   decision: controlled-preallocated-mutation
   principles:
   - immutability
-  - deterministic-performance
+  - performance-budgeting
   protected_attributes:
   - determinism
   - memory-efficiency
@@ -83,8 +83,8 @@ conflicts:
 - id: exception-convenience-vs-real-time-policy
   decision: explicit-status-in-real-time-path
   principles:
-  - exception-based-errors
-  - deterministic-failure-handling
+  - fail-fast
+  - performance-budgeting
   protected_attributes:
   - determinism
   - reliability
