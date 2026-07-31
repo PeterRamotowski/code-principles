@@ -4,6 +4,10 @@ All notable changes to the foundation package are documented here.
 
 ## [Unreleased]
 
+No changes yet.
+
+## [0.4.0] — 2026-07-31
+
 ### Added
 
 - six language-independent Core Skill MVP packages covering clarity, abstraction and reuse, modular

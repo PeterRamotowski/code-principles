@@ -1,4 +1,4 @@
-schema_version: 0.3.0
+schema_version: 0.4.0
 id: safe-change-compatible-migration
 description: Sequence a long-lived contract migration through observable compatible intermediate states.
 input:

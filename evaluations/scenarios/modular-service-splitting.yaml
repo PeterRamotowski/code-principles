@@ -1,4 +1,4 @@
-schema_version: 0.3.0
+schema_version: 0.4.0
 id: modular-service-splitting
 description: Reject independently operated services when only naming and repository size suggest separation.
 input:

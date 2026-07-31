@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:code-principles:schema:adapter:0.3.0",
+  "$id": "urn:code-principles:schema:adapter:0.4.0",
   "title": "Software Engineering Adapter Metadata",
   "description": "Metadata contract for language and framework adapters.",
   "type": "object",
@@ -23,7 +23,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "id": {
       "$ref": "#/$defs/identifier"

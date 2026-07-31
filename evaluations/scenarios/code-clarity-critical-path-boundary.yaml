@@ -1,4 +1,4 @@
-schema_version: 0.3.0
+schema_version: 0.4.0
 id: code-clarity-critical-path-boundary
 description: Verify that consequential state changes favor traceable decisions and failures over terse code.
 input:

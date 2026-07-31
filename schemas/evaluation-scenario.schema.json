@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:code-principles:schema:evaluation-scenario:0.3.0",
+  "$id": "urn:code-principles:schema:evaluation-scenario:0.4.0",
   "title": "Evaluation Scenario",
   "type": "object",
   "additionalProperties": false,
@@ -14,7 +14,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "id": {
       "type": "string",

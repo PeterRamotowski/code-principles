@@ -1,4 +1,4 @@
-schema_version: 0.3.0
+schema_version: 0.4.0
 id: safe-change-local-fix
 description: Keep a production fix behaviorally bounded while allowing directly supporting local improvement.
 input:

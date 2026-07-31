@@ -1,4 +1,4 @@
-schema_version: 0.3.0
+schema_version: 0.4.0
 id: code-clarity-balanced-local-change
 description: Verify that a routine local change improves comprehension without expanding into unrelated cleanup.
 input:
