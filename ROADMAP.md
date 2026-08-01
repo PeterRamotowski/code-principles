@@ -181,6 +181,8 @@ Implementation notes:
 
 ## Milestone 6 — Representative Language Adapters
 
+Status: `complete`
+
 Implement three deliberately different adapters:
 
 ### TypeScript
