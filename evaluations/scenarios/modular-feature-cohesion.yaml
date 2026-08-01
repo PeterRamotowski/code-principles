@@ -1,4 +1,4 @@
-schema_version: 0.4.0
+schema_version: 0.5.0
 id: modular-feature-cohesion
 description: Keep one capability's validation, state transition, and presentation ownership cohesively discoverable.
 input:

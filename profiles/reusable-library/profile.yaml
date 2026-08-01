@@ -1,7 +1,7 @@
-schema_version: 0.4.0
+schema_version: 0.5.0
 id: reusable-library
 name: Reusable Library
-version: 0.4.0
+version: 0.5.0
 type: project-profile
 status: candidate
 description: Configures a reusable artifact consumed independently through an intentional and compatibility-governed public surface.

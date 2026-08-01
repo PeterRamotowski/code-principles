@@ -20,7 +20,7 @@ The repository is a useful human-readable compendium and the foundation of a pla
 
 ## Status
 
-- Foundation version: `0.4.0`
+- Foundation version: `0.5.0`
 - Status: `Project Profiles MVP`
 - Content language: English
 - Schema dialect: JSON Schema Draft 2020-12

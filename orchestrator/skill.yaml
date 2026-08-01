@@ -1,7 +1,7 @@
-schema_version: 0.4.0
+schema_version: 0.5.0
 id: software-engineering-orchestrator
 name: Code Principles Orchestrator
-version: 0.4.0
+version: 0.5.0
 type: orchestrator
 status: draft
 description: Detects project context, selects controlled profiles and Core Skill modes, activates canonical

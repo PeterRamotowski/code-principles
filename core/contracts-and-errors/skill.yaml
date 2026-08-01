@@ -1,7 +1,7 @@
-schema_version: 0.4.0
+schema_version: 0.5.0
 id: contracts-and-errors
 name: Contracts, Validation, Errors, and Security
-version: 0.4.0
+version: 0.5.0
 type: core-skill
 status: candidate
 description: Defines trust boundaries, semantic parsing, invariant enforcement, failure behavior, and authority limits.

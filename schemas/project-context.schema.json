@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:code-principles:schema:project-context:0.4.0",
+  "$id": "urn:code-principles:schema:project-context:0.5.0",
   "title": "Software Engineering Project Context",
   "description": "Explicit repository configuration or normalized detected project context.",
   "type": "object",
@@ -13,7 +13,7 @@
   "properties": {
     "specification_version": {
       "type": "string",
-      "const": "0.4.0"
+      "const": "0.5.0"
     },
     "selection_mode": {
       "type": "string",

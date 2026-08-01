@@ -1,4 +1,4 @@
-schema_version: 0.4.0
+schema_version: 0.5.0
 id: profile-browser-dry-versus-yagni
 description: Keep superficially similar interaction behavior local when no stable shared knowledge has been demonstrated.
 input:

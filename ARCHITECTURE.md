@@ -408,7 +408,7 @@ This file should describe stable project policy, not temporary task instructions
 Example:
 
 ```yaml
-specification_version: 0.4.0
+specification_version: 0.5.0
 selection_mode: automatic-with-visible-result
 
 project:

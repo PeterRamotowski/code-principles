@@ -4,6 +4,10 @@ All notable changes to the foundation package are documented here.
 
 ## [Unreleased]
 
+No changes yet.
+
+## [0.5.0] — 2026-08-01
+
 ### Added
 
 - five language-independent Project Profile MVP packages for browser, full-stack, backend service,
