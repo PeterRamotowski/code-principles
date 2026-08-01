@@ -5,4 +5,6 @@ Evaluation scenarios test policy selection and rejected behavior, not only outpu
 The suite contains one cross-cutting orchestrator scenario and three scenarios for every Milestone 4 Core
 Skill: a positive case, a conflict or boundary case, and an overengineering counterexample. Five
 Milestone 5 scenarios apply the same DRY-versus-YAGNI conflict to different project profiles and require
-artifact-specific resolutions. Later milestones should add modifier- and adapter-specific coverage.
+artifact-specific resolutions. Three Milestone 6 scenarios apply the same reusable-library profile and task
+to TypeScript, Python, and C++, requiring distinct runtime, type, resource, and package guidance. Later
+milestones should add modifier and remaining-adapter coverage.

@@ -229,6 +229,18 @@ Exit criteria:
 - the same project profile produces meaningfully different language-specific guidance;
 - adapter dependencies are acyclic.
 
+Implementation notes:
+
+- TypeScript, Python, and C++ are implemented under `languages/<language-id>/` with schema-validated
+  metadata, normative `SKILL.md` guidance, and positive and negative decision examples;
+- adapter metadata declares Core Skill and canonical-principle refinements without selecting or copying a
+  project profile;
+- TypeScript explicitly extends the JavaScript catalogue adapter, while Python and C++ are independent;
+- three evaluation scenarios apply the same reusable-library task to all representative adapters and require
+  different language-specific resolutions;
+- repository validation enforces package completeness, focus coverage, catalogue inheritance, evaluation
+  coverage, cross-language variance, and acyclic dependencies.
+
 ## Milestone 7 — Remaining Language Adapters
 
 Implement:

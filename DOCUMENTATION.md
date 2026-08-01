@@ -37,6 +37,13 @@
 - `profiles/*/PROFILE.md` — language-independent artifact priorities and policy decisions.
 - `profiles/*/profile.yaml` — machine-readable selection evidence and default Core Skill modes.
 
+## Language adapters
+
+- `languages/README.md` — implemented adapter index and refinement rules.
+- `languages/*/SKILL.md` — normative language-specific decision guidance.
+- `languages/*/adapter.yaml` — machine-readable activation, dependencies, and refinements.
+- `languages/*/examples/` — positive and negative language decisions.
+
 ## Development
 
 - `CONTRIBUTING.md` — contribution requirements.
