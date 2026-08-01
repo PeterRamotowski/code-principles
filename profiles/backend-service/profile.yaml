@@ -1,0 +1,44 @@
+schema_version: 0.4.0
+id: backend-service
+name: Backend Service
+version: 0.4.0
+type: project-profile
+status: candidate
+description: Configures a long-running service whose primary responsibility is handling network requests or application operations.
+normative_document: profiles/backend-service/PROFILE.md
+intended_artifacts:
+- Independently operated server processes that expose network or application operations.
+- Request-handling services that own transactions, integrations, and operational behavior.
+selection:
+  artifact_types: [backend-service]
+  signals:
+  - a long-running process serves network requests or application operations
+  - transactions, integrations, concurrency, or service operation dominates the task
+  exclusions:
+  - server behavior is inseparable from one integrated browser product artifact
+  - the primary deliverable is a consumer-linked library
+priority_order: [correctness, data-integrity, reliability, security, operability, maintainability, performance]
+skill_modes:
+  code-clarity: balanced
+  abstraction-and-reuse: balanced
+  modular-design: service-oriented
+  contracts-and-errors: strict-boundaries
+  state-and-side-effects: single-owner-mutation
+  testing-strategy: integration-balanced
+  distributed-reliability: synchronous-transactional
+  safe-change: local-safe-change
+typical_risks:
+- Partial failure leaving externally visible state inconsistent.
+- Retry, timeout, or concurrency behavior duplicating effects.
+- Weak boundary contracts admitting invalid or unauthorized operations.
+- Deployment boundaries being introduced without independent lifecycle evidence.
+recommended_modifiers: [security-sensitive, multi-tenant, high-throughput, latency-sensitive, public-api]
+prohibited_defaults:
+- Do not assume a backend service should be split into microservices.
+- Do not assume every internal operation is a remote or public contract.
+- Do not assume retries are safe without effect and ownership analysis.
+non_goals:
+- Prescribing microservices, asynchronous messaging, or one persistence model.
+- Defining browser interaction or reusable-library consumer policy.
+requires: []
+conflicts_with: []

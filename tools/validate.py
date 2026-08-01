@@ -33,6 +33,13 @@ MILESTONE_4_SKILLS = {
     "testing-strategy",
     "safe-change",
 }
+MILESTONE_5_PROFILES = {
+    "browser-web-application",
+    "fullstack-web-application",
+    "backend-service",
+    "reusable-library",
+    "legacy-modernization",
+}
 
 
 class DuplicateKeyError(ValueError):
@@ -367,11 +374,88 @@ class RepositoryValidator:
         self.check_component_metadata(
             profiles, modifiers, adapters, skills, skill_modes, principles
         )
+        self.check_project_profiles_mvp(profile_items, adapters, skills, skill_modes)
         self.check_examples_and_context(
             profiles, modifiers, languages, frameworks, skills, skill_modes, principles
         )
         self.check_profiles_are_language_independent(profile_items, adapters)
         return len(principles)
+
+    def check_project_profiles_mvp(
+        self, catalogue_items, technologies, skills, skill_modes
+    ) -> None:
+        """Enforce the Milestone 5 Definition of Done for project profiles."""
+        catalogue = {
+            item.get("id"): item
+            for item in catalogue_items
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+        implemented = {
+            data.get("id"): (path, data)
+            for path in sorted(ROOT.glob("profiles/*/profile.yaml"))
+            if isinstance((data := self.documents.get(path)), dict)
+            and data.get("type") == "project-profile"
+            and isinstance(data.get("id"), str)
+        }
+        missing = sorted(MILESTONE_5_PROFILES - set(implemented))
+        if missing:
+            self.error(f"Milestone 5: missing implemented profiles: {', '.join(missing)}")
+
+        scenarios_by_profile = defaultdict(list)
+        shared_conflict_resolutions = defaultdict(set)
+        for path in sorted((ROOT / "evaluations/scenarios").glob("*.yaml")):
+            data = self.documents.get(path)
+            if not isinstance(data, dict):
+                continue
+            profile = data.get("input", {}).get("profile")
+            if isinstance(profile, str):
+                scenarios_by_profile[profile].append((path, data))
+                conflict = data.get("input", {}).get("conflict")
+                resolution = data.get("expected", {}).get("resolution")
+                if isinstance(conflict, str) and isinstance(resolution, str):
+                    shared_conflict_resolutions[conflict].add(resolution)
+
+        technology_re = re.compile(
+            r"\b(?:" + "|".join(re.escape(item) for item in sorted(technologies)) + r")\b",
+            re.IGNORECASE,
+        )
+        for identifier in sorted(MILESTONE_5_PROFILES & set(implemented)):
+            path, data = implemented[identifier]
+            expected_path = ROOT / "profiles" / identifier / "profile.yaml"
+            if path != expected_path:
+                self.error(
+                    f"{self.relative(path)}: profile metadata must be at "
+                    f"profiles/{identifier}/profile.yaml"
+                )
+            if identifier not in catalogue:
+                self.error(f"{self.relative(path)}: profile is missing from catalogs/profiles.yaml")
+
+            normative = ROOT / data.get("normative_document", "")
+            if not normative.is_file():
+                continue
+            text = normative.read_text(encoding="utf-8")
+            for skill, mode in sorted(data.get("skill_modes", {}).items()):
+                self.check_skill_mode(self.relative(path), skill, mode, skills, skill_modes)
+                if f"`{skill}`" not in text or f"`{mode}`" not in text:
+                    self.error(
+                        f"{self.relative(normative)}: default mode is not documented: "
+                        f"{skill}={mode}"
+                    )
+            combined_text = text + "\n" + yaml.safe_dump(data, sort_keys=True)
+            match = technology_re.search(combined_text)
+            if match:
+                self.error(
+                    f"{self.relative(normative)}: profile contains technology-specific guidance: "
+                    f"{match.group(0)}"
+                )
+            if not scenarios_by_profile.get(identifier):
+                self.error(f"profiles/{identifier}: at least one evaluation scenario is required")
+
+        if not any(len(resolutions) >= 3 for resolutions in shared_conflict_resolutions.values()):
+            self.error(
+                "Milestone 5: scenarios must demonstrate at least three different resolutions "
+                "for the same principle conflict"
+            )
 
     def check_core_skill_mvp(self, catalogue_items, implemented_skills, technologies) -> None:
         """Enforce the Milestone 4 Definition of Done for implemented Core Skills."""
@@ -609,6 +693,9 @@ class RepositoryValidator:
             data = self.documents.get(path, {})
             source = self.relative(path)
             scenario_ids.append((data.get("id"), source))
+            profile = data.get("input", {}).get("profile")
+            if profile is not None:
+                self.require_reference(source, "input.profile", profile, profiles)
             for target in data.get("principles_under_test", []):
                 self.require_reference(source, "principles_under_test", target, principles)
             expected = data.get("expected", {})

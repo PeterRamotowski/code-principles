@@ -1,0 +1,18 @@
+schema_version: 0.4.0
+id: profile-browser-dry-versus-yagni
+description: Keep superficially similar interaction behavior local when no stable shared knowledge has been demonstrated.
+input:
+  profile: browser-web-application
+  skill: abstraction-and-reuse
+  mode: conservative
+  conflict: dry-versus-yagni
+  task: Two interface features contain similar interaction code but have different behavior and owners.
+expected:
+  resolution: preserve-locality
+  active_principles: [yagni, locality-of-behaviour]
+  constrained_principles: [dry]
+  suppressed_principles: []
+forbidden:
+- Extract a shared component based only on visual or structural similarity.
+- Move feature behavior away from its owner without shared knowledge evidence.
+principles_under_test: [dry, yagni, locality-of-behaviour]

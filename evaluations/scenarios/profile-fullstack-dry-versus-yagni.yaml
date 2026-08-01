@@ -1,0 +1,18 @@
+schema_version: 0.4.0
+id: profile-fullstack-dry-versus-yagni
+description: Centralize one authoritative cross-boundary policy without coupling client and server implementation mechanics.
+input:
+  profile: fullstack-web-application
+  skill: abstraction-and-reuse
+  mode: balanced
+  conflict: dry-versus-yagni
+  task: Browser and server paths duplicate an authorization decision that only the server can authoritatively make.
+expected:
+  resolution: centralize-authoritative-policy
+  active_principles: [single-source-of-truth, information-hiding]
+  constrained_principles: [dry, yagni]
+  suppressed_principles: []
+forbidden:
+- Trust a client-side authorization result as server authority.
+- Share server mechanics merely to make both implementations symmetrical.
+principles_under_test: [dry, yagni, single-source-of-truth, information-hiding]

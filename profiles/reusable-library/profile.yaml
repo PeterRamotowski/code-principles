@@ -1,0 +1,44 @@
+schema_version: 0.4.0
+id: reusable-library
+name: Reusable Library
+version: 0.4.0
+type: project-profile
+status: candidate
+description: Configures a reusable artifact consumed independently through an intentional and compatibility-governed public surface.
+normative_document: profiles/reusable-library/PROFILE.md
+intended_artifacts:
+- Published or shared libraries consumed independently from their implementation lifecycle.
+- Reusable packages with an intentional consumer-facing contract and release lifecycle.
+selection:
+  artifact_types: [reusable-library]
+  exposure: [organization-internal, external-integration, public-library]
+  signals:
+  - independent consumers compile, link, import, or integrate with the artifact
+  - a supported public surface and release lifecycle dominate the task
+  exclusions:
+  - reusable modules are implementation details of one application
+  - an executable is the supported product and packages are internal
+priority_order: [correctness, compatibility, usability, maintainability, portability, extensibility, performance]
+skill_modes:
+  code-clarity: balanced
+  abstraction-and-reuse: extensible-public-library
+  modular-design: library-oriented
+  contracts-and-errors: strict-boundaries
+  api-and-compatibility: public-library
+  testing-strategy: unit-focused
+  safe-change: compatibility-first
+typical_risks:
+- Accidental public surface becoming a permanent compatibility burden.
+- Consumer behavior breaking despite source-level implementation correctness.
+- Dependencies, global state, or environment assumptions reducing portability.
+- Speculative extensibility obscuring the small supported contract.
+recommended_modifiers: [public-api, strict-backward-compatibility, high-throughput, latency-sensitive]
+prohibited_defaults:
+- Do not assume implementation details are safe to expose for convenience.
+- Do not assume consumers can migrate atomically with the library.
+- Do not add extension points without verified consumer variation.
+non_goals:
+- Defining application deployment, user-interface behavior, or service topology.
+- Maximizing API surface or supporting every hypothetical consumer environment.
+requires: []
+conflicts_with: []

@@ -4,7 +4,18 @@ All notable changes to the foundation package are documented here.
 
 ## [Unreleased]
 
-No changes yet.
+### Added
+
+- five language-independent Project Profile MVP packages for browser, full-stack, backend service,
+  reusable library, and legacy-modernization work;
+- profile-specific evaluation scenarios that resolve the same DRY-versus-YAGNI conflict differently;
+- validation of profile package completeness, documented modes, language independence, and cross-profile
+  resolution variance.
+
+### Changed
+
+- the orchestrator now loads default Core Skill modes from implemented profile metadata;
+- controlled distributions and project status now include Project Profiles MVP content.
 
 ## [0.4.0] — 2026-07-31
 

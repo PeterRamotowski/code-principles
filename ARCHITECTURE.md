@@ -124,7 +124,7 @@ A core skill may define multiple modes. For example, `abstraction-and-reuse` may
 
 ## 3.3 Project profiles
 
-Planned path:
+Implementation path:
 
 ```text
 profiles/<profile-id>/
@@ -149,15 +149,18 @@ Example profile composition:
 
 ```yaml
 id: reusable-library
-default_skill_modes:
-  code-clarity: public-consumer-readable
-  abstraction-and-reuse: extensible-library
-  modular-design: stable-boundaries
+skill_modes:
+  code-clarity: balanced
+  abstraction-and-reuse: extensible-public-library
+  modular-design: library-oriented
   contracts-and-errors: strict-boundaries
   api-and-compatibility: public-library
   testing-strategy: unit-focused
-  performance: evidence-based
+  safe-change: compatibility-first
 ```
+
+The orchestrator loads implemented `profile.yaml` files as the runtime source for these default mode
+selections. This keeps profile configuration inspectable and prevents a second hand-maintained mode table.
 
 ## 3.4 Modifiers
 

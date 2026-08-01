@@ -1,0 +1,43 @@
+schema_version: 0.4.0
+id: fullstack-web-application
+name: Full-stack Web Application
+version: 0.4.0
+type: project-profile
+status: candidate
+description: Configures one product artifact with material browser and server responsibilities, including their trust and data boundaries.
+normative_document: profiles/fullstack-web-application/PROFILE.md
+intended_artifacts:
+- Product applications that own both browser interaction and server-side application behavior.
+- Integrated web artifacts with server authority, persistence, and client rendering responsibilities.
+selection:
+  artifact_types: [fullstack-application]
+  signals:
+  - the affected product owns meaningful browser and server execution
+  - client and server boundaries, persistence, or rendering authority dominate the task
+  exclusions:
+  - the browser and server artifacts are independently owned and changed
+  - the task is confined to a separately deployed backend service
+priority_order: [correctness, security, data-integrity, usability, reliability, maintainability, operability]
+skill_modes:
+  code-clarity: balanced
+  abstraction-and-reuse: balanced
+  modular-design: feature-oriented
+  contracts-and-errors: strict-boundaries
+  api-and-compatibility: internal-application
+  testing-strategy: integration-balanced
+  safe-change: local-safe-change
+typical_risks:
+- Client and server authority becoming ambiguous or duplicated.
+- Secrets or privileged operations crossing into an untrusted execution context.
+- Inconsistent validation, caching, or data ownership across boundaries.
+- Shared abstractions coupling independently changing client and server concerns.
+recommended_modifiers: [security-sensitive, multi-tenant, accessibility-required, public-api]
+prohibited_defaults:
+- Do not assume code sharing makes client and server trust equivalent.
+- Do not assume an internal request boundary is a stable public API.
+- Do not assume every operation requires a separately deployed service.
+non_goals:
+- Prescribing one deployment topology or rendering strategy.
+- Treating all product-internal boundaries as public compatibility contracts.
+requires: []
+conflicts_with: []

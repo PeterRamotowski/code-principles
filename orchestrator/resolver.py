@@ -38,51 +38,30 @@ ARTIFACT_PROFILES = {
     "legacy-modernization": "legacy-modernization",
 }
 
-PROFILE_MODES = {
+FALLBACK_PROFILE_MODES = {
     "general-software": {
         "code-clarity": "balanced",
         "abstraction-and-reuse": "conservative",
         "safe-change": "local-safe-change",
     },
-    "browser-web-application": {
-        "code-clarity": "balanced",
-        "modular-design": "feature-oriented",
-        "contracts-and-errors": "strict-boundaries",
-        "state-and-side-effects": "localized-state",
-        "testing-strategy": "integration-balanced",
-    },
-    "fullstack-web-application": {
-        "code-clarity": "balanced",
-        "abstraction-and-reuse": "balanced",
-        "modular-design": "feature-oriented",
-        "contracts-and-errors": "strict-boundaries",
-        "api-and-compatibility": "internal-application",
-        "testing-strategy": "integration-balanced",
-    },
-    "backend-service": {
-        "code-clarity": "balanced",
-        "modular-design": "service-oriented",
-        "contracts-and-errors": "strict-boundaries",
-        "state-and-side-effects": "single-owner-mutation",
-        "testing-strategy": "integration-balanced",
-        "distributed-reliability": "synchronous-transactional",
-    },
-    "reusable-library": {
-        "code-clarity": "balanced",
-        "abstraction-and-reuse": "extensible-public-library",
-        "modular-design": "library-oriented",
-        "contracts-and-errors": "strict-boundaries",
-        "api-and-compatibility": "public-library",
-        "testing-strategy": "unit-focused",
-    },
-    "legacy-modernization": {
-        "code-clarity": "balanced",
-        "abstraction-and-reuse": "legacy-preservation",
-        "testing-strategy": "characterization-first",
-        "safe-change": "incremental-modernization",
-        "api-and-compatibility": "internal-application",
-    },
 }
+
+
+def _load_profile_modes() -> dict[str, dict[str, str]]:
+    """Load implemented profiles as the source of truth for default Skill modes."""
+    modes = deepcopy(FALLBACK_PROFILE_MODES)
+    for path in sorted((ROOT / "profiles").glob("*/profile.yaml")):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            continue
+        identifier = data.get("id")
+        skill_modes = data.get("skill_modes")
+        if isinstance(identifier, str) and isinstance(skill_modes, dict):
+            modes[identifier] = dict(skill_modes)
+    return modes
+
+
+PROFILE_MODES = _load_profile_modes()
 
 MODIFIER_MODES = {
     "public-api": {"api-and-compatibility": "external-api", "contracts-and-errors": "strict-boundaries"},

@@ -1,0 +1,43 @@
+schema_version: 0.4.0
+id: browser-web-application
+name: Browser Web Application
+version: 0.4.0
+type: project-profile
+status: candidate
+description: Configures engineering priorities for a browser-executed user interface whose primary responsibility is interactive user behavior.
+normative_document: profiles/browser-web-application/PROFILE.md
+intended_artifacts:
+- Browser-executed user interfaces delivered as the primary product artifact.
+- Client applications responsible for rendering, interaction, navigation, and local user state.
+selection:
+  artifact_types: [web-application, frontend-application]
+  signals:
+  - the affected artifact executes primarily in a browser
+  - interaction, rendering, navigation, or client state dominates the task
+  exclusions:
+  - substantial server behavior belongs to the same affected artifact
+  - the user interface is only an administrative surface for another primary artifact
+priority_order: [correctness, accessibility, usability, security, maintainability, performance]
+skill_modes:
+  code-clarity: balanced
+  abstraction-and-reuse: conservative
+  modular-design: feature-oriented
+  contracts-and-errors: strict-boundaries
+  state-and-side-effects: localized-state
+  testing-strategy: integration-balanced
+  safe-change: local-safe-change
+typical_risks:
+- Inaccessible interaction or rendering that excludes users.
+- State ownership that becomes implicit, duplicated, or inconsistent.
+- Treating remote or persisted data as trusted client state.
+- Excessive component abstraction that obscures user behavior.
+recommended_modifiers: [accessibility-required, offline-first, security-sensitive]
+prohibited_defaults:
+- Do not assume server authority or trusted client input.
+- Do not assume every view needs global state or a reusable component abstraction.
+- Do not assume rendering performance is acceptable or deficient without evidence.
+non_goals:
+- Defining server deployment, persistence, or distributed consistency policy.
+- Prescribing a browser framework, component library, or styling technology.
+requires: []
+conflicts_with: []

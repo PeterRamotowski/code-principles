@@ -1,0 +1,18 @@
+schema_version: 0.4.0
+id: profile-legacy-dry-versus-yagni
+description: Preserve apparently duplicated legacy flows until characterization proves their behavior can safely converge.
+input:
+  profile: legacy-modernization
+  skill: abstraction-and-reuse
+  mode: legacy-preservation
+  conflict: dry-versus-yagni
+  task: Two legacy flows look duplicated but produce subtly different observed results.
+expected:
+  resolution: preserve-observed-divergence
+  active_principles: [chestertons-fence, backward-compatibility]
+  constrained_principles: [dry]
+  suppressed_principles: []
+forbidden:
+- Merge the flows before characterizing their observable behavior.
+- Treat unexplained divergence as accidental duplication.
+principles_under_test: [dry, yagni, chestertons-fence, backward-compatibility]

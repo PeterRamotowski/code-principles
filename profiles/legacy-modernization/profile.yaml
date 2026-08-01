@@ -1,0 +1,44 @@
+schema_version: 0.4.0
+id: legacy-modernization
+name: Legacy Modernization
+version: 0.4.0
+type: project-profile
+status: candidate
+description: Configures bounded evolution of a difficult existing system where behavior, history, and reversibility constrain change.
+normative_document: profiles/legacy-modernization/PROFILE.md
+intended_artifacts:
+- Existing systems whose central task is safe modernization under poorly understood constraints.
+- Difficult code paths requiring behavior discovery, characterization, and incremental replacement.
+selection:
+  artifact_types: [unknown]
+  project_stages: [legacy-modernization]
+  signals:
+  - the task explicitly targets modernization of a difficult existing system
+  - undocumented behavior or historical constraints materially limit safe change
+  exclusions:
+  - age or unfamiliar style is the only evidence of legacy risk
+  - explicit authority permits redesign without behavior preservation
+priority_order: [correctness, compatibility, data-integrity, reliability, testability, maintainability, simplicity]
+skill_modes:
+  code-clarity: balanced
+  abstraction-and-reuse: legacy-preservation
+  modular-design: feature-oriented
+  contracts-and-errors: tolerant-syntax-strict-semantics
+  testing-strategy: characterization-first
+  safe-change: incremental-modernization
+  api-and-compatibility: internal-application
+typical_risks:
+- Undocumented behavior being removed as if it were accidental.
+- Broad rewrites exceeding available evidence and rollback capacity.
+- Characterization tests freezing implementation details instead of behavior.
+- New abstractions forcing unrelated legacy cases into one model.
+recommended_modifiers: [strict-backward-compatibility, security-sensitive, public-api]
+prohibited_defaults:
+- Do not assume old, unfamiliar, or unfashionable code is safe to replace.
+- Do not assume complete redesign is safer than bounded migration.
+- Do not clean unrelated behavior while evidence and rollback remain weak.
+non_goals:
+- Preserving every implementation detail indefinitely.
+- Authorizing a rewrite or prescribing a target architecture.
+requires: []
+conflicts_with: []

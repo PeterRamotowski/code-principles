@@ -1,0 +1,18 @@
+schema_version: 0.4.0
+id: profile-backend-dry-versus-yagni
+description: Centralize a verified transaction rule inside its cohesive service owner without creating a new deployment boundary.
+input:
+  profile: backend-service
+  skill: abstraction-and-reuse
+  mode: balanced
+  conflict: dry-versus-yagni
+  task: Two service operations repeat the same transaction policy and change for the same business reason.
+expected:
+  resolution: centralize-within-owner
+  active_principles: [single-source-of-truth, high-cohesion-low-coupling]
+  constrained_principles: [dry, yagni]
+  suppressed_principles: []
+forbidden:
+- Create a separately operated service only to remove source duplication.
+- Generalize unrelated transaction behavior behind the same abstraction.
+principles_under_test: [dry, yagni, single-source-of-truth, high-cohesion-low-coupling]

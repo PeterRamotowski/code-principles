@@ -9,6 +9,6 @@ available modes; implemented components also have normative metadata and guidanc
 - `languages.yaml` includes JavaScript, TypeScript, Python, PHP, Go, and C++.
 - `frameworks.yaml` includes React, Next.js, Angular, Vue, Nuxt, Symfony, and Drupal.
 
-A catalogue entry alone is a blueprint identifier, not a completed Skill. The Milestone 4 Core Skills are
-implemented under `core/`; later components remain blueprints until they receive their own normative
-document, metadata, examples, and evaluations.
+A catalogue entry alone is a blueprint identifier, not a completed component. The Milestone 4 Core Skills
+are implemented under `core/`, and the five Milestone 5 profiles are implemented under `profiles/`.
+Remaining components stay blueprints until they receive normative documents, metadata, and evaluations.

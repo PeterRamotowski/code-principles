@@ -1,0 +1,18 @@
+schema_version: 0.4.0
+id: profile-library-dry-versus-yagni
+description: Introduce a narrow public extension seam when independent consumers demonstrate one stable variation point.
+input:
+  profile: reusable-library
+  skill: abstraction-and-reuse
+  mode: extensible-public-library
+  conflict: dry-versus-yagni
+  task: Independent consumers require two documented policies at one stable decision point.
+expected:
+  resolution: expose-narrow-extension-seam
+  active_principles: [open-closed-principle, single-source-of-truth]
+  constrained_principles: [yagni, premature-generalization]
+  suppressed_principles: []
+forbidden:
+- Expose implementation machinery as the extension contract.
+- Add hooks for consumer variations that have not been demonstrated.
+principles_under_test: [dry, yagni, open-closed-principle, single-source-of-truth, premature-generalization]

@@ -28,6 +28,7 @@ DISTRIBUTION_DIRECTORIES = {
     "evaluations",
     "orchestrator",
     "principles",
+    "profiles",
     "schemas",
     "tools",
 }

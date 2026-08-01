@@ -141,6 +141,8 @@ Implementation notes:
 
 ## Milestone 5 — Project Profiles MVP
 
+Status: `complete`
+
 Implement:
 
 1. `browser-web-application`;
@@ -164,6 +166,18 @@ Exit criteria:
 - profiles remain language-independent;
 - profiles select modes without duplicating core rules;
 - scenarios demonstrate different resolutions for the same principle conflict.
+
+Implementation notes:
+
+- each profile is implemented under `profiles/<profile-id>/` with schema-validated metadata and a
+  normative `PROFILE.md`;
+- profile metadata is the orchestrator's runtime source for default Core Skill modes;
+- profile guidance defines artifact scope, ordered qualities, risks, modifiers, assumptions, and
+  non-goals while referencing rather than duplicating Core Skill rules;
+- five evaluation scenarios resolve the same DRY-versus-YAGNI conflict according to different artifact
+  constraints;
+- repository validation enforces the Milestone 5 package set, documented modes, evaluation coverage,
+  cross-profile resolution variance, and language independence.
 
 ## Milestone 6 — Representative Language Adapters
 

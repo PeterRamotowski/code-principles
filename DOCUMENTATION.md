@@ -31,6 +31,12 @@
 - `core/*/examples/` — positive and negative decisions.
 - `evaluations/scenarios/` — policy-selection and forbidden-behavior scenarios.
 
+## Project profiles
+
+- `profiles/README.md` — implemented profile index and package behavior.
+- `profiles/*/PROFILE.md` — language-independent artifact priorities and policy decisions.
+- `profiles/*/profile.yaml` — machine-readable selection evidence and default Core Skill modes.
+
 ## Development
 
 - `CONTRIBUTING.md` — contribution requirements.

@@ -1,5 +1,5 @@
 schema_version: 0.4.0
-status: blueprint
+status: project-profiles-mvp
 profiles:
 - id: general-software
   name: General Software
