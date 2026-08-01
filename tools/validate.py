@@ -43,6 +43,7 @@ MILESTONE_5_PROFILES = {
 MILESTONE_6_ADAPTERS = {"typescript", "python", "cpp"}
 MILESTONE_7_ADAPTERS = {"javascript", "php", "go"}
 IMPLEMENTED_LANGUAGE_ADAPTERS = MILESTONE_6_ADAPTERS | MILESTONE_7_ADAPTERS
+MILESTONE_8_ADAPTERS = {"react", "nextjs", "vue", "nuxt", "angular", "symfony", "drupal"}
 
 
 class DuplicateKeyError(ValueError):
@@ -379,6 +380,7 @@ class RepositoryValidator:
         )
         self.check_project_profiles_mvp(profile_items, adapters, skills, skill_modes)
         self.check_language_adapters_mvp(language_items, skills, principles)
+        self.check_framework_adapters_mvp(framework_items, skills, principles)
         self.check_examples_and_context(
             profiles, modifiers, languages, frameworks, skills, skill_modes, principles
         )
@@ -551,6 +553,72 @@ class RepositoryValidator:
         typescript = implemented.get("typescript")
         if typescript and set(typescript[1].get("extends", [])) != {"javascript"}:
             self.error("Milestone 7: TypeScript must explicitly extend JavaScript")
+
+    def check_framework_adapters_mvp(self, catalogue_items, skills, principles) -> None:
+        """Enforce the Milestone 8 Definition of Done for framework adapters."""
+        catalogue = {
+            item.get("id"): item
+            for item in catalogue_items
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+        implemented = {
+            data.get("id"): (path, data)
+            for path in sorted(ROOT.glob("frameworks/*/adapter.yaml"))
+            if isinstance((data := self.documents.get(path)), dict)
+            and data.get("type") == "framework-adapter"
+            and isinstance(data.get("id"), str)
+        }
+        missing = sorted(MILESTONE_8_ADAPTERS - set(implemented))
+        if missing:
+            self.error(f"Milestone 8: missing implemented framework adapters: {', '.join(missing)}")
+
+        scenarios = defaultdict(list)
+        for path in sorted((ROOT / "evaluations/scenarios").glob("*.yaml")):
+            data = self.documents.get(path)
+            adapter = data.get("input", {}).get("framework_adapter") if isinstance(data, dict) else None
+            if isinstance(adapter, str):
+                scenarios[adapter].append(path)
+
+        required_terms = {
+            "react": ("state locality", "effects", "composition", "behavior-focused", "typescript typing rules"),
+            "nextjs": ("server", "client", "cache", "server actions", "secrets"),
+            "vue": ("reactivity", "composables", "component scope", "state locality", "effects"),
+            "nuxt": ("refines vue", "server", "client", "ssr", "data fetching", "auto-import"),
+            "angular": ("dependency injection", "standalone components", "signals", "rxjs", "forms"),
+            "symfony": ("service container", "httpkernel", "messenger", "doctrine", "configuration"),
+            "drupal": ("extension", "cacheability metadata", "entities", "configuration", "hooks"),
+        }
+        for identifier in sorted(MILESTONE_8_ADAPTERS & set(implemented)):
+            path, data = implemented[identifier]
+            expected_path = ROOT / "frameworks" / identifier / "adapter.yaml"
+            if path != expected_path:
+                self.error(f"{self.relative(path)}: adapter metadata must be at frameworks/{identifier}/adapter.yaml")
+            item = catalogue.get(identifier)
+            if not item:
+                self.error(f"{self.relative(path)}: adapter is missing from catalogs/frameworks.yaml")
+            elif set(data.get("requires", [])) != set(item.get("requires", [])):
+                self.error(f"{self.relative(path)}: requires does not match catalogs/frameworks.yaml")
+            if not data.get("refines"):
+                self.error(f"{self.relative(path)}: adapter must refine at least one Core Skill")
+            normative = ROOT / data.get("normative_document", "")
+            if normative.is_file():
+                content = normative.read_text(encoding="utf-8").lower()
+                for term in required_terms[identifier]:
+                    if term not in content:
+                        self.error(f"{self.relative(normative)}: required adapter focus is not documented: {term}")
+            examples = ROOT / "frameworks" / identifier / "examples"
+            example_text = "\n".join(item.read_text(encoding="utf-8") for item in sorted(examples.glob("*.md")))
+            if "Positive example" not in example_text or "Negative example" not in example_text:
+                self.error(f"frameworks/{identifier}/examples: positive and negative examples are required")
+            if not scenarios.get(identifier):
+                self.error(f"frameworks/{identifier}: at least one evaluation scenario is required")
+
+        if implemented.get("react") and "typescript" in implemented["react"][1].get("requires", []):
+            self.error("Milestone 8: React must not require TypeScript or define its typing policy")
+        if implemented.get("nuxt") and "vue" not in implemented["nuxt"][1].get("requires", []):
+            self.error("Milestone 8: Nuxt must refine Vue")
+        if implemented.get("drupal") and set(implemented["drupal"][1].get("requires", [])) != {"php", "symfony"}:
+            self.error("Milestone 8: Drupal must require PHP and Symfony")
 
     def check_project_profiles_mvp(
         self, catalogue_items, technologies, skills, skill_modes

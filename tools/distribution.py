@@ -26,6 +26,7 @@ DISTRIBUTION_DIRECTORIES = {
     "catalogs",
     "core",
     "evaluations",
+    "frameworks",
     "languages",
     "orchestrator",
     "principles",
