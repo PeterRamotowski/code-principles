@@ -1,0 +1,52 @@
+schema_version: 0.7.0
+id: php
+name: PHP
+version: 0.7.0
+type: language-adapter
+status: candidate
+description: Refines engineering policy for PHP typing limits, value objects, exceptions, Composer boundaries, reflection, and process lifetime.
+normative_document: languages/php/SKILL.md
+technology:
+  kind: language
+  names: [PHP]
+activation:
+  signals:
+  - PHP source is materially changed or reviewed.
+  - A Composer package, framework boundary, reflected contract, or long-running PHP process is designed.
+  file_patterns: ['*.php', composer.json]
+extends: []
+requires: []
+refines:
+- skill: code-clarity
+  topics: [strict-typing, value-objects, attributes]
+  supported_modes: [minimal, balanced, explicit-critical-path]
+- skill: contracts-and-errors
+  topics: [runtime-validation, exceptions, reflection]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+- skill: state-and-side-effects
+  topics: [process-state, resource-lifecycle]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: api-and-compatibility
+  topics: [composer-packages, framework-interoperability]
+  supported_modes: [internal-application, public-library, external-api, stable-abi]
+runtime_constraints:
+- PHP type declarations do not prove external semantic validity and strict typing is selected per calling file.
+- Static state and retained services can outlive one request in workers and other long-running processes.
+common_misuse:
+- Treating strict_types as validation for request, configuration, database, or deserialized values.
+- Using attributes and reflection as invisible control flow without validated metadata or caching discipline.
+- Assuming request-scoped cleanup will reset state in a long-running worker.
+non_goals:
+- Mandating one framework, static analyzer, serializer, container, or exception hierarchy.
+- Replacing framework extension contracts with a generic architecture.
+self_contained: true
+principle_refinements:
+- principle: parse-dont-validate
+  interpretation: Parse external arrays and scalars into semantically valid value objects or domain values at ingress.
+  cannot_change_canonical_meaning: true
+- principle: encapsulation
+  interpretation: Use value objects to centralize stable invariants when raw scalar combinations permit invalid domain states.
+  cannot_change_canonical_meaning: true
+- principle: backward-compatibility
+  interpretation: Treat Composer package entry points, public symbols, exceptions, metadata, and framework integration behavior as contracts.
+  cannot_change_canonical_meaning: true

@@ -1,4 +1,4 @@
-schema_version: 0.6.0
+schema_version: 0.7.0
 id: make-illegal-states-unrepresentable
 name: Make Illegal States Unrepresentable
 aliases: []

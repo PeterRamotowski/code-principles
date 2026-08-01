@@ -1,4 +1,4 @@
-schema_version: 0.6.0
+schema_version: 0.7.0
 id: abstraction-shared-policy
 description: Centralize one diverging policy while retaining consumer-specific representations at their boundaries.
 input:

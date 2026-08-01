@@ -245,6 +245,8 @@ Implementation notes:
 
 ## Milestone 7 — Remaining Language Adapters
 
+Status: `complete`
+
 Implement:
 
 - JavaScript;
@@ -271,6 +273,29 @@ Go focus:
 - channels versus shared state;
 - package visibility;
 - allocation and benchmark discipline.
+
+Exit criteria:
+
+- each adapter refines Core Skills and canonical principles without selecting a project profile;
+- JavaScript defines the runtime policy inherited by TypeScript;
+- every adapter includes normative guidance, metadata, positive and negative examples, and evaluation coverage;
+- the same project profile produces distinct guidance for JavaScript, PHP, and Go;
+- adapter dependencies remain acyclic.
+
+Implementation notes:
+
+- JavaScript, PHP, and Go are implemented under `languages/<language-id>/` with schema-validated metadata,
+  normative `SKILL.md` guidance, and positive and negative decision examples;
+- JavaScript owns dynamic contracts, coercion, mutation, promises, errors, modules, and package runtime
+  behavior, while TypeScript explicitly extends those rules with erased static types;
+- PHP covers typing limitations, value objects, exceptions, Composer, attributes and reflection, long-running
+  processes, and framework interoperability;
+- Go covers consumer-defined interfaces, explicit errors, context propagation, goroutine ownership, channels
+  versus shared state, package visibility, and measured allocation decisions;
+- three evaluation scenarios apply the reusable-library profile and common task to the remaining adapters and
+  require distinct resolutions;
+- repository validation enforces package completeness, focus coverage, evaluation variance, TypeScript's
+  JavaScript inheritance, and acyclic dependencies.
 
 ## Milestone 8 — Framework Adapters
 

@@ -1,4 +1,4 @@
-schema_version: 0.6.0
+schema_version: 0.7.0
 id: adapter-cpp-public-library
 description: Refine one reusable-library profile into C++ ownership, error-policy, and compatibility guidance.
 input:

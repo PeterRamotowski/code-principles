@@ -1,0 +1,18 @@
+schema_version: 0.7.0
+id: adapter-go-public-library
+description: Refine one reusable-library profile into Go consumer-interface, error, and package-surface guidance.
+input:
+  profile: reusable-library
+  language_adapter: go
+  task: Publish a parsing library with a small supported public API for independent consumers.
+expected:
+  resolution: export-concrete-values-and-preserve-explicit-errors
+  guidance:
+  - Return a small concrete parser and let consuming packages define interfaces when substitution is needed.
+  - Wrap failures with operation context while preserving documented error identities.
+  - Retain allocation complexity only with representative benchmark and profile evidence.
+  active_principles: [interface-segregation-principle, fail-fast, measure-dont-guess]
+forbidden:
+- Export a broad provider interface solely to make mocking possible.
+- Add pooling or asynchronous fan-out without representative evidence and lifecycle ownership.
+principles_under_test: [interface-segregation-principle, fail-fast, measure-dont-guess]

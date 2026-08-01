@@ -1,0 +1,18 @@
+schema_version: 0.7.0
+id: adapter-javascript-public-library
+description: Refine one reusable-library profile into JavaScript runtime, asynchronous, and module-contract guidance.
+input:
+  profile: reusable-library
+  language_adapter: javascript
+  task: Publish a parsing library with a small supported public API for independent consumers.
+expected:
+  resolution: parse-dynamic-values-and-govern-module-exports
+  guidance:
+  - Parse external dynamic values at runtime and distinguish contractually meaningful falsy values.
+  - Export only supported module entry points and avoid import-time environmental side effects.
+  - Own every promise rejection, cancellation path, and asynchronous lifetime.
+  active_principles: [parse-dont-validate, explicit-over-implicit, backward-compatibility]
+forbidden:
+- Treat documentation or editor inference as runtime validation.
+- Publish deep implementation imports as a supported package surface.
+principles_under_test: [parse-dont-validate, explicit-over-implicit, backward-compatibility]

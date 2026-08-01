@@ -1,0 +1,52 @@
+schema_version: 0.7.0
+id: javascript
+name: JavaScript
+version: 0.7.0
+type: language-adapter
+status: candidate
+description: Refines engineering policy for JavaScript's dynamic runtime, coercion rules, asynchronous work, modules, mutation, and package contracts.
+normative_document: languages/javascript/SKILL.md
+technology:
+  kind: language
+  names: [JavaScript, JS, ECMAScript]
+activation:
+  signals:
+  - JavaScript source is materially changed or reviewed.
+  - A JavaScript runtime boundary, asynchronous lifecycle, module, or package contract is designed.
+  file_patterns: ['*.js', '*.jsx', '*.mjs', '*.cjs', package.json]
+extends: []
+requires: []
+refines:
+- skill: code-clarity
+  topics: [coercion, dynamic-contracts, modules]
+  supported_modes: [minimal, balanced, explicit-critical-path]
+- skill: contracts-and-errors
+  topics: [runtime-validation, exceptions, promise-rejections]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+- skill: state-and-side-effects
+  topics: [mutation, async-ownership]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: api-and-compatibility
+  topics: [package-exports, module-formats]
+  supported_modes: [internal-application, public-library, external-api, stable-abi]
+runtime_constraints:
+- Values and object shapes are enforced only by executable runtime behavior.
+- Coercion, mutation, prototype lookup, exceptions, promises, and module loading are observable semantics.
+common_misuse:
+- Treating documentation, editor inference, or naming as runtime validation.
+- Detaching promise work without owning rejection, cancellation, and shutdown behavior.
+- Publishing deep implementation imports as an accidental package contract.
+non_goals:
+- Requiring one module format, validation library, immutable style, or class model.
+- Restating project-profile or framework policy.
+self_contained: true
+principle_refinements:
+- principle: parse-dont-validate
+  interpretation: Convert untrusted dynamic values into explicit trusted shapes at runtime boundaries.
+  cannot_change_canonical_meaning: true
+- principle: explicit-over-implicit
+  interpretation: Make coercion, mutation ownership, asynchronous lifetime, and module side effects visible where consequential.
+  cannot_change_canonical_meaning: true
+- principle: backward-compatibility
+  interpretation: Treat documented exports, accepted values, observable errors, and asynchronous behavior as package contracts.
+  cannot_change_canonical_meaning: true

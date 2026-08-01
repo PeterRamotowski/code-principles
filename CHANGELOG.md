@@ -6,6 +6,29 @@ All notable changes to the foundation package are documented here.
 
 No changes yet.
 
+## [0.7.0] — 2026-08-01
+
+### Added
+
+- production-shaped JavaScript, PHP, and Go language adapter packages with normative guidance,
+  schema-validated metadata, and positive and negative decision examples;
+- JavaScript refinements for runtime validation, coercion, mutation, promises, errors, modules, and package
+  contracts, forming the implemented runtime parent of TypeScript;
+- PHP refinements for strict typing limitations, value objects, exceptions, Composer packages, attributes and
+  reflection, long-running processes, and framework interoperability;
+- Go refinements for consumer-defined interfaces, explicit errors, context propagation, goroutine lifecycle,
+  channels and shared state, package visibility, and benchmark-backed allocation decisions;
+- evaluation scenarios demonstrating distinct JavaScript, PHP, and Go resolutions for the same
+  reusable-library profile and task;
+- Milestone 7 validation of adapter completeness, focus coverage, evaluation variance, TypeScript inheritance,
+  and dependency acyclicity.
+
+### Changed
+
+- controlled distributions, documentation maps, catalogue status, and project status now describe all six
+  implemented target language adapters;
+- foundation and component metadata versions advance to `0.7.0`.
+
 ## [0.6.0] — 2026-08-01
 
 ### Added

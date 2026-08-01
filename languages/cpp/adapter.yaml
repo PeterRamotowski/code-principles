@@ -1,7 +1,7 @@
-schema_version: 0.6.0
+schema_version: 0.7.0
 id: cpp
 name: C++
-version: 0.6.0
+version: 0.7.0
 type: language-adapter
 status: candidate
 description: Refines engineering policy for C++ ownership, deterministic resources, error policy, undefined behavior, and binary interfaces.

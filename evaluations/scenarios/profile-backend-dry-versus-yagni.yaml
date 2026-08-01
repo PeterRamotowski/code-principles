@@ -1,4 +1,4 @@
-schema_version: 0.6.0
+schema_version: 0.7.0
 id: profile-backend-dry-versus-yagni
 description: Centralize a verified transaction rule inside its cohesive service owner without creating a new deployment boundary.
 input:

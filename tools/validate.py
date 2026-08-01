@@ -41,6 +41,8 @@ MILESTONE_5_PROFILES = {
     "legacy-modernization",
 }
 MILESTONE_6_ADAPTERS = {"typescript", "python", "cpp"}
+MILESTONE_7_ADAPTERS = {"javascript", "php", "go"}
+IMPLEMENTED_LANGUAGE_ADAPTERS = MILESTONE_6_ADAPTERS | MILESTONE_7_ADAPTERS
 
 
 class DuplicateKeyError(ValueError):
@@ -384,7 +386,7 @@ class RepositoryValidator:
         return len(principles)
 
     def check_language_adapters_mvp(self, catalogue_items, skills, principles) -> None:
-        """Enforce the Milestone 6 Definition of Done for representative adapters."""
+        """Enforce the Definitions of Done for implemented language adapters."""
         catalogue = {
             item.get("id"): item
             for item in catalogue_items
@@ -401,6 +403,11 @@ class RepositoryValidator:
         if missing:
             self.error(
                 f"Milestone 6: missing implemented language adapters: {', '.join(missing)}"
+            )
+        missing = sorted(MILESTONE_7_ADAPTERS - set(implemented))
+        if missing:
+            self.error(
+                f"Milestone 7: missing implemented language adapters: {', '.join(missing)}"
             )
 
         scenarios_by_adapter = defaultdict(list)
@@ -441,8 +448,37 @@ class RepositoryValidator:
                 "undefined behavior",
                 "concurrency",
             ),
+            "javascript": (
+                "coercion",
+                "runtime validation",
+                "modules",
+                "promises",
+                "mutation",
+                "dynamic contracts",
+            ),
+            "php": (
+                "strict_types",
+                "exceptions",
+                "value objects",
+                "composer",
+                "attributes",
+                "reflection",
+                "long-running",
+                "framework interoperability",
+            ),
+            "go": (
+                "consumer-defined",
+                "error values",
+                "context",
+                "goroutine",
+                "channels",
+                "shared state",
+                "package visibility",
+                "allocation",
+                "benchmark",
+            ),
         }
-        for identifier in sorted(MILESTONE_6_ADAPTERS & set(implemented)):
+        for identifier in sorted(IMPLEMENTED_LANGUAGE_ADAPTERS & set(implemented)):
             path, data = implemented[identifier]
             expected_path = ROOT / "languages" / identifier / "adapter.yaml"
             if path != expected_path:
@@ -500,6 +536,21 @@ class RepositoryValidator:
             self.error(
                 "Milestone 6: one project profile must produce distinct guidance for all representative adapters"
             )
+
+        remaining_profile_variance = any(
+            MILESTONE_7_ADAPTERS <= set(by_adapter)
+            and len({by_adapter[item] for item in MILESTONE_7_ADAPTERS})
+            == len(MILESTONE_7_ADAPTERS)
+            for by_adapter in resolutions_by_profile.values()
+        )
+        if not remaining_profile_variance:
+            self.error(
+                "Milestone 7: one project profile must produce distinct guidance for all remaining adapters"
+            )
+
+        typescript = implemented.get("typescript")
+        if typescript and set(typescript[1].get("extends", [])) != {"javascript"}:
+            self.error("Milestone 7: TypeScript must explicitly extend JavaScript")
 
     def check_project_profiles_mvp(
         self, catalogue_items, technologies, skills, skill_modes

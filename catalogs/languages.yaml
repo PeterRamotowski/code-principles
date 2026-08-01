@@ -1,5 +1,5 @@
-schema_version: 0.6.0
-status: representative-adapters-mvp
+schema_version: 0.7.0
+status: language-adapters-complete
 languages:
 - id: javascript
   name: JavaScript

@@ -1,4 +1,4 @@
-schema_version: 0.6.0
+schema_version: 0.7.0
 id: contracts-external-command
 description: Parse an untrusted command into valid semantic values before it enters trusted application state.
 input:

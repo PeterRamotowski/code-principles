@@ -11,7 +11,7 @@ Most engineering Skill collections provide isolated prompts such as “Clean Cod
 - controlled Core Skills that group related entries into practical decision procedures;
 - project profiles that configure Skills without duplicating their rules;
 - modifiers for security, compatibility, performance, real-time, accessibility, and other constraints;
-- representative language adapters for TypeScript, Python, and C++, with remaining language blueprints;
+- production-shaped language adapters for JavaScript, TypeScript, Python, PHP, Go, and C++;
 - blueprints for framework adapters covering React, Next.js, Angular, Vue, Nuxt, Symfony, and Drupal;
 - an orchestrator that detects context, resolves conflicts, and produces an explainable engineering policy;
 - no dependency on externally maintained Skills.
@@ -20,8 +20,8 @@ The repository is a useful human-readable compendium and the foundation of a pla
 
 ## Status
 
-- Foundation version: `0.6.0`
-- Status: `Representative Language Adapters MVP`
+- Foundation version: `0.7.0`
+- Status: `Language Adapters Complete`
 - Content language: English
 - Schema dialect: JSON Schema Draft 2020-12
 - External Skill dependencies: none
@@ -29,8 +29,8 @@ The repository is a useful human-readable compendium and the foundation of a pla
 
 This repository defines the knowledge model, canonical principle catalogue, schemas, validation tooling,
 an executable deterministic orchestrator, six production-shaped language-independent Core Skills, five
-operational project profiles, and representative TypeScript, Python, and C++ language adapters. Remaining
-language and framework adapter guidance follows in later milestones.
+operational project profiles, and complete JavaScript, TypeScript, Python, PHP, Go, and C++ language adapters.
+Framework adapter guidance follows in later milestones.
 
 ## Resolution model
 
@@ -118,7 +118,7 @@ External resources MAY be cited for history or further reading, but:
 ├── orchestrator/
 ├── core/                 # implemented Core Skills
 ├── profiles/             # implemented project profiles
-├── languages/            # implemented representative language adapters
+├── languages/            # implemented language adapters
 ├── tools/
 └── requirements-dev.txt
 ```
@@ -177,8 +177,8 @@ make package
 ## Important scope boundary
 
 Not every blueprint is a finished production component. The six Milestone 4 Core Skills, five Milestone 5
-project profiles, three Milestone 6 language adapters, and orchestrator have detailed guidance. Modifiers,
-remaining language adapters, and framework adapters remain scheduled for later milestones. The canonical
+project profiles, all six target language adapters, and orchestrator have detailed guidance. Modifiers and
+framework adapters remain scheduled for later milestones. The canonical
 principle catalogue is usable immediately as a compendium and as the source for resolved Skill behavior.
 
 ## License

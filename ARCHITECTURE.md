@@ -193,17 +193,12 @@ Examples:
 
 ## 3.5 Language adapters
 
-Planned path:
+Implementation path:
 
 ```text
 languages/<language-id>/
 ├── SKILL.md
 ├── adapter.yaml
-├── typing.md
-├── errors.md
-├── state-and-mutability.md
-├── concurrency.md
-├── packaging.md
 └── examples/
 ```
 
@@ -221,7 +216,7 @@ A language adapter may cover:
 
 A language adapter must not restate the entire project profile.
 
-### 3.5.1 Planned language relationships
+### 3.5.1 Language relationships
 
 ```text
 javascript
@@ -235,9 +230,13 @@ cpp
 
 Inheritance between adapters must be explicit and acyclic.
 
+All six initial target adapters are implemented. JavaScript owns runtime semantics shared with TypeScript;
+TypeScript adds erased static-type refinements without duplicating that runtime policy. PHP, Python, Go, and
+C++ are independent language roots.
+
 ### 3.5.2 Python adapter scope
 
-The Python adapter is expected to refine guidance for:
+The Python adapter refines guidance for:
 
 - type hints and their runtime limitations;
 - `Any`, `Unknown`-equivalent boundaries, and optional values;
@@ -408,7 +407,7 @@ This file should describe stable project policy, not temporary task instructions
 Example:
 
 ```yaml
-specification_version: 0.6.0
+specification_version: 0.7.0
 selection_mode: automatic-with-visible-result
 
 project:
@@ -551,7 +550,7 @@ The architecture should evolve through working increments:
 3. six core skills;
 4. five profiles;
 5. TypeScript, Python, and C++ adapters;
-6. remaining language adapters;
+6. JavaScript, PHP, and Go adapters;
 7. framework adapters;
 8. modifiers;
 9. evaluation suite;

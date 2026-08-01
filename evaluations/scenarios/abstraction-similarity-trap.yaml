@@ -1,4 +1,4 @@
-schema_version: 0.6.0
+schema_version: 0.7.0
 id: abstraction-similarity-trap
 description: Reject a generic abstraction for two syntactically similar concepts with independent ownership.
 input:

@@ -1,0 +1,55 @@
+schema_version: 0.7.0
+id: go
+name: Go
+version: 0.7.0
+type: language-adapter
+status: candidate
+description: Refines engineering policy for Go interfaces, explicit errors, context propagation, goroutine ownership, packages, and measured allocation.
+normative_document: languages/go/SKILL.md
+technology:
+  kind: language
+  names: [Go, Golang]
+activation:
+  signals:
+  - Go source is materially changed or reviewed.
+  - A Go package contract, context boundary, goroutine lifecycle, or performance-sensitive path is designed.
+  file_patterns: ['*.go', go.mod, go.work]
+extends: []
+requires: []
+refines:
+- skill: abstraction-and-reuse
+  topics: [consumer-defined-interfaces, package-boundaries]
+  supported_modes: [conservative, balanced, extensible-public-library, legacy-preservation]
+- skill: contracts-and-errors
+  topics: [error-values, wrapping, cancellation]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+- skill: state-and-side-effects
+  topics: [goroutine-lifecycle, channels, shared-state]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: performance-and-resources
+  topics: [allocation, benchmarks, concurrency]
+  supported_modes: [clarity-first, budget-constrained, hot-path-optimized, hard-real-time]
+- skill: api-and-compatibility
+  topics: [package-visibility, exported-contracts]
+  supported_modes: [internal-application, public-library, external-api, stable-abi]
+runtime_constraints:
+- Goroutines and channels have no automatic structured lifetime or leak prevention.
+- Exported identifiers, concrete types, errors, and package paths create source-level consumer contracts.
+common_misuse:
+- Defining provider-wide interfaces before a consumer demonstrates the operations it needs.
+- Starting goroutines without cancellation, completion, backpressure, or shutdown ownership.
+- Claiming an allocation optimization without representative benchmark and profile evidence.
+non_goals:
+- Requiring an interface, channel, goroutine, or custom error type for every operation.
+- Replacing repository package conventions with a universal layout.
+self_contained: true
+principle_refinements:
+- principle: interface-segregation-principle
+  interpretation: Define small interfaces at the consuming package when substitution is needed and concrete use is insufficient.
+  cannot_change_canonical_meaning: true
+- principle: fail-fast
+  interpretation: Return explicit contextual errors promptly while preserving identities callers must inspect.
+  cannot_change_canonical_meaning: true
+- principle: measure-dont-guess
+  interpretation: Require representative benchmarks and profiles before retaining allocation or concurrency complexity.
+  cannot_change_canonical_meaning: true

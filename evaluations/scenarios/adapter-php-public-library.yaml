@@ -1,0 +1,18 @@
+schema_version: 0.7.0
+id: adapter-php-public-library
+description: Refine one reusable-library profile into PHP value-object, exception, and Composer-contract guidance.
+input:
+  profile: reusable-library
+  language_adapter: php
+  task: Publish a parsing library with a small supported public API for independent consumers.
+expected:
+  resolution: parse-value-objects-and-stabilize-composer-contracts
+  guidance:
+  - Parse external scalars into validated value objects because strict typing does not prove domain validity.
+  - Keep Composer dependencies and public namespaces small and document stable exception categories.
+  - Validate attribute metadata and avoid observable work during autoload.
+  active_principles: [parse-dont-validate, encapsulation, backward-compatibility]
+forbidden:
+- Treat strict_types or static-analysis annotations as external validation.
+- Expose framework or dependency internals through the supported namespace.
+principles_under_test: [parse-dont-validate, encapsulation, backward-compatibility]
