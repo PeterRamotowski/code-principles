@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:code-principles:schema:profile:0.7.0",
+  "$id": "urn:code-principles:schema:profile:0.8.0",
   "title": "Software Engineering Profile or Modifier Metadata",
   "description": "Metadata contract for language-independent project profiles and cross-cutting modifiers.",
   "type": "object",
@@ -26,7 +26,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.7.0"
+      "const": "0.8.0"
     },
     "id": {
       "$ref": "#/$defs/identifier"

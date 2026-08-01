@@ -1,4 +1,4 @@
-schema_version: 0.7.0
+schema_version: 0.8.0
 status: core-skills-mvp
 skills:
 - id: code-clarity

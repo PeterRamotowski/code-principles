@@ -1,7 +1,7 @@
-schema_version: 0.7.0
+schema_version: 0.8.0
 id: backend-service
 name: Backend Service
-version: 0.7.0
+version: 0.8.0
 type: project-profile
 status: candidate
 description: Configures a long-running service whose primary responsibility is handling network requests or application operations.

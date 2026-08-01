@@ -6,6 +6,24 @@ All notable changes to the foundation package are documented here.
 
 No changes yet.
 
+## [0.8.0] — 2026-08-01
+
+### Added
+
+- production-shaped React, Next.js, Vue, Nuxt, Angular, Symfony, and Drupal framework adapter packages with
+  normative guidance, schema-validated metadata, and positive and negative decision examples;
+- framework-specific policies for component and reactive state ownership, effects, server/client execution,
+  SSR and hydration, caching, actions, DI, forms, messaging, persistence, extension APIs, entities, hooks,
+  configuration, and cacheability metadata;
+- seven framework evaluation scenarios and Milestone 8 validation of package completeness, focus coverage,
+  evaluation coverage, dependency relationships, examples, and dependency acyclicity.
+
+### Changed
+
+- controlled distributions, documentation maps, catalogue status, and project status now include all seven
+  framework adapters;
+- foundation and component metadata versions advance to `0.8.0`.
+
 ## [0.7.0] — 2026-08-01
 
 ### Added

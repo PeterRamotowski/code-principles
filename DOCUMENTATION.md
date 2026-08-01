@@ -44,6 +44,13 @@
 - `languages/*/adapter.yaml` — machine-readable activation, dependencies, and refinements.
 - `languages/*/examples/` — positive and negative language decisions.
 
+## Framework adapters
+
+- `frameworks/README.md` — implemented adapter index and dependency relationships.
+- `frameworks/*/SKILL.md` — normative framework-specific decision guidance.
+- `frameworks/*/adapter.yaml` — machine-readable activation, dependencies, and refinements.
+- `frameworks/*/examples/` — positive and negative framework decisions.
+
 ## Development
 
 - `CONTRIBUTING.md` — contribution requirements.

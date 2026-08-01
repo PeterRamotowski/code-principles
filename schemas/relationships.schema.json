@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:code-principles:schema:relationships:0.7.0",
+  "$id": "urn:code-principles:schema:relationships:0.8.0",
   "title": "Principle Relationships",
   "type": "object",
   "additionalProperties": false,
@@ -10,7 +10,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.7.0"
+      "const": "0.8.0"
     },
     "relationships": {
       "type": "array",

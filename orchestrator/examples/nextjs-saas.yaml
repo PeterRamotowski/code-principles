@@ -1,5 +1,5 @@
-specification_version: 0.7.0
-policy_version: 0.7.0
+specification_version: 0.8.0
+policy_version: 0.8.0
 selection_mode: automatic-with-visible-result
 context:
   artifact_type: fullstack-application

@@ -8,5 +8,6 @@ Milestone 5 scenarios apply the same DRY-versus-YAGNI conflict to different proj
 artifact-specific resolutions. Three Milestone 6 scenarios apply the same reusable-library profile and task
 to TypeScript, Python, and C++, requiring distinct runtime, type, resource, and package guidance. Later
 Milestone 7 scenarios apply that profile and task to JavaScript, PHP, and Go, requiring distinct dynamic
-runtime, value-object and Composer, and consumer-interface and lifecycle guidance. Later milestones should
-add modifier and framework-adapter coverage.
+runtime, value-object and Composer, and consumer-interface and lifecycle guidance. Seven Milestone 8
+scenarios cover framework-specific component, execution, reactivity, SSR, DI, messaging, extension, entity,
+configuration, and caching decisions. Later milestones should add modifier coverage.

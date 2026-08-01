@@ -252,7 +252,7 @@ The Python adapter refines guidance for:
 
 ## 3.6 Framework adapters
 
-Planned path:
+Implementation path:
 
 ```text
 frameworks/<framework-id>/
@@ -272,6 +272,11 @@ Examples:
 - Angular: framework DI, signals, RxJS, services, standalone components, forms;
 - Symfony: service container, request lifecycle, Messenger, Doctrine integration, configuration conventions;
 - Drupal: plugin APIs, hooks, cache metadata, entities, configuration, extension lifecycle, Symfony integration.
+
+All seven initial framework adapters are implemented. React depends only on JavaScript and deliberately owns
+no TypeScript policy. Next.js combines React and TypeScript with explicit server/client rules. Nuxt refines
+Vue instead of repeating its component and reactivity rules. Drupal depends on PHP and Symfony but owns its
+host extension, entity, configuration, update, and cacheability contracts.
 
 ## 3.7 Schemas
 
@@ -407,7 +412,7 @@ This file should describe stable project policy, not temporary task instructions
 Example:
 
 ```yaml
-specification_version: 0.7.0
+specification_version: 0.8.0
 selection_mode: automatic-with-visible-result
 
 project:

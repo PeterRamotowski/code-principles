@@ -1,4 +1,4 @@
-schema_version: 0.7.0
+schema_version: 0.8.0
 id: interface-segregation-principle
 name: Interface Segregation Principle
 aliases: []

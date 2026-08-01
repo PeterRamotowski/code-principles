@@ -299,6 +299,8 @@ Implementation notes:
 
 ## Milestone 8 — Framework Adapters
 
+Status: `complete`
+
 Implement after language adapters stabilize:
 
 1. React;
@@ -316,6 +318,18 @@ Important requirements:
 - Nuxt must refine Vue rather than duplicate it;
 - Drupal may depend on PHP and Symfony but must define its own extension, cache, entity, configuration, and hook concerns;
 - framework conventions should be preserved for ordinary application code.
+
+Completion evidence:
+
+- all seven adapters are implemented under `frameworks/<framework-id>/` with schema-validated metadata,
+  normative guidance, positive and negative examples, and evaluation coverage;
+- React owns component, state, effect, composition, and behavior-testing guidance without TypeScript rules;
+- Next.js and Nuxt define explicit server/client and caching behavior, with Nuxt refining Vue;
+- Angular, Symfony, and Drupal preserve their native DI, lifecycle, extension, and configuration conventions;
+- Drupal explicitly builds on PHP and Symfony while owning extension, cacheability, entity, configuration,
+  and hook policy;
+- repository validation enforces completeness, required focus areas, dependency relationships, examples,
+  evaluation coverage, and adapter dependency acyclicity.
 
 ## Milestone 9 — Extended Core Skills
 

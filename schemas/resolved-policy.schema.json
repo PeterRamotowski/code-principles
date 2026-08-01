@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:code-principles:schema:resolved-policy:0.7.0",
+  "$id": "urn:code-principles:schema:resolved-policy:0.8.0",
   "title": "Resolved Software Engineering Policy",
   "description": "Task-scoped output produced by the engineering policy orchestrator.",
   "type": "object",
@@ -17,7 +17,7 @@
   "properties": {
     "specification_version": {
       "type": "string",
-      "const": "0.7.0"
+      "const": "0.8.0"
     },
     "policy_version": {
       "$ref": "#/$defs/semanticVersion"
