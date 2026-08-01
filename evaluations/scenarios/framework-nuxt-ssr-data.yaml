@@ -1,0 +1,19 @@
+schema_version: 0.8.0
+id: framework-nuxt-ssr-data
+description: Verify Nuxt SSR safety, hydration reuse, server-only secrets, and conventional routing.
+input:
+  profile: fullstack-web-application
+  language_adapter: typescript
+  framework_adapter: nuxt
+  task: Render a personalized order page using a private provider credential.
+expected:
+  resolution: fetch-per-user-on-server-and-reuse-hydration-payload
+  guidance:
+  - Keep the credential and provider client in a server-only boundary.
+  - Fetch with stable per-user identity and reuse the serialized SSR payload during hydration.
+  - Preserve Nuxt page routing and auto-import conventions.
+  active_principles: [principle-of-least-privilege, single-source-of-truth, principle-of-least-astonishment]
+forbidden:
+- Store request data in process-global state.
+- Expose the private credential through public runtime configuration.
+principles_under_test: [principle-of-least-privilege, single-source-of-truth, principle-of-least-astonishment]

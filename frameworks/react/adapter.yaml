@@ -1,0 +1,46 @@
+schema_version: 0.8.0
+id: react
+name: React
+version: 0.8.0
+type: framework-adapter
+status: candidate
+description: Refines engineering policy for React component ownership, composition, local state, effects, and behavior-focused tests.
+normative_document: frameworks/react/SKILL.md
+technology:
+  kind: framework
+  names: [React]
+activation:
+  signals: [React components or hooks are materially changed or reviewed.]
+  file_patterns: ['*.jsx', '*.tsx']
+  manifest_dependencies: [react]
+extends: []
+requires: [javascript]
+refines:
+- skill: modular-design
+  topics: [component-responsibility, composition, state-locality]
+  supported_modes: [feature-oriented, domain-oriented, service-oriented, data-oriented, library-oriented]
+- skill: state-and-side-effects
+  topics: [effects, derived-state, ownership]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: testing-strategy
+  topics: [behavior-focused-tests, user-observable-results]
+  supported_modes: [unit-focused, integration-balanced, characterization-first, hardware-integration]
+runtime_constraints:
+- Rendering must remain pure; effects run after committed rendering and require explicit synchronization ownership.
+common_misuse:
+- Using effects for values that can be derived during rendering.
+- Lifting state globally before multiple consumers or lifetimes require it.
+non_goals:
+- Defining TypeScript typing rules or replacing JavaScript runtime policy.
+- Mandating one state, routing, styling, or testing library.
+self_contained: true
+principle_refinements:
+- principle: high-cohesion-low-coupling
+  interpretation: Keep state and behavior with the smallest component subtree that owns their lifetime.
+  cannot_change_canonical_meaning: true
+- principle: composition-over-inheritance
+  interpretation: Express reusable UI variation through component and hook composition rather than component class hierarchies.
+  cannot_change_canonical_meaning: true
+- principle: test-behaviour-not-implementation
+  interpretation: Verify user-visible outcomes and accessible interactions instead of hook or component internals.
+  cannot_change_canonical_meaning: true

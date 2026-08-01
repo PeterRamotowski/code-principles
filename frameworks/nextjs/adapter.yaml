@@ -1,0 +1,47 @@
+schema_version: 0.8.0
+id: nextjs
+name: Next.js
+version: 0.8.0
+type: framework-adapter
+status: candidate
+description: Refines policy for Next.js server and client execution, rendering, caching, routing, server actions, and secret handling.
+normative_document: frameworks/nextjs/SKILL.md
+technology:
+  kind: framework
+  names: [Next.js, NextJS]
+activation:
+  signals: [A Next.js route, component, action, or cache boundary is materially changed.]
+  file_patterns: [next.config.js, next.config.mjs, next.config.ts]
+  manifest_dependencies: [next]
+extends: []
+requires: [typescript, react]
+refines:
+- skill: dependencies-and-boundaries
+  topics: [server-client-boundary, routing, secrets]
+  supported_modes: [framework-native, modular-monolith, domain-centric, component-based]
+- skill: state-and-side-effects
+  topics: [server-actions, caching, invalidation]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: contracts-and-errors
+  topics: [route-input, action-input, authorization]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+runtime_constraints:
+- Server and client modules execute in different trust, data-access, and serialization environments.
+- Rendering and data caches can outlive one request and require an explicit freshness policy.
+common_misuse:
+- Importing secrets or privileged server modules into a client dependency graph.
+- Treating server actions as trusted merely because their caller is framework-generated.
+non_goals:
+- Repeating React component policy or TypeScript typing rules.
+- Requiring every route to use one rendering or caching mode.
+self_contained: true
+principle_refinements:
+- principle: principle-of-least-privilege
+  interpretation: Keep secrets and privileged capabilities exclusively in server-owned modules and reauthorize every mutation.
+  cannot_change_canonical_meaning: true
+- principle: explicit-over-implicit
+  interpretation: Make execution environment, cache lifetime, invalidation, and dynamic rendering decisions visible.
+  cannot_change_canonical_meaning: true
+- principle: parse-dont-validate
+  interpretation: Parse route, form, action, header, and integration input at the server boundary before trusted use.
+  cannot_change_canonical_meaning: true

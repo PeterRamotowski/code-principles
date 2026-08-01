@@ -1,0 +1,46 @@
+schema_version: 0.8.0
+id: vue
+name: Vue
+version: 0.8.0
+type: framework-adapter
+status: candidate
+description: Refines engineering policy for Vue reactivity, composables, component scope, state locality, and effects.
+normative_document: frameworks/vue/SKILL.md
+technology:
+  kind: framework
+  names: [Vue, Vue.js]
+activation:
+  signals: [Vue components, composables, or reactive state are materially changed or reviewed.]
+  file_patterns: ['*.vue']
+  manifest_dependencies: [vue]
+extends: []
+requires: [javascript]
+refines:
+- skill: modular-design
+  topics: [component-scope, composables, provide-inject]
+  supported_modes: [feature-oriented, domain-oriented, service-oriented, data-oriented, library-oriented]
+- skill: state-and-side-effects
+  topics: [reactivity, state-locality, watchers]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: testing-strategy
+  topics: [component-behavior, composable-contracts]
+  supported_modes: [unit-focused, integration-balanced, characterization-first, hardware-integration]
+runtime_constraints:
+- Reactive proxies, refs, computed values, and watchers have distinct identity and lifecycle behavior.
+common_misuse:
+- Destructuring reactive state in a way that silently loses reactivity.
+- Using a watcher for pure derived state or moving local state into a global store prematurely.
+non_goals:
+- Selecting a store, router, UI kit, or TypeScript policy.
+- Duplicating Nuxt server-rendering and routing policy.
+self_contained: true
+principle_refinements:
+- principle: locality-of-behaviour
+  interpretation: Keep reactive state, effects, and handlers close to the component or composable that owns them.
+  cannot_change_canonical_meaning: true
+- principle: command-query-separation
+  interpretation: Use computed state for pure derivation and explicit actions or watchers only for side effects.
+  cannot_change_canonical_meaning: true
+- principle: high-cohesion-low-coupling
+  interpretation: Extract a composable around a coherent reusable behavior rather than incidental syntax similarity.
+  cannot_change_canonical_meaning: true

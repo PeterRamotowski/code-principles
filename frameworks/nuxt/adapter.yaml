@@ -1,0 +1,46 @@
+schema_version: 0.8.0
+id: nuxt
+name: Nuxt
+version: 0.8.0
+type: framework-adapter
+status: candidate
+description: Refines Vue policy for Nuxt SSR, server and client boundaries, data fetching, caching, routing, and auto-import conventions.
+normative_document: frameworks/nuxt/SKILL.md
+technology:
+  kind: framework
+  names: [Nuxt, Nuxt.js]
+activation:
+  signals: [A Nuxt page, layout, plugin, middleware, server route, or data boundary is changed.]
+  file_patterns: [nuxt.config.ts, nuxt.config.js]
+  manifest_dependencies: [nuxt]
+extends: []
+requires: [typescript, vue]
+refines:
+- skill: dependencies-and-boundaries
+  topics: [server-client-boundary, routing, auto-imports]
+  supported_modes: [framework-native, modular-monolith, domain-centric, component-based]
+- skill: state-and-side-effects
+  topics: [ssr, data-fetching, caching, hydration]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: contracts-and-errors
+  topics: [server-routes, middleware, runtime-config]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+runtime_constraints:
+- Universal modules may execute during SSR and again on the client, while server-only modules retain privileged authority.
+common_misuse:
+- Accessing browser globals during SSR or leaking private runtime configuration to the client.
+- Refetching identical data during hydration without a deliberate cache key and lifetime.
+non_goals:
+- Repeating Vue component, reactivity, composable, or state-locality guidance.
+- Replacing Nuxt routing and auto-import conventions with a private framework layer.
+self_contained: true
+principle_refinements:
+- principle: principle-of-least-privilege
+  interpretation: Keep private runtime configuration and privileged dependencies in server-only Nuxt boundaries.
+  cannot_change_canonical_meaning: true
+- principle: single-source-of-truth
+  interpretation: Share SSR payload and cache identity so hydration does not create a second competing data source.
+  cannot_change_canonical_meaning: true
+- principle: principle-of-least-astonishment
+  interpretation: Preserve Nuxt file routing and auto-import conventions for ordinary application code.
+  cannot_change_canonical_meaning: true

@@ -1,0 +1,19 @@
+schema_version: 0.8.0
+id: framework-vue-reactive-composable
+description: Verify Vue reactive ownership, computed derivation, composable cohesion, and effect cleanup.
+input:
+  profile: browser-web-application
+  language_adapter: javascript
+  framework_adapter: vue
+  task: Share online-presence behavior between two profile components.
+expected:
+  resolution: extract-one-lifecycle-owned-presence-composable
+  guidance:
+  - Keep display derivations computed and preserve ref identity across the composable boundary.
+  - Let the composable own subscription setup and scope cleanup.
+  - Keep component-only state local and request parent mutations through explicit events.
+  active_principles: [locality-of-behaviour, command-query-separation, high-cohesion-low-coupling]
+forbidden:
+- Mirror computed presence through watchers.
+- Turn unrelated component state into hidden composable globals.
+principles_under_test: [locality-of-behaviour, command-query-separation, high-cohesion-low-coupling]

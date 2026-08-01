@@ -1,0 +1,47 @@
+schema_version: 0.8.0
+id: drupal
+name: Drupal
+version: 0.8.0
+type: framework-adapter
+status: candidate
+description: Refines policy for Drupal extension APIs, plugins, hooks, entities, cacheability metadata, configuration, and host compatibility.
+normative_document: frameworks/drupal/SKILL.md
+technology:
+  kind: framework
+  names: [Drupal]
+activation:
+  signals: [A Drupal module, plugin, hook, entity, render array, or configuration contract is changed.]
+  file_patterns: ['*.info.yml', '*.module', '*.install', '*.services.yml', '*.routing.yml']
+  manifest_dependencies: [drupal/core]
+extends: []
+requires: [php, symfony]
+refines:
+- skill: api-and-compatibility
+  topics: [extension-apis, plugins, hooks, host-compatibility]
+  supported_modes: [internal-application, public-library, external-api, stable-abi]
+- skill: state-and-side-effects
+  topics: [entities, configuration, update-hooks]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: performance-and-resources
+  topics: [cacheability-metadata, cache-contexts, cache-tags]
+  supported_modes: [clarity-first, budget-constrained, hot-path-optimized, hard-real-time]
+runtime_constraints:
+- Render output correctness includes cache tags, contexts, and max-age, not only rendered markup.
+- Installed configuration, entity schema, plugin discovery, and update hooks participate in extension compatibility.
+common_misuse:
+- Returning personalized render output without matching cacheability metadata.
+- Editing active configuration or entity schema without an install and update lifecycle.
+non_goals:
+- Treating Drupal as generic Symfony or bypassing supported extension APIs for ordinary module code.
+- Replacing PHP runtime, Composer, or Symfony container policy.
+self_contained: true
+principle_refinements:
+- principle: backward-compatibility
+  interpretation: Treat extension APIs, plugin definitions, hooks, configuration schema, and entity update paths as host contracts.
+  cannot_change_canonical_meaning: true
+- principle: single-source-of-truth
+  interpretation: Separate deployable configuration from mutable content and give each one an explicit owner.
+  cannot_change_canonical_meaning: true
+- principle: explicit-over-implicit
+  interpretation: Attach complete cacheability metadata to render results at the point where dependencies are known.
+  cannot_change_canonical_meaning: true

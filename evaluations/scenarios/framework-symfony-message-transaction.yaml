@@ -1,0 +1,19 @@
+schema_version: 0.8.0
+id: framework-symfony-message-transaction
+description: Verify Symfony container use, Doctrine transaction ownership, and Messenger redelivery safety.
+input:
+  profile: backend-service
+  language_adapter: php
+  framework_adapter: symfony
+  task: Persist an order and asynchronously send its confirmation.
+expected:
+  resolution: commit-order-then-handle-idempotent-message-by-identifier
+  guidance:
+  - Inject the application operation and own the Doctrine write in one explicit transaction.
+  - Dispatch a durable message containing the order identifier after commit or through an outbox.
+  - Make the Messenger handler idempotent with explicit retry and terminal failure policy.
+  active_principles: [inversion-of-control, idempotency, information-hiding]
+forbidden:
+- Put a managed Doctrine entity in the transport message.
+- Assume Messenger delivery occurs exactly once.
+principles_under_test: [inversion-of-control, idempotency, information-hiding]

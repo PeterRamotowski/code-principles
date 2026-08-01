@@ -1,0 +1,19 @@
+schema_version: 0.8.0
+id: framework-react-state-and-effects
+description: Verify React state locality, render derivation, effect ownership, and behavior-focused testing.
+input:
+  profile: browser-web-application
+  language_adapter: javascript
+  framework_adapter: react
+  task: Add filtering and live updates to an interactive product list.
+expected:
+  resolution: derive-local-view-state-and-own-external-synchronization
+  guidance:
+  - Keep the query local and derive filtered rows during rendering.
+  - Use one cleanup-capable effect only for the external live-update subscription.
+  - Test accessible interaction and visible results rather than hook internals.
+  active_principles: [locality-of-behaviour, composition-over-inheritance, test-behaviour-not-implementation]
+forbidden:
+- Copy derivable filtered rows into state and synchronize them with chained effects.
+- Define TypeScript typing policy in the React adapter.
+principles_under_test: [locality-of-behaviour, composition-over-inheritance, test-behaviour-not-implementation]

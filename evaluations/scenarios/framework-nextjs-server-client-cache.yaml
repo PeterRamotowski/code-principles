@@ -1,0 +1,19 @@
+schema_version: 0.8.0
+id: framework-nextjs-server-client-cache
+description: Verify Next.js execution boundaries, cache ownership, secret isolation, and server-action trust checks.
+input:
+  profile: fullstack-web-application
+  language_adapter: typescript
+  framework_adapter: nextjs
+  task: Add a cached account dashboard and a server action that changes the billing address.
+expected:
+  resolution: isolate-client-interaction-and-reauthorize-server-mutations
+  guidance:
+  - Keep account data and secrets server-side and pass only a serializable client model.
+  - Scope cache identity to the account and invalidate it after the committed mutation.
+  - Parse and authorize the server action as an externally callable boundary.
+  active_principles: [principle-of-least-privilege, explicit-over-implicit, parse-dont-validate]
+forbidden:
+- Put personalized account results in a shared cache.
+- Trust a server action because the framework generated its caller.
+principles_under_test: [principle-of-least-privilege, explicit-over-implicit, parse-dont-validate]

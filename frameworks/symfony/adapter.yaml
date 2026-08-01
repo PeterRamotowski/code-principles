@@ -1,0 +1,46 @@
+schema_version: 0.8.0
+id: symfony
+name: Symfony
+version: 0.8.0
+type: framework-adapter
+status: candidate
+description: Refines engineering policy for Symfony container conventions, HttpKernel lifecycle, Messenger, Doctrine boundaries, and configuration.
+normative_document: frameworks/symfony/SKILL.md
+technology:
+  kind: framework
+  names: [Symfony]
+activation:
+  signals: [Symfony services, controllers, messages, Doctrine integrations, or configuration are changed.]
+  file_patterns: [symfony.lock, 'config/services.yaml', 'config/packages/*.yaml']
+  manifest_dependencies: [symfony/framework-bundle]
+extends: []
+requires: [php]
+refines:
+- skill: dependencies-and-boundaries
+  topics: [service-container, autowiring, httpkernel]
+  supported_modes: [framework-native, modular-monolith, domain-centric, component-based]
+- skill: distributed-reliability
+  topics: [messenger, retries, idempotency]
+  supported_modes: [synchronous-transactional, idempotent-ingress, eventually-consistent, high-reliability]
+- skill: state-and-side-effects
+  topics: [doctrine, transactions, unit-of-work]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+runtime_constraints:
+- HttpKernel events, container scope, Doctrine's unit of work, and Messenger retries affect observable lifecycle and consistency.
+common_misuse:
+- Fetching services from the container in application code instead of declaring dependencies.
+- Treating a Messenger delivery as exactly once or allowing Doctrine entities to cross durable message boundaries.
+non_goals:
+- Hiding ordinary Symfony configuration and extension points behind a private framework.
+- Replacing PHP runtime or Composer package policy.
+self_contained: true
+principle_refinements:
+- principle: inversion-of-control
+  interpretation: Declare services and extension points through Symfony's service container and lifecycle conventions.
+  cannot_change_canonical_meaning: true
+- principle: idempotency
+  interpretation: Design Messenger handlers for redelivery and align side effects with explicit transaction ownership.
+  cannot_change_canonical_meaning: true
+- principle: information-hiding
+  interpretation: Keep Doctrine persistence details behind application-owned transaction and repository boundaries where warranted.
+  cannot_change_canonical_meaning: true

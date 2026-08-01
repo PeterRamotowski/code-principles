@@ -1,0 +1,19 @@
+schema_version: 0.8.0
+id: framework-angular-state-boundaries
+description: Verify Angular provider lifetime, signal and RxJS ownership, standalone components, and forms.
+input:
+  profile: browser-web-application
+  language_adapter: typescript
+  framework_adapter: angular
+  task: Add a dynamic checkout form with asynchronous address suggestions.
+expected:
+  resolution: scope-checkout-state-and-cancel-stale-suggestions
+  guidance:
+  - Keep the standalone form component cohesive and scope mutable checkout state to the route.
+  - Use a reactive form for dynamic validation and RxJS cancellation for stale suggestions.
+  - Derive synchronous display state with signals without mirroring the stream state.
+  active_principles: [dependency-injection, single-source-of-truth, high-cohesion-low-coupling]
+forbidden:
+- Store one checkout's mutable form state in a root provider.
+- Maintain duplicate authoritative values in subscriptions and signals.
+principles_under_test: [dependency-injection, single-source-of-truth, high-cohesion-low-coupling]

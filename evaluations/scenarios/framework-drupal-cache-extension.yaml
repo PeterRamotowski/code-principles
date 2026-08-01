@@ -1,0 +1,19 @@
+schema_version: 0.8.0
+id: framework-drupal-cache-extension
+description: Verify Drupal extension contracts, entity and configuration ownership, upgrades, and cacheability.
+input:
+  profile: legacy-modernization
+  language_adapter: php
+  framework_adapter: drupal
+  task: Add a configurable personalized entity summary to an existing module.
+expected:
+  resolution: use-host-extension-and-bubble-precise-cacheability
+  guidance:
+  - Use documented plugin and entity APIs with access checks and a deployable configuration update path.
+  - Keep deployable configuration separate from content and define its configuration schema.
+  - Attach entity tags, personalization contexts, and a justified max-age to the render array.
+  active_principles: [backward-compatibility, single-source-of-truth, explicit-over-implicit]
+forbidden:
+- Patch Drupal core or bypass entity access APIs.
+- Return personalized markup without matching cacheability metadata.
+principles_under_test: [backward-compatibility, single-source-of-truth, explicit-over-implicit]

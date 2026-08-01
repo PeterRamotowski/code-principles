@@ -1,0 +1,46 @@
+schema_version: 0.8.0
+id: angular
+name: Angular
+version: 0.8.0
+type: framework-adapter
+status: candidate
+description: Refines engineering policy for Angular dependency injection, standalone components, signals and RxJS, forms, and service boundaries.
+normative_document: frameworks/angular/SKILL.md
+technology:
+  kind: framework
+  names: [Angular]
+activation:
+  signals: [Angular components, directives, services, routes, or forms are materially changed.]
+  file_patterns: [angular.json, '*.component.ts', '*.service.ts']
+  manifest_dependencies: ['@angular/core']
+extends: []
+requires: [typescript]
+refines:
+- skill: dependencies-and-boundaries
+  topics: [dependency-injection, provider-scope, standalone-components]
+  supported_modes: [framework-native, modular-monolith, domain-centric, component-based]
+- skill: state-and-side-effects
+  topics: [signals, rxjs, subscriptions]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: contracts-and-errors
+  topics: [forms, validation, http-boundaries]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+runtime_constraints:
+- Provider scope determines service lifetime, while signals and RxJS streams have different composition and cancellation semantics.
+common_misuse:
+- Registering mutable services at root when feature or component ownership is required.
+- Mirroring one state transition across signals and subscriptions without a single owner.
+non_goals:
+- Replacing Angular dependency injection, router, forms, or standalone component conventions.
+- Prescribing RxJS for every synchronous state value.
+self_contained: true
+principle_refinements:
+- principle: dependency-injection
+  interpretation: Use Angular providers with the narrowest lifetime that matches the service's state and responsibility.
+  cannot_change_canonical_meaning: true
+- principle: single-source-of-truth
+  interpretation: Choose one authoritative signal, stream, form control, or service for each mutable state transition.
+  cannot_change_canonical_meaning: true
+- principle: high-cohesion-low-coupling
+  interpretation: Keep standalone components focused and put shared orchestration behind explicit service boundaries.
+  cannot_change_canonical_meaning: true
