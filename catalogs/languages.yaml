@@ -1,5 +1,5 @@
-schema_version: 0.5.0
-status: blueprint
+schema_version: 0.6.0
+status: representative-adapters-mvp
 languages:
 - id: javascript
   name: JavaScript

@@ -164,7 +164,7 @@ selections. This keeps profile configuration inspectable and prevents a second h
 
 ## 3.4 Modifiers
 
-Planned path:
+Package path:
 
 ```text
 modifiers/<modifier-id>/
@@ -408,7 +408,7 @@ This file should describe stable project policy, not temporary task instructions
 Example:
 
 ```yaml
-specification_version: 0.5.0
+specification_version: 0.6.0
 selection_mode: automatic-with-visible-result
 
 project:

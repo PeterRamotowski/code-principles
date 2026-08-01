@@ -1,4 +1,4 @@
-schema_version: 0.5.0
+schema_version: 0.6.0
 id: modular-library-consumers
 description: Shape reusable boundaries around focused consumer dependencies and hidden volatile implementation.
 input:

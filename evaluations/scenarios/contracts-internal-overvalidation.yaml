@@ -1,4 +1,4 @@
-schema_version: 0.5.0
+schema_version: 0.6.0
 id: contracts-internal-overvalidation
 description: Avoid duplicating boundary parsing at every controlled handoff once construction owns invariants.
 input:

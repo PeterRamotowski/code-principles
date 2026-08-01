@@ -1,4 +1,4 @@
-schema_version: 0.5.0
+schema_version: 0.6.0
 id: clean-architecture-dependency-rule
 name: Clean Architecture Dependency Rule
 aliases: []

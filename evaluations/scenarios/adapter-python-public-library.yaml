@@ -1,4 +1,4 @@
-schema_version: 0.5.0
+schema_version: 0.6.0
 id: adapter-python-public-library
 description: Refine one reusable-library profile into Python runtime, structural, and import-surface guidance.
 input:

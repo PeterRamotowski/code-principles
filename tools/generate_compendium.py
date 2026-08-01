@@ -33,7 +33,7 @@ by_id = {entry['id']: entry for entry in entries}
 if len(by_id) != len(entries): raise SystemExit('Duplicate principle IDs detected.')
 
 registry = {
-    'schema_version': entries[0]['schema_version'] if entries else '0.5.0',
+    'schema_version': entries[0]['schema_version'] if entries else '0.6.0',
     'status': 'candidate',
     'canonical_source': 'principles/entries',
     'generated_outputs': ['principles/registry.yaml','principles/relationships.yaml','principles/INDEX.md','principles/categories','principles/compendium'],

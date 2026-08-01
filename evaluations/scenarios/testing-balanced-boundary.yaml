@@ -1,4 +1,4 @@
-schema_version: 0.5.0
+schema_version: 0.6.0
 id: testing-balanced-boundary
 description: Match focused and integration tests to decision logic and persistent boundary risks respectively.
 input:

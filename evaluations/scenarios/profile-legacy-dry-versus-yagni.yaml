@@ -1,4 +1,4 @@
-schema_version: 0.5.0
+schema_version: 0.6.0
 id: profile-legacy-dry-versus-yagni
 description: Preserve apparently duplicated legacy flows until characterization proves their behavior can safely converge.
 input:

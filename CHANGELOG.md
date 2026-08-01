@@ -6,6 +6,25 @@ All notable changes to the foundation package are documented here.
 
 No changes yet.
 
+## [0.6.0] — 2026-08-01
+
+### Added
+
+- production-shaped TypeScript, Python, and C++ language adapter packages with normative guidance,
+  schema-validated metadata, and positive and negative decision examples;
+- language-specific refinements for runtime validation, typing, domain modeling, errors, resources,
+  concurrency, packaging, public APIs, ABI, and undefined behavior;
+- evaluation scenarios demonstrating distinct TypeScript, Python, and C++ resolutions for the same
+  reusable-library profile and task;
+- Milestone 6 validation of adapter completeness, focus coverage, catalogue inheritance, evaluation
+  coverage, cross-language variance, and dependency acyclicity.
+
+### Changed
+
+- controlled distributions, documentation maps, catalog status, and project status now include the
+  representative language adapters;
+- foundation and component metadata versions advance to `0.6.0`.
+
 ## [0.5.0] — 2026-08-01
 
 ### Added
