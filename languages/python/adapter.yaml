@@ -1,0 +1,55 @@
+schema_version: 0.5.0
+id: python
+name: Python
+version: 0.5.0
+type: language-adapter
+status: candidate
+description: Refines engineering policy for Python's dynamic runtime, optional typing, resource scopes, and packaging model.
+normative_document: languages/python/SKILL.md
+technology:
+  kind: language
+  names: [Python]
+activation:
+  signals:
+  - Python source is materially changed or reviewed.
+  - A Python package contract, concurrency boundary, or resource lifecycle is designed.
+  file_patterns: ['*.py', pyproject.toml]
+extends: []
+requires: []
+refines:
+- skill: code-clarity
+  topics: [type-hints, domain-objects, generators]
+  supported_modes: [minimal, balanced, explicit-critical-path]
+- skill: contracts-and-errors
+  topics: [runtime-validation, exceptions, context-managers]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+- skill: abstraction-and-reuse
+  topics: [protocols, structural-typing]
+  supported_modes: [conservative, balanced, extensible-public-library, legacy-preservation]
+- skill: performance-and-resources
+  topics: [iterators, io-concurrency, cpu-concurrency]
+  supported_modes: [clarity-first, budget-constrained, hot-path-optimized, hard-real-time]
+- skill: api-and-compatibility
+  topics: [public-imports, packaging]
+  supported_modes: [internal-application, public-library, external-api, stable-abi]
+runtime_constraints:
+- Type hints do not normally enforce values at runtime.
+- Mutable objects, exceptions, imports, and interpreter concurrency remain observable runtime behavior.
+common_misuse:
+- Treating annotations or casts as validation of external values.
+- Introducing inheritance when a narrow Protocol or plain callable expresses the consumer need.
+- Exposing implementation modules as the documented import surface.
+non_goals:
+- Requiring annotations on every local regardless of project policy.
+- Selecting a web framework, validation library, or concurrency mechanism by default.
+self_contained: true
+principle_refinements:
+- principle: parse-dont-validate
+  interpretation: Convert untrusted values into domain objects through explicit runtime parsing boundaries.
+  cannot_change_canonical_meaning: true
+- principle: dependency-inversion-principle
+  interpretation: Use narrow consumer-owned Protocols where structural substitution materially decouples policy.
+  cannot_change_canonical_meaning: true
+- principle: backward-compatibility
+  interpretation: Treat documented import paths, call signatures, exceptions, and behavior as package contracts.
+  cannot_change_canonical_meaning: true

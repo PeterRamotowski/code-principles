@@ -1,0 +1,53 @@
+schema_version: 0.5.0
+id: typescript
+name: TypeScript
+version: 0.5.0
+type: language-adapter
+status: candidate
+description: Refines engineering policy for TypeScript's erased type system running with JavaScript semantics.
+normative_document: languages/typescript/SKILL.md
+technology:
+  kind: language
+  names: [TypeScript, TS]
+activation:
+  signals:
+  - TypeScript source is materially changed or reviewed.
+  - A typed JavaScript package contract is designed or evolved.
+  file_patterns: ['*.ts', '*.tsx', tsconfig.json]
+  manifest_dependencies: [typescript]
+extends: [javascript]
+requires: []
+refines:
+- skill: code-clarity
+  topics: [strict-typing, narrowing, type-complexity]
+  supported_modes: [minimal, balanced, explicit-critical-path]
+- skill: contracts-and-errors
+  topics: [unknown-input, runtime-validation, discriminated-unions]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+- skill: abstraction-and-reuse
+  topics: [generics, public-types]
+  supported_modes: [conservative, balanced, extensible-public-library, legacy-preservation]
+- skill: api-and-compatibility
+  topics: [package-exports, declaration-surface]
+  supported_modes: [internal-application, public-library, external-api, stable-abi]
+runtime_constraints:
+- Type annotations are erased and cannot validate values at runtime.
+- JavaScript coercion, mutation, exceptions, promises, and module behavior remain authoritative.
+common_misuse:
+- Replacing untrusted input validation with a type assertion.
+- Using any or deeply recursive generic types to silence a contract problem.
+- Exporting inferred implementation types as an accidental package API.
+non_goals:
+- Restating JavaScript runtime or project-profile policy.
+- Requiring advanced type machinery when a small explicit type is sufficient.
+self_contained: true
+principle_refinements:
+- principle: parse-dont-validate
+  interpretation: Parse unknown external values into discriminated domain types before trusted use.
+  cannot_change_canonical_meaning: true
+- principle: make-illegal-states-unrepresentable
+  interpretation: Prefer finite tagged unions when variants and their required data are known.
+  cannot_change_canonical_meaning: true
+- principle: backward-compatibility
+  interpretation: Treat exported runtime behavior and declaration shapes as one supported package contract.
+  cannot_change_canonical_meaning: true

@@ -1,0 +1,18 @@
+schema_version: 0.5.0
+id: adapter-cpp-public-library
+description: Refine one reusable-library profile into C++ ownership, error-policy, and compatibility guidance.
+input:
+  profile: reusable-library
+  language_adapter: cpp
+  task: Publish a parsing library with a small supported public API for independent consumers.
+expected:
+  resolution: own-resources-and-separate-source-from-abi
+  guidance:
+  - Express ownership through values and RAII and define one public error policy.
+  - Minimize public headers and distinguish source compatibility from any promised ABI stability.
+  - Keep allocation ownership explicit across binary boundaries.
+  active_principles: [encapsulation, make-illegal-states-unrepresentable, backward-compatibility]
+forbidden:
+- Use shared ownership as the default for every public object.
+- Claim ABI stability without defining toolchain, layout, symbols, and allocation boundaries.
+principles_under_test: [encapsulation, make-illegal-states-unrepresentable, backward-compatibility]

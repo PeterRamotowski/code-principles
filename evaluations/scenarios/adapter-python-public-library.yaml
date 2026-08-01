@@ -1,0 +1,18 @@
+schema_version: 0.5.0
+id: adapter-python-public-library
+description: Refine one reusable-library profile into Python runtime, structural, and import-surface guidance.
+input:
+  profile: reusable-library
+  language_adapter: python
+  task: Publish a parsing library with a small supported public API for independent consumers.
+expected:
+  resolution: parse-domain-values-and-stabilize-imports
+  guidance:
+  - Parse external values into domain objects because annotations do not enforce runtime contracts.
+  - Use a narrow consumer-owned Protocol only where independent implementations are required.
+  - Treat documented import paths and public exceptions as compatibility commitments.
+  active_principles: [parse-dont-validate, dependency-inversion-principle, backward-compatibility]
+forbidden:
+- Use a cast as evidence that external data is valid.
+- Publish implementation modules as the accidental supported import surface.
+principles_under_test: [parse-dont-validate, dependency-inversion-principle, backward-compatibility]

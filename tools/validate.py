@@ -40,6 +40,7 @@ MILESTONE_5_PROFILES = {
     "reusable-library",
     "legacy-modernization",
 }
+MILESTONE_6_ADAPTERS = {"typescript", "python", "cpp"}
 
 
 class DuplicateKeyError(ValueError):
@@ -375,11 +376,130 @@ class RepositoryValidator:
             profiles, modifiers, adapters, skills, skill_modes, principles
         )
         self.check_project_profiles_mvp(profile_items, adapters, skills, skill_modes)
+        self.check_language_adapters_mvp(language_items, skills, principles)
         self.check_examples_and_context(
             profiles, modifiers, languages, frameworks, skills, skill_modes, principles
         )
         self.check_profiles_are_language_independent(profile_items, adapters)
         return len(principles)
+
+    def check_language_adapters_mvp(self, catalogue_items, skills, principles) -> None:
+        """Enforce the Milestone 6 Definition of Done for representative adapters."""
+        catalogue = {
+            item.get("id"): item
+            for item in catalogue_items
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+        implemented = {
+            data.get("id"): (path, data)
+            for path in sorted(ROOT.glob("languages/*/adapter.yaml"))
+            if isinstance((data := self.documents.get(path)), dict)
+            and data.get("type") == "language-adapter"
+            and isinstance(data.get("id"), str)
+        }
+        missing = sorted(MILESTONE_6_ADAPTERS - set(implemented))
+        if missing:
+            self.error(
+                f"Milestone 6: missing implemented language adapters: {', '.join(missing)}"
+            )
+
+        scenarios_by_adapter = defaultdict(list)
+        resolutions_by_profile = defaultdict(dict)
+        for path in sorted((ROOT / "evaluations/scenarios").glob("*.yaml")):
+            data = self.documents.get(path)
+            if not isinstance(data, dict):
+                continue
+            adapter = data.get("input", {}).get("language_adapter")
+            if isinstance(adapter, str):
+                scenarios_by_adapter[adapter].append((path, data))
+                profile = data.get("input", {}).get("profile")
+                resolution = data.get("expected", {}).get("resolution")
+                if isinstance(profile, str) and isinstance(resolution, str):
+                    resolutions_by_profile[profile][adapter] = resolution
+
+        required_terms = {
+            "typescript": ("`unknown`", "discriminated unions", "runtime", "generics", "package"),
+            "python": (
+                "`Protocol`",
+                "data class",
+                "exceptions",
+                "generators",
+                "context manager",
+                "CPU-bound",
+                "public imports",
+            ),
+            "cpp": (
+                "RAII",
+                "ownership",
+                "value semantics",
+                "smart pointers",
+                "const",
+                "error policy",
+                "templates",
+                "allocation",
+                "ABI",
+                "undefined behavior",
+                "concurrency",
+            ),
+        }
+        for identifier in sorted(MILESTONE_6_ADAPTERS & set(implemented)):
+            path, data = implemented[identifier]
+            expected_path = ROOT / "languages" / identifier / "adapter.yaml"
+            if path != expected_path:
+                self.error(
+                    f"{self.relative(path)}: adapter metadata must be at "
+                    f"languages/{identifier}/adapter.yaml"
+                )
+            catalogue_item = catalogue.get(identifier)
+            if not catalogue_item:
+                self.error(
+                    f"{self.relative(path)}: adapter is missing from catalogs/languages.yaml"
+                )
+            elif set(data.get("extends", [])) != set(catalogue_item.get("extends", [])):
+                self.error(f"{self.relative(path)}: extends does not match catalogs/languages.yaml")
+            if not data.get("refines"):
+                self.error(f"{self.relative(path)}: adapter must refine at least one Core Skill")
+            for refinement in data.get("refines", []):
+                self.require_reference(
+                    self.relative(path), "refines.skill", refinement.get("skill"), skills
+                )
+            for refinement in data.get("principle_refinements", []):
+                self.require_reference(
+                    self.relative(path),
+                    "principle_refinements.principle",
+                    refinement.get("principle"),
+                    principles,
+                )
+
+            normative = ROOT / data.get("normative_document", "")
+            if normative.is_file():
+                text = normative.read_text(encoding="utf-8").lower()
+                for term in required_terms[identifier]:
+                    if term.lower() not in text:
+                        self.error(
+                            f"{self.relative(normative)}: required adapter focus is not documented: {term}"
+                        )
+            examples = ROOT / "languages" / identifier / "examples"
+            example_text = "\n".join(
+                item.read_text(encoding="utf-8") for item in sorted(examples.glob("*.md"))
+            )
+            if "Positive example" not in example_text or "Negative example" not in example_text:
+                self.error(
+                    f"languages/{identifier}/examples: positive and negative examples are required"
+                )
+            if not scenarios_by_adapter.get(identifier):
+                self.error(f"languages/{identifier}: at least one evaluation scenario is required")
+
+        same_profile_variance = any(
+            MILESTONE_6_ADAPTERS <= set(by_adapter)
+            and len({by_adapter[item] for item in MILESTONE_6_ADAPTERS})
+            == len(MILESTONE_6_ADAPTERS)
+            for by_adapter in resolutions_by_profile.values()
+        )
+        if not same_profile_variance:
+            self.error(
+                "Milestone 6: one project profile must produce distinct guidance for all representative adapters"
+            )
 
     def check_project_profiles_mvp(
         self, catalogue_items, technologies, skills, skill_modes
@@ -696,6 +816,11 @@ class RepositoryValidator:
             profile = data.get("input", {}).get("profile")
             if profile is not None:
                 self.require_reference(source, "input.profile", profile, profiles)
+            language_adapter = data.get("input", {}).get("language_adapter")
+            if language_adapter is not None:
+                self.require_reference(
+                    source, "input.language_adapter", language_adapter, languages
+                )
             for target in data.get("principles_under_test", []):
                 self.require_reference(source, "principles_under_test", target, principles)
             expected = data.get("expected", {})

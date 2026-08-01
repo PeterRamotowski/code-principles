@@ -1,0 +1,18 @@
+schema_version: 0.5.0
+id: adapter-typescript-public-library
+description: Refine one reusable-library profile into TypeScript runtime and declaration-surface guidance.
+input:
+  profile: reusable-library
+  language_adapter: typescript
+  task: Publish a parsing library with a small supported public API for independent consumers.
+expected:
+  resolution: validate-unknown-and-govern-declarations
+  guidance:
+  - Accept untrusted input as unknown and parse it before returning a discriminated domain type.
+  - Review runtime exports and emitted declarations together as the supported package contract.
+  - Keep generics proportional to demonstrated consumer relationships.
+  active_principles: [parse-dont-validate, make-illegal-states-unrepresentable, backward-compatibility]
+forbidden:
+- Assert external values directly to the exported result type.
+- Expose recursive generic machinery solely to remove repeated declarations.
+principles_under_test: [parse-dont-validate, make-illegal-states-unrepresentable, backward-compatibility]

@@ -1,0 +1,55 @@
+schema_version: 0.5.0
+id: cpp
+name: C++
+version: 0.5.0
+type: language-adapter
+status: candidate
+description: Refines engineering policy for C++ ownership, deterministic resources, error policy, undefined behavior, and binary interfaces.
+normative_document: languages/cpp/SKILL.md
+technology:
+  kind: language
+  names: [C++, CPP]
+activation:
+  signals:
+  - C++ source or headers are materially changed or reviewed.
+  - Native ownership, deterministic resource, concurrency, or ABI policy is involved.
+  file_patterns: ['*.cpp', '*.cc', '*.cxx', '*.hpp', '*.h', CMakeLists.txt]
+extends: []
+requires: []
+refines:
+- skill: code-clarity
+  topics: [const-correctness, value-semantics, templates]
+  supported_modes: [minimal, balanced, explicit-critical-path]
+- skill: contracts-and-errors
+  topics: [error-policy, undefined-behavior, invariants]
+  supported_modes: [strict-boundaries, tolerant-syntax-strict-semantics, trusted-internal-pipeline, safety-critical]
+- skill: state-and-side-effects
+  topics: [ownership, raii, smart-pointers]
+  supported_modes: [pragmatic-mutable, immutable-core, localized-state, single-owner-mutation, cqrs-event-driven]
+- skill: performance-and-resources
+  topics: [allocations, deterministic-resources, concurrency]
+  supported_modes: [clarity-first, budget-constrained, hot-path-optimized, hard-real-time]
+- skill: api-and-compatibility
+  topics: [abi, public-headers]
+  supported_modes: [internal-application, public-library, external-api, stable-abi]
+runtime_constraints:
+- Object lifetime, aliasing, synchronization, and undefined behavior constrain every abstraction.
+- Binary compatibility depends on compiler, standard library, layout, calling convention, and exposed symbols.
+common_misuse:
+- Using shared ownership where a single owner or value is sufficient.
+- Mixing exception and explicit-result policies across one boundary without translation.
+- Hiding unbounded allocation or blocking work inside a deterministic path.
+non_goals:
+- Mandating exceptions, templates, inheritance, or heap allocation for all projects.
+- Replacing measured platform constraints with generic performance folklore.
+self_contained: true
+principle_refinements:
+- principle: encapsulation
+  interpretation: Couple resource lifetime to an owning type while keeping invariants valid across moves and destruction.
+  cannot_change_canonical_meaning: true
+- principle: make-illegal-states-unrepresentable
+  interpretation: Express ownership, nullability, and valid variants in types when doing so preserves usable interfaces.
+  cannot_change_canonical_meaning: true
+- principle: backward-compatibility
+  interpretation: Govern source and binary compatibility separately and expose only the ABI intentionally promised.
+  cannot_change_canonical_meaning: true
