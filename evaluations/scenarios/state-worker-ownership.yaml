@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: state-worker-ownership
+description: Give job effects and acknowledgement one authoritative worker owner.
+input: {skill: state-and-side-effects, mode: single-owner-mutation, profile: background-worker, modifier: high-throughput, task: Process delivered jobs concurrently without duplicate effects.}
+expected:
+  active_principles: [command-query-separation, encapsulation, single-source-of-truth]
+  constrained_principles: [immutability]
+  suppressed_principles: []
+forbidden: [Allow multiple uncoordinated writers., Acknowledge through a hidden query effect.]
+principles_under_test: [command-query-separation, encapsulation, single-source-of-truth, immutability]

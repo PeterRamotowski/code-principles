@@ -1,0 +1,29 @@
+schema_version: 0.10.0
+id: background-worker
+name: Background Worker
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures asynchronously delivered work with explicit acknowledgement, retry, and shutdown behavior.
+normative_document: profiles/background-worker/PROFILE.md
+intended_artifacts: [Long-running consumers and scheduled workers that execute jobs outside a request lifecycle.]
+selection:
+  artifact_types: [background-worker]
+  signals: [jobs are polled delivered scheduled retried or acknowledged]
+  exclusions: [the primary artifact synchronously serves requests]
+priority_order: [correctness, reliability, data-integrity, operability, performance, maintainability]
+skill_modes:
+  code-clarity: explicit-critical-path
+  contracts-and-errors: strict-boundaries
+  state-and-side-effects: single-owner-mutation
+  dependencies-and-boundaries: framework-native
+  performance-and-resources: budget-constrained
+  distributed-reliability: idempotent-ingress
+  testing-strategy: integration-balanced
+  safe-change: local-safe-change
+typical_risks: [Redelivery duplicates consequential effects., Acknowledgement occurs before required durability., Shutdown abandons or repeats in-flight work.]
+recommended_modifiers: [high-throughput, memory-sensitive, security-sensitive]
+prohibited_defaults: [Do not assume at-most-once delivery., Do not retry effects with unknown duplicate semantics., Do not allow unbounded concurrency or queues.]
+non_goals: [Prescribing a queue scheduler or concurrency library.]
+requires: []
+conflicts_with: []

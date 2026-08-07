@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: dependencies-plugin-contract
+description: Define explicit host-facing contracts for an independently released extension.
+input: {skill: dependencies-and-boundaries, mode: component-based, profile: plugin-or-extension, modifier: public-api, task: Isolate a host extension contract from private host internals.}
+expected:
+  active_principles: [stable-dependencies-principle, acyclic-dependencies-principle, dependency-inversion-principle]
+  constrained_principles: [dependency-injection]
+  suppressed_principles: []
+forbidden: [Use shared host internals as the integration API., Create a cyclic required contract.]
+principles_under_test: [stable-dependencies-principle, acyclic-dependencies-principle, dependency-inversion-principle]

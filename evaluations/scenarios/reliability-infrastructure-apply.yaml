@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: reliability-infrastructure-apply
+description: Make repeated infrastructure application safe after an interrupted acknowledgement.
+input: {skill: distributed-reliability, mode: idempotent-ingress, profile: infrastructure-tool, modifier: security-sensitive, task: Resume a privileged apply operation after connection loss.}
+expected:
+  active_principles: [idempotency, design-by-contract, single-source-of-truth]
+  constrained_principles: [eventual-consistency]
+  suppressed_principles: []
+forbidden: [Use a check-then-act deduplication race., Repeat a privileged effect with unknown identity.]
+principles_under_test: [idempotency, design-by-contract, single-source-of-truth]

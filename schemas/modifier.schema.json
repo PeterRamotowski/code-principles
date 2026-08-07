@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:code-principles:schema:modifier:0.8.0",
+  "$id": "urn:code-principles:schema:modifier:0.10.0",
   "title": "Engineering Modifier",
   "type": "object",
   "additionalProperties": false,
@@ -11,12 +11,13 @@
     "version",
     "status",
     "description",
+    "normative_document",
     "activation",
     "effects"
   ],
   "properties": {
     "schema_version": {
-      "const": "0.8.0"
+      "const": "0.10.0"
     },
     "id": {
       "type": "string",
@@ -42,16 +43,61 @@
       ]
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "minLength": 20
+    },
+    "normative_document": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/-]+\\.md$"
     },
     "activation": {
       "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 8
       }
     },
     "effects": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "skill_modes",
+        "required_decisions",
+        "prohibited_decisions"
+      ],
+      "properties": {
+        "skill_modes": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          }
+        },
+        "required_decisions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 8
+          }
+        },
+        "prohibited_decisions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 8
+          }
+        }
+      }
     },
     "conflicts": {
       "type": "array",

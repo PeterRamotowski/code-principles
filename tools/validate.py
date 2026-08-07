@@ -33,12 +33,42 @@ MILESTONE_4_SKILLS = {
     "testing-strategy",
     "safe-change",
 }
+MILESTONE_9_SKILLS = {
+    "dependencies-and-boundaries",
+    "state-and-side-effects",
+    "api-and-compatibility",
+    "performance-and-resources",
+    "distributed-reliability",
+    "engineering-review-lenses",
+}
 MILESTONE_5_PROFILES = {
     "browser-web-application",
     "fullstack-web-application",
     "backend-service",
     "reusable-library",
     "legacy-modernization",
+}
+MILESTONE_10_PROFILES = {
+    "plugin-or-extension",
+    "data-pipeline",
+    "background-worker",
+    "distributed-system",
+    "real-time-system",
+    "prototype",
+    "cli-application",
+    "infrastructure-tool",
+}
+MILESTONE_10_MODIFIERS = {
+    "public-api",
+    "strict-backward-compatibility",
+    "security-sensitive",
+    "high-throughput",
+    "memory-sensitive",
+    "latency-sensitive",
+    "real-time",
+    "multi-tenant",
+    "accessibility-required",
+    "offline-first",
 }
 MILESTONE_6_ADAPTERS = {"typescript", "python", "cpp"}
 MILESTONE_7_ADAPTERS = {"javascript", "php", "go"}
@@ -379,6 +409,7 @@ class RepositoryValidator:
             profiles, modifiers, adapters, skills, skill_modes, principles
         )
         self.check_project_profiles_mvp(profile_items, adapters, skills, skill_modes)
+        self.check_extended_modifiers(modifier_items, skills, skill_modes)
         self.check_language_adapters_mvp(language_items, skills, principles)
         self.check_framework_adapters_mvp(framework_items, skills, principles)
         self.check_examples_and_context(
@@ -639,6 +670,9 @@ class RepositoryValidator:
         missing = sorted(MILESTONE_5_PROFILES - set(implemented))
         if missing:
             self.error(f"Milestone 5: missing implemented profiles: {', '.join(missing)}")
+        missing = sorted(MILESTONE_10_PROFILES - set(implemented))
+        if missing:
+            self.error(f"Milestone 10: missing implemented profiles: {', '.join(missing)}")
 
         scenarios_by_profile = defaultdict(list)
         shared_conflict_resolutions = defaultdict(set)
@@ -658,7 +692,8 @@ class RepositoryValidator:
             r"\b(?:" + "|".join(re.escape(item) for item in sorted(technologies)) + r")\b",
             re.IGNORECASE,
         )
-        for identifier in sorted(MILESTONE_5_PROFILES & set(implemented)):
+        required_profiles = MILESTONE_5_PROFILES | MILESTONE_10_PROFILES
+        for identifier in sorted(required_profiles & set(implemented)):
             path, data = implemented[identifier]
             expected_path = ROOT / "profiles" / identifier / "profile.yaml"
             if path != expected_path:
@@ -711,6 +746,9 @@ class RepositoryValidator:
         missing = sorted(MILESTONE_4_SKILLS - set(implemented))
         if missing:
             self.error(f"Milestone 4: missing implemented Core Skills: {', '.join(missing)}")
+        missing = sorted(MILESTONE_9_SKILLS - set(implemented))
+        if missing:
+            self.error(f"Milestone 9: missing implemented Core Skills: {', '.join(missing)}")
 
         scenarios_by_skill = defaultdict(list)
         for path in sorted((ROOT / "evaluations/scenarios").glob("*.yaml")):
@@ -725,7 +763,8 @@ class RepositoryValidator:
             r"\b(?:" + "|".join(re.escape(item) for item in sorted(technologies)) + r")\b",
             re.IGNORECASE,
         )
-        for identifier in sorted(MILESTONE_4_SKILLS & set(implemented)):
+        required_skills = MILESTONE_4_SKILLS | MILESTONE_9_SKILLS
+        for identifier in sorted(required_skills & set(implemented)):
             path, data = implemented[identifier]
             expected_path = ROOT / "core" / identifier / "skill.yaml"
             if path != expected_path:
@@ -784,6 +823,47 @@ class RepositoryValidator:
                     f"core/{identifier}: evaluation scenarios reference unknown modes: "
                     f"{', '.join(unknown_modes)}"
                 )
+
+    def check_extended_modifiers(self, catalogue_items, skills, skill_modes) -> None:
+        """Enforce the Milestone 10 Definition of Done for modifiers."""
+        catalogue = {
+            item.get("id"): item
+            for item in catalogue_items
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+        implemented = {
+            data.get("id"): (path, data)
+            for path in sorted(ROOT.glob("modifiers/*/modifier.yaml"))
+            if isinstance((data := self.documents.get(path)), dict)
+            and isinstance(data.get("id"), str)
+        }
+        missing = sorted(MILESTONE_10_MODIFIERS - set(implemented))
+        if missing:
+            self.error(f"Milestone 10: missing implemented modifiers: {', '.join(missing)}")
+
+        covered = set()
+        for path in sorted((ROOT / "evaluations/scenarios").glob("*.yaml")):
+            data = self.documents.get(path)
+            if not isinstance(data, dict):
+                continue
+            modifier = data.get("input", {}).get("modifier")
+            if isinstance(modifier, str):
+                covered.add(modifier)
+
+        for identifier in sorted(MILESTONE_10_MODIFIERS & set(implemented)):
+            path, data = implemented[identifier]
+            if identifier not in catalogue:
+                self.error(f"{self.relative(path)}: modifier is missing from catalogs/modifiers.yaml")
+            normative = ROOT / data.get("normative_document", "")
+            if not normative.is_file():
+                self.error(f"{self.relative(path)}: normative_document does not exist")
+            for skill, mode in data.get("effects", {}).get("skill_modes", {}).items():
+                self.check_skill_mode(self.relative(path), skill, mode, skills, skill_modes)
+            for field in ("required_decisions", "prohibited_decisions"):
+                if not data.get("effects", {}).get(field):
+                    self.error(f"{self.relative(path)}: effects.{field} must not be empty")
+            if identifier not in covered:
+                self.error(f"modifiers/{identifier}: at least one evaluation scenario is required")
 
     def check_duplicate_metadata(self, metadata, label: str) -> None:
         paths_by_id = defaultdict(list)
@@ -935,6 +1015,9 @@ class RepositoryValidator:
             profile = data.get("input", {}).get("profile")
             if profile is not None:
                 self.require_reference(source, "input.profile", profile, profiles)
+            modifier = data.get("input", {}).get("modifier")
+            if modifier is not None:
+                self.require_reference(source, "input.modifier", modifier, modifiers)
             language_adapter = data.get("input", {}).get("language_adapter")
             if language_adapter is not None:
                 self.require_reference(

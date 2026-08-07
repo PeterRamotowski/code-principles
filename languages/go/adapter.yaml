@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: go
 name: Go
-version: 0.8.0
+version: 0.10.0
 type: language-adapter
 status: candidate
 description: Refines engineering policy for Go interfaces, explicit errors, context propagation, goroutine ownership, packages, and measured allocation.

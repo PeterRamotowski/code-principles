@@ -1,5 +1,5 @@
-schema_version: 0.8.0
-status: blueprint
+schema_version: 0.10.0
+status: modifiers-complete
 modifiers:
 - id: public-api
   name: Public API

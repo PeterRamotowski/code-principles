@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: performance-worker-hot-path
+description: Contain a measured worker hot-path optimization under a latency target.
+input: {skill: performance-and-resources, mode: hot-path-optimized, profile: background-worker, modifier: latency-sensitive, task: Reduce measured tail processing delay without unbounded queues.}
+expected:
+  active_principles: [measure-dont-guess, performance-budgeting, locality-of-behaviour]
+  constrained_principles: [make-it-work-right-fast]
+  suppressed_principles: []
+forbidden: [Tune unrelated code globally., Benchmark an unrepresentative workload.]
+principles_under_test: [measure-dont-guess, performance-budgeting, locality-of-behaviour]

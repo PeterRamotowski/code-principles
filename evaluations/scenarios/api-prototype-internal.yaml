@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: api-prototype-internal
+description: Change prototype internals atomically without inventing a permanent public contract.
+input: {skill: api-and-compatibility, mode: internal-application, profile: prototype, task: Revise one experimental data shape and all callers.}
+expected:
+  active_principles: [information-hiding, explicit-over-implicit]
+  constrained_principles: [backward-compatibility, semantic-versioning]
+  suppressed_principles: []
+forbidden: [Version every private helper., Promise stability for an experimental internal shape.]
+principles_under_test: [information-hiding, explicit-over-implicit, backward-compatibility]

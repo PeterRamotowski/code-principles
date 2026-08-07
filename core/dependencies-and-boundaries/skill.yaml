@@ -1,0 +1,54 @@
+schema_version: 0.10.0
+id: dependencies-and-boundaries
+name: Dependencies and Architecture Boundaries
+version: 0.10.0
+type: core-skill
+status: candidate
+description: Governs dependency direction, boundary placement, and proportionate isolation from volatile details.
+normative_document: core/dependencies-and-boundaries/SKILL.md
+applies_to: [architecture, implementation, integration, review]
+activation:
+  default: task-relevant
+  signals: [a dependency or architectural boundary is introduced or changed, framework or infrastructure isolation is material]
+  exclusions: [local behavior changes that do not alter dependencies or ownership]
+requires: [modular-design]
+conflicts_with:
+- id: code-clarity
+  resolution: Add a boundary only when dependency direction or independent change justifies its local cost.
+  escalate_when: [the simpler structure would couple policy to volatile details]
+- id: abstraction-and-reuse
+  resolution: Design boundaries around ownership and volatility, not superficial reuse.
+  escalate_when: [independent consumers require a supported extension contract]
+- id: performance-and-resources
+  resolution: Preserve required boundaries and remove indirection only with measured critical-path evidence.
+  escalate_when: [a hard resource budget cannot be met]
+modes:
+- id: framework-native
+  description: Preserve native conventions and isolate only unstable or independently evolving details.
+  emphasizes: [inversion-of-control, high-cohesion-low-coupling]
+  constrains: [dependency-inversion-principle, ports-and-adapters]
+  suppressed_behaviours: [wrapping every framework facility, interfaces with one incidental implementation]
+- id: modular-monolith
+  description: Enforce acyclic cohesive module boundaries inside one deployable unit.
+  emphasizes: [acyclic-dependencies-principle, stable-dependencies-principle, information-hiding]
+  constrains: [ports-and-adapters]
+  suppressed_behaviours: [cross-module persistence ownership, service extraction without lifecycle evidence]
+- id: domain-centric
+  description: Keep domain policy independent from delivery and infrastructure mechanisms.
+  emphasizes: [clean-architecture-dependency-rule, dependency-inversion-principle, ports-and-adapters]
+  constrains: [inversion-of-control]
+  suppressed_behaviours: [framework types in domain contracts, generic repositories without a consumer need]
+- id: component-based
+  description: Define explicit provided and required contracts for independently versioned components.
+  emphasizes: [stable-dependencies-principle, acyclic-dependencies-principle, dependency-inversion-principle]
+  constrains: [dependency-injection]
+  suppressed_behaviours: [cyclic component contracts, shared internals as integration APIs]
+default_mode: framework-native
+priority: 760
+outputs: [dependency-direction, boundary-map, ownership-policy, isolation-policy]
+principles:
+  primary: [acyclic-dependencies-principle, clean-architecture-dependency-rule, dependency-injection, dependency-inversion-principle, inversion-of-control, ports-and-adapters, stable-dependencies-principle]
+  supporting: [high-cohesion-low-coupling, information-hiding]
+  constrains: [kiss, premature-generalization, performance-budgeting]
+self_contained: true
+tags: [architecture, dependencies, boundaries]

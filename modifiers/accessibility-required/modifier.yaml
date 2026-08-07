@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: accessibility-required
+name: Accessibility Required
+version: 0.10.0
+status: candidate
+description: Treats accessible semantics, interaction, perception, and assistive-technology behavior as correctness.
+normative_document: modifiers/accessibility-required/MODIFIER.md
+activation: [the artifact has a user interface and accessibility is required, barriers would prevent intended users completing tasks]
+effects:
+  skill_modes: {testing-strategy: integration-balanced}
+  required_decisions: [define semantic keyboard focus contrast and announcement behavior, verify automated and human interaction paths]
+  prohibited_decisions: [replace semantics with visual imitation, treat automated checks as complete accessibility evidence]
+conflicts: []

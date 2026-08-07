@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: framework-angular-state-boundaries
 description: Verify Angular provider lifetime, signal and RxJS ownership, standalone components, and forms.
 input:

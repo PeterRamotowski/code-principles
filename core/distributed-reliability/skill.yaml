@@ -1,0 +1,54 @@
+schema_version: 0.10.0
+id: distributed-reliability
+name: Distributed Reliability
+version: 0.10.0
+type: core-skill
+status: candidate
+description: Defines retry, duplication, ordering, timeout, partial-failure, and convergence semantics.
+normative_document: core/distributed-reliability/SKILL.md
+applies_to: [integration, architecture, operations, review]
+activation:
+  default: task-relevant
+  signals: [work crosses a process or network boundary, retries duplication ordering or convergence are possible]
+  exclusions: [single-process state changes with atomic local failure]
+requires: [contracts-and-errors, state-and-side-effects]
+conflicts_with:
+- id: code-clarity
+  resolution: Make failure and delivery semantics explicit while using the simplest adequate protocol.
+  escalate_when: [simple synchronous behavior cannot meet reliability needs]
+- id: performance-and-resources
+  resolution: Bound retries queues and timeouts; optimize only without weakening correctness semantics.
+  escalate_when: [reliability targets and resource budgets conflict]
+- id: api-and-compatibility
+  resolution: Treat idempotency keys ordering and retry-visible errors as contract behavior.
+  escalate_when: [existing consumers cannot adopt required reliability metadata]
+modes:
+- id: synchronous-transactional
+  description: Prefer one bounded synchronous operation and a local transaction where it provides required atomicity.
+  emphasizes: [fail-fast, design-by-contract]
+  constrains: [eventual-consistency, idempotency]
+  suppressed_behaviours: [messaging without a failure need, retries of unknown effects]
+- id: idempotent-ingress
+  description: Make duplicate delivery safe at ingress and record effect identity durably.
+  emphasizes: [idempotency, design-by-contract, single-source-of-truth]
+  constrains: [eventual-consistency]
+  suppressed_behaviours: [check-then-act deduplication races, infinite retry]
+- id: eventually-consistent
+  description: Define ownership, ordering, convergence, staleness, and repair for asynchronous state.
+  emphasizes: [eventual-consistency, idempotency, command-query-separation]
+  constrains: [single-source-of-truth]
+  suppressed_behaviours: [promising immediate consistency, unspecified conflict resolution]
+- id: high-reliability
+  description: Engineer bounded retries, durable handoff, observability, containment, and recovery from explicit failure models.
+  emphasizes: [idempotency, eventual-consistency, defensive-programming]
+  constrains: [worse-is-better, postels-law]
+  suppressed_behaviours: [unbounded failover loops, acknowledging before required durability]
+default_mode: synchronous-transactional
+priority: 820
+outputs: [failure-model, delivery-semantics, retry-policy, convergence-policy]
+principles:
+  primary: [eventual-consistency, idempotency]
+  supporting: [design-by-contract, defensive-programming, command-query-separation]
+  constrains: [postels-law, performance-budgeting, single-source-of-truth]
+self_contained: true
+tags: [distributed-systems, reliability, retries, consistency]

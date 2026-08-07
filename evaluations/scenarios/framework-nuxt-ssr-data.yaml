@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: framework-nuxt-ssr-data
 description: Verify Nuxt SSR safety, hydration reuse, server-only secrets, and conventional routing.
 input:

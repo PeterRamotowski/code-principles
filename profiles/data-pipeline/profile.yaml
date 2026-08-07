@@ -1,0 +1,29 @@
+schema_version: 0.10.0
+id: data-pipeline
+name: Data Pipeline
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures staged ingestion and transformation with restartability, provenance, and bounded resources.
+normative_document: profiles/data-pipeline/PROFILE.md
+intended_artifacts: [Batch or streaming pipelines that ingest transform validate and publish datasets.]
+selection:
+  artifact_types: [data-pipeline]
+  signals: [ordered transformation stages and data movement dominate the artifact]
+  exclusions: [request handling is the dominant lifecycle]
+priority_order: [data-integrity, correctness, reliability, performance, maintainability, operability]
+skill_modes:
+  code-clarity: explicit-critical-path
+  modular-design: data-oriented
+  contracts-and-errors: trusted-internal-pipeline
+  state-and-side-effects: single-owner-mutation
+  performance-and-resources: budget-constrained
+  distributed-reliability: idempotent-ingress
+  testing-strategy: integration-balanced
+  safe-change: local-safe-change
+typical_risks: [Unbounded materialization exhausting memory., Restarting duplicates or loses output., Schema or provenance changes silently corrupt downstream meaning.]
+recommended_modifiers: [memory-sensitive, high-throughput, strict-backward-compatibility]
+prohibited_defaults: [Do not materialize unbounded inputs., Do not treat restartability as automatic., Do not revalidate every controlled handoff without a provenance change.]
+non_goals: [Prescribing one processing engine storage format or deployment model.]
+requires: []
+conflicts_with: []

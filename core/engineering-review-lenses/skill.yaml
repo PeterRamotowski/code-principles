@@ -1,0 +1,49 @@
+schema_version: 0.10.0
+id: engineering-review-lenses
+name: Engineering Review Lenses
+version: 0.10.0
+type: core-skill
+status: candidate
+description: Applies broad engineering laws as evidence-seeking review questions rather than universal prescriptions.
+normative_document: core/engineering-review-lenses/SKILL.md
+applies_to: [review, planning, architecture, change-management]
+activation:
+  default: task-relevant
+  signals: [a broad change has organizational or ecosystem effects, an architecture or delivery review is requested]
+  exclusions: [routine local implementation with no material systemic question]
+requires: []
+conflicts_with:
+- id: code-clarity
+  resolution: Use lenses to expose a concrete risk, not to replace a clear local decision with slogans.
+  escalate_when: [system evidence contradicts the local optimum]
+- id: safe-change
+  resolution: Historical caution requires evidence of purpose and current consequences, not permanent preservation.
+  escalate_when: [the rationale cannot be recovered and failure consequence is high]
+- id: modular-design
+  resolution: Treat organizational alignment as an input to ownership, not an automatic architecture blueprint.
+  escalate_when: [ownership and system boundaries are persistently misaligned]
+modes:
+- id: lightweight
+  description: Ask a small set of consequence and assumption questions for bounded changes.
+  emphasizes: [murphys-law, chestertons-fence]
+  constrains: [clean-code, solid]
+  suppressed_behaviours: [checklist theater, citing laws without a decision impact]
+- id: architecture-review
+  description: Examine evolution, observability, consumers, failure, and incremental feasibility.
+  emphasizes: [galls-law, hyrums-law, murphys-law, worse-is-better]
+  constrains: [clean-code, solid]
+  suppressed_behaviours: [greenfield assumptions, architecture approval by slogan]
+- id: organizational-review
+  description: Examine ownership communication staffing coordination and feedback effects on system outcomes.
+  emphasizes: [conways-law, brooks-law, linus-law]
+  constrains: [galls-law]
+  suppressed_behaviours: [assuming headcount linearly increases throughput, reorganizing solely to match a diagram]
+default_mode: lightweight
+priority: 300
+outputs: [review-questions, systemic-risks, evidence-gaps, reconsideration-triggers]
+principles:
+  primary: [brooks-law, chestertons-fence, clean-code, conways-law, galls-law, hyrums-law, linus-law, murphys-law, solid, worse-is-better]
+  supporting: [measure-dont-guess, principle-of-least-astonishment]
+  constrains: [kiss, premature-generalization]
+self_contained: true
+tags: [review, systems-thinking, organizations, risk]

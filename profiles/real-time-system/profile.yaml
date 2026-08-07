@@ -1,0 +1,28 @@
+schema_version: 0.10.0
+id: real-time-system
+name: Real-time or Embedded System
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures systems where correctness includes deterministic timing and bounded resource use.
+normative_document: profiles/real-time-system/PROFILE.md
+intended_artifacts: [Embedded control and real-time systems with explicit timing and resource constraints.]
+selection:
+  artifact_types: [embedded-system]
+  signals: [missed deadlines or unbounded critical-path work is a correctness failure]
+  exclusions: [ordinary responsiveness goals without deterministic timing requirements]
+priority_order: [correctness, determinism, reliability, safety, memory-efficiency, performance, maintainability]
+skill_modes:
+  code-clarity: explicit-critical-path
+  contracts-and-errors: safety-critical
+  dependencies-and-boundaries: component-based
+  state-and-side-effects: single-owner-mutation
+  performance-and-resources: hard-real-time
+  testing-strategy: hardware-integration
+  safe-change: compatibility-first
+typical_risks: [Unbounded allocation blocking or work misses a deadline., Ownership ambiguity creates races or lifetime faults., Average latency is mistaken for worst-case evidence.]
+recommended_modifiers: [real-time, memory-sensitive, latency-sensitive, security-sensitive]
+prohibited_defaults: [Do not allocate or block unpredictably on critical paths., Do not use average timing as deadline proof., Do not broaden change without system-level verification.]
+non_goals: [Certifying safety or prescribing a hardware platform scheduler or language.]
+requires: []
+conflicts_with: []

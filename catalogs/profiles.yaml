@@ -1,5 +1,5 @@
-schema_version: 0.8.0
-status: project-profiles-mvp
+schema_version: 0.10.0
+status: extended-profiles-complete
 profiles:
 - id: general-software
   name: General Software
@@ -22,6 +22,9 @@ profiles:
 - id: data-pipeline
   name: Data Pipeline
   focus: explicit transformation stages, throughput, restartability, and bounded memory
+- id: background-worker
+  name: Background Worker
+  focus: delivery, acknowledgement, retries, concurrency, shutdown, and bounded execution
 - id: distributed-system
   name: Distributed System
   focus: partial failure, retries, idempotency, ordering, and consistency
@@ -31,6 +34,12 @@ profiles:
 - id: prototype
   name: Prototype
   focus: fast learning, reversibility, minimal abstraction, and explicit instability
+- id: cli-application
+  name: CLI Application
+  focus: invocation, standard streams, exit behavior, automation compatibility, and process effects
+- id: infrastructure-tool
+  name: Infrastructure Tool
+  focus: planning, authority, idempotent application, partial failure, and operational safety
 - id: legacy-modernization
   name: Legacy Modernization
   focus: behavior preservation, characterization, bounded change, and historical constraints

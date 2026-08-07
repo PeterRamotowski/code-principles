@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: testing-strategy
 name: Testing Strategy
-version: 0.8.0
+version: 0.10.0
 type: core-skill
 status: candidate
 description: Selects evidence-producing test levels, behavior focus, feedback loops, and change-appropriate verification.

@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: state-pipeline-bounded
+description: Localize mutable buffers and checkpoints in a memory-sensitive pipeline.
+input: {skill: state-and-side-effects, mode: localized-state, profile: data-pipeline, modifier: memory-sensitive, task: Stream a large input through bounded transformation stages.}
+expected:
+  active_principles: [encapsulation, locality-of-behaviour, information-hiding]
+  constrained_principles: [single-source-of-truth]
+  suppressed_principles: []
+forbidden: [Create global writable buffers., Store a second uncoordinated checkpoint truth.]
+principles_under_test: [encapsulation, locality-of-behaviour, information-hiding, single-source-of-truth]

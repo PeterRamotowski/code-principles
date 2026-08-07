@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: symfony
 name: Symfony
-version: 0.8.0
+version: 0.10.0
 type: framework-adapter
 status: candidate
 description: Refines engineering policy for Symfony container conventions, HttpKernel lifecycle, Messenger, Doctrine boundaries, and configuration.

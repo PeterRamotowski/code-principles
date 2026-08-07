@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: dependencies-prototype-overengineering
+description: Preserve direct conventional dependencies in a bounded user-interface prototype.
+input: {skill: dependencies-and-boundaries, mode: framework-native, profile: prototype, modifier: accessibility-required, task: Test one accessible interaction hypothesis.}
+expected:
+  active_principles: [inversion-of-control, high-cohesion-low-coupling]
+  constrained_principles: [dependency-inversion-principle, ports-and-adapters]
+  suppressed_principles: []
+forbidden: [Wrap every stable facility., Add one interface per concrete implementation.]
+principles_under_test: [inversion-of-control, high-cohesion-low-coupling, dependency-inversion-principle]

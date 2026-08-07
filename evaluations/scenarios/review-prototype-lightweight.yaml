@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: review-prototype-lightweight
+description: Apply proportional risk and history questions to an accessible prototype change.
+input: {skill: engineering-review-lenses, mode: lightweight, profile: prototype, modifier: accessibility-required, task: Review a bounded interaction experiment.}
+expected:
+  active_principles: [murphys-law, chestertons-fence]
+  constrained_principles: [clean-code, solid]
+  suppressed_principles: []
+forbidden: [Turn umbrella concepts into an approval checklist., Cite a law without a decision impact.]
+principles_under_test: [murphys-law, chestertons-fence, clean-code, solid]

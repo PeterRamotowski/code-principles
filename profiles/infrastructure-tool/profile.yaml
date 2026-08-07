@@ -1,0 +1,29 @@
+schema_version: 0.10.0
+id: infrastructure-tool
+name: Infrastructure Tool
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures tools that plan and apply consequential infrastructure or operational state changes.
+normative_document: profiles/infrastructure-tool/PROFILE.md
+intended_artifacts: [Provisioning deployment migration and operational automation tools with consequential effects.]
+selection:
+  artifact_types: [infrastructure-tool]
+  signals: [the artifact observes plans or mutates shared operational infrastructure]
+  exclusions: [read-only reporting with no operational authority]
+priority_order: [safety, correctness, reliability, security, operability, maintainability]
+skill_modes:
+  code-clarity: explicit-critical-path
+  contracts-and-errors: safety-critical
+  dependencies-and-boundaries: component-based
+  state-and-side-effects: single-owner-mutation
+  api-and-compatibility: external-api
+  distributed-reliability: idempotent-ingress
+  testing-strategy: integration-balanced
+  safe-change: compatibility-first
+typical_risks: [Partial application leaves shared infrastructure inconsistent., Excess authority expands blast radius., A plan becomes stale before execution.]
+recommended_modifiers: [security-sensitive, strict-backward-compatibility, public-api]
+prohibited_defaults: [Do not apply destructive changes without explicit scope and evidence., Do not assume retries are safe., Do not grant broader authority than the operation requires.]
+non_goals: [Prescribing a cloud provider configuration language or deployment platform.]
+requires: []
+conflicts_with: []

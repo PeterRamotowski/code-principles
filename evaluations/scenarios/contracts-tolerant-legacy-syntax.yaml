@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: contracts-tolerant-legacy-syntax
 description: Preserve harmless legacy syntax while rejecting ambiguous meaning and normalizing one contract.
 input:

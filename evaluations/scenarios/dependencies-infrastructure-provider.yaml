@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: dependencies-infrastructure-provider
+description: Keep operational policy independent from a volatile provider integration.
+input: {skill: dependencies-and-boundaries, mode: domain-centric, profile: infrastructure-tool, modifier: security-sensitive, task: Separate a least-authority deployment plan from provider calls.}
+expected:
+  active_principles: [clean-architecture-dependency-rule, dependency-inversion-principle, ports-and-adapters]
+  constrained_principles: [inversion-of-control]
+  suppressed_principles: []
+forbidden: [Leak provider request types into planning policy., Add a generic repository unrelated to consumer needs.]
+principles_under_test: [clean-architecture-dependency-rule, dependency-inversion-principle, ports-and-adapters]

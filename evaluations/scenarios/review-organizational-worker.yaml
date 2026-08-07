@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: review-organizational-worker
+description: Examine ownership and coordination effects before splitting a worker across teams.
+input: {skill: engineering-review-lenses, mode: organizational-review, profile: background-worker, modifier: strict-backward-compatibility, task: Reassign ownership while preserving job contracts.}
+expected:
+  active_principles: [conways-law, brooks-law, linus-law]
+  constrained_principles: [galls-law]
+  suppressed_principles: []
+forbidden: [Assume headcount linearly increases throughput., Reorganize solely to match a diagram.]
+principles_under_test: [conways-law, brooks-law, linus-law, galls-law]

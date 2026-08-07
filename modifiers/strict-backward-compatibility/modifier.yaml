@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: strict-backward-compatibility
+name: Strict Backward Compatibility
+version: 0.10.0
+status: candidate
+description: Requires supported existing consumers to retain observable behavior or receive an explicit migration path.
+normative_document: modifiers/strict-backward-compatibility/MODIFIER.md
+activation: [independent consumers cannot upgrade atomically, a compatibility support window is contractual]
+effects:
+  skill_modes: {safe-change: compatibility-first}
+  required_decisions: [inventory supported observable behavior, provide deprecation migration and removal criteria]
+  prohibited_decisions: [break supported consumers for internal cleanup, infer compatibility from signatures alone]
+conflicts: []

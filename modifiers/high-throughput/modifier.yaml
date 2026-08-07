@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: high-throughput
+name: High Throughput
+version: 0.10.0
+status: candidate
+description: Activates measured throughput budgets, bounded concurrency, batching, and backpressure.
+normative_document: modifiers/high-throughput/MODIFIER.md
+activation: [a verified sustained or burst throughput target is material, overload behavior affects reliability]
+effects:
+  skill_modes: {performance-and-resources: budget-constrained}
+  required_decisions: [define workload throughput and saturation budgets, bound queues concurrency and fan-out]
+  prohibited_decisions: [optimize without representative measurement, use unbounded buffering to hide overload]
+conflicts: []

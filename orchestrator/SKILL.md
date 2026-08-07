@@ -72,7 +72,7 @@ For a non-trivial task, the orchestrator MUST internally produce:
 
 The output SHOULD conform to `schemas/resolved-policy.schema.json`.
 
-## Executable MVP
+## Executable implementation
 
 `tools/orchestrate.py` implements this procedure for the Milestone 3 artifact set. It combines inputs in
 the following order:

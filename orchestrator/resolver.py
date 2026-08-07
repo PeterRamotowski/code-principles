@@ -35,6 +35,13 @@ ARTIFACT_PROFILES = {
     "fullstack-application": "fullstack-web-application",
     "backend-service": "backend-service",
     "reusable-library": "reusable-library",
+    "cli-application": "cli-application",
+    "embedded-system": "real-time-system",
+    "data-pipeline": "data-pipeline",
+    "background-worker": "background-worker",
+    "distributed-system": "distributed-system",
+    "plugin-or-extension": "plugin-or-extension",
+    "infrastructure-tool": "infrastructure-tool",
     "legacy-modernization": "legacy-modernization",
 }
 
@@ -63,21 +70,20 @@ def _load_profile_modes() -> dict[str, dict[str, str]]:
 
 PROFILE_MODES = _load_profile_modes()
 
+def _load_modifier_effects() -> dict[str, dict[str, Any]]:
+    """Load implemented modifiers as the source of truth for policy overlays."""
+    effects = {}
+    for path in sorted((ROOT / "modifiers").glob("*/modifier.yaml")):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if isinstance(data, dict) and isinstance(data.get("id"), str):
+            effects[data["id"]] = dict(data.get("effects", {}))
+    return effects
+
+
+MODIFIER_EFFECTS = _load_modifier_effects()
 MODIFIER_MODES = {
-    "public-api": {"api-and-compatibility": "external-api", "contracts-and-errors": "strict-boundaries"},
-    "strict-backward-compatibility": {"safe-change": "compatibility-first"},
-    "security-sensitive": {"contracts-and-errors": "strict-boundaries"},
-    "high-throughput": {"performance-and-resources": "budget-constrained"},
-    "memory-sensitive": {"performance-and-resources": "budget-constrained"},
-    "latency-sensitive": {"performance-and-resources": "budget-constrained"},
-    "real-time": {
-        "contracts-and-errors": "safety-critical",
-        "performance-and-resources": "hard-real-time",
-        "state-and-side-effects": "single-owner-mutation",
-    },
-    "accessibility-required": {"testing-strategy": "integration-balanced"},
-    "offline-first": {"distributed-reliability": "eventually-consistent"},
-    "multi-tenant": {"contracts-and-errors": "strict-boundaries"},
+    identifier: dict(effects.get("skill_modes", {}))
+    for identifier, effects in MODIFIER_EFFECTS.items()
 }
 
 SKILL_PRINCIPLES = {
@@ -203,6 +209,7 @@ def detect_repository_context(repository: Path, task: str = "") -> dict[str, Any
         artifact_evidence.append("Python project metadata without an observed executable role")
 
     task_artifacts = (
+        ("prototype", ("prototype", "proof of concept", "proof-of-concept", "spike")),
         ("legacy-modernization", ("legacy modernization", "modernize legacy", "migrate legacy")),
         ("fullstack-application", ("full-stack", "fullstack")),
         (
@@ -211,13 +218,20 @@ def detect_repository_context(repository: Path, task: str = "") -> dict[str, Any
         ),
         ("frontend-application", ("browser application", "frontend application", "front-end application")),
         ("backend-service", ("backend service", "http service", "api service")),
+        ("data-pipeline", ("data pipeline", "etl pipeline", "streaming pipeline")),
+        ("background-worker", ("background worker", "job worker", "queue consumer")),
+        ("distributed-system", ("distributed system",)),
+        ("plugin-or-extension", ("plugin", "extension module", "host extension")),
+        ("cli-application", ("cli application", "command-line application", "command line tool")),
+        ("infrastructure-tool", ("infrastructure tool", "provisioning tool", "deployment tool")),
+        ("embedded-system", ("embedded system", "real-time system")),
     )
     stage = "unknown"
     stage_confidence = "unknown"
     for candidate, signals in task_artifacts:
         if any(signal in f" {task_lower}" for signal in signals):
-            if candidate == "legacy-modernization":
-                stage, stage_confidence = "legacy-modernization", "inferred-high"
+            if candidate in {"legacy-modernization", "prototype"}:
+                stage, stage_confidence = candidate, "inferred-high"
             else:
                 artifact, confidence = candidate, "inferred-high"
                 artifact_evidence.append(f"task wording indicates {candidate}")
@@ -527,6 +541,15 @@ def _decisions(
         if modifier in modifier_decisions:
             identifier, statement, rationale = modifier_decisions[modifier]
             decisions.append({"id": identifier, "statement": statement, "rationale": rationale, "scope": ["task"]})
+        for index, statement in enumerate(
+            MODIFIER_EFFECTS.get(modifier, {}).get("required_decisions", []), start=1
+        ):
+            decisions.append({
+                "id": f"modifier-{modifier}-{index}",
+                "statement": statement[0].upper() + statement[1:] + ".",
+                "rationale": f"The active {modifier} modifier requires this decision.",
+                "scope": ["task"],
+            })
     return decisions
 
 
@@ -564,11 +587,10 @@ def resolve_policy(
     explicit_profile = normalized.get("profiles", {}).get("base")
     if normalized["selection_mode"] == "manual" and not explicit_profile:
         raise OrchestrationError("manual selection_mode requires an explicit profiles.base value")
-    profile = explicit_profile or (
-        "legacy-modernization" if stage == "legacy-modernization" else ARTIFACT_PROFILES.get(artifact)
-    )
+    stage_profile = stage if stage in {"legacy-modernization", "prototype"} else None
+    profile = explicit_profile or stage_profile or ARTIFACT_PROFILES.get(artifact)
     if profile not in PROFILE_MODES:
-        raise OrchestrationError(f"unsupported base profile for the MVP: {profile or artifact}")
+        raise OrchestrationError(f"unsupported base profile: {profile or artifact}")
     modifiers = _activate_modifiers(normalized, task)
     languages = _selected_adapters(normalized, "languages")
     frameworks = _selected_adapters(normalized, "frameworks")
@@ -601,6 +623,11 @@ def resolve_policy(
         repository_overrides.get("prohibited_patterns", [])
         + user_overrides.get("prohibited_patterns", [])
         + skill_prohibitions
+        + [
+            item
+            for modifier in modifiers
+            for item in MODIFIER_EFFECTS.get(modifier, {}).get("prohibited_decisions", [])
+        ]
     ))
     decisions = _decisions(
         profile, modifiers, authority, explicitly_configured=bool(explicit_profile)

@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: code-clarity-helper-overengineering
 description: Reject helper extraction driven only by arbitrary size limits in one cohesive local operation.
 input:

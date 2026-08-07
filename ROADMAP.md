@@ -333,6 +333,8 @@ Completion evidence:
 
 ## Milestone 9 — Extended Core Skills
 
+Status: `complete`
+
 Implement:
 
 - `dependencies-and-boundaries`;
@@ -342,7 +344,19 @@ Implement:
 - `distributed-reliability`;
 - `engineering-review-lenses`.
 
+Completion evidence:
+
+- all six extended Core Skills are implemented under `core/<skill-id>/` with schema-validated metadata,
+  normative mode guidance, explicit conflict rules, and positive and negative examples;
+- every catalogue mode is implemented and documented, remains language-independent, and maps only to
+  canonical principles;
+- each Skill has positive, boundary, and overengineering evaluation coverage;
+- repository validation enforces package completeness, catalogue parity, conflict depth, examples, and
+  evaluation coverage for both Core Skill milestones.
+
 ## Milestone 10 — Extended Profiles and Modifiers
+
+Status: `complete`
 
 Profiles:
 
@@ -367,6 +381,17 @@ Modifiers:
 - multi-tenant;
 - accessibility required;
 - offline first.
+
+Completion evidence:
+
+- all eight profiles are implemented under `profiles/<profile-id>/` with language-independent normative
+  guidance, schema-validated defaults, risks, prohibitions, and evaluation coverage;
+- all ten modifiers are implemented under `modifiers/<modifier-id>/` with activation criteria, normative
+  guidance, machine-readable Skill-mode effects, required decisions, and prohibited decisions;
+- the orchestrator selects every new artifact profile and applies modifier modes, required decisions, and
+  prohibitions from package metadata to resolved policy;
+- repository validation enforces catalogue completeness, normative documents, Skill-mode references, and
+  evaluation coverage for profiles and modifiers.
 
 ## Milestone 11 — Evaluation Suite
 

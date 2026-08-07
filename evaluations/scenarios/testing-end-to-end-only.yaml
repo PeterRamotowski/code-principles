@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: testing-end-to-end-only
 description: Reject end-to-end-only verification for isolated decisions that need fast diagnostic feedback.
 input:

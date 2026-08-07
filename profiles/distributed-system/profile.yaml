@@ -1,0 +1,29 @@
+schema_version: 0.10.0
+id: distributed-system
+name: Distributed System
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures independently failing components with explicit ownership, delivery, and convergence semantics.
+normative_document: profiles/distributed-system/PROFILE.md
+intended_artifacts: [Systems whose correctness depends on multiple independently failing processes or services.]
+selection:
+  artifact_types: [distributed-system]
+  signals: [partial failure retries ordering and cross-process consistency dominate]
+  exclusions: [a single process and local transaction satisfy the failure model]
+priority_order: [correctness, reliability, data-integrity, operability, security, performance]
+skill_modes:
+  code-clarity: explicit-critical-path
+  modular-design: service-oriented
+  contracts-and-errors: strict-boundaries
+  dependencies-and-boundaries: component-based
+  state-and-side-effects: cqrs-event-driven
+  distributed-reliability: eventually-consistent
+  performance-and-resources: budget-constrained
+  testing-strategy: integration-balanced
+typical_risks: [Ambiguous ownership causes conflicting state., Unbounded retry amplifies failure., Ordering staleness or repair semantics remain unspecified.]
+recommended_modifiers: [security-sensitive, high-throughput, latency-sensitive, multi-tenant]
+prohibited_defaults: [Do not promise exactly-once execution., Do not distribute a cohesive operation without lifecycle evidence., Do not claim eventual consistency without convergence and repair rules.]
+non_goals: [Mandating microservices messaging event sourcing or CQRS.]
+requires: []
+conflicts_with: []

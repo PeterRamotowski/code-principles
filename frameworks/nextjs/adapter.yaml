@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: nextjs
 name: Next.js
-version: 0.8.0
+version: 0.10.0
 type: framework-adapter
 status: candidate
 description: Refines policy for Next.js server and client execution, rendering, caching, routing, server actions, and secret handling.

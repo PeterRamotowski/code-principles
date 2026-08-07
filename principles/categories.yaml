@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 categories:
 - id: simplicity-and-clarity
   name: Simplicity, Scope, and Code Clarity

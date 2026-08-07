@@ -1,0 +1,31 @@
+schema_version: 0.10.0
+id: plugin-or-extension
+name: Plugin or Extension
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures code loaded by a host through supported extension points and lifecycle contracts.
+normative_document: profiles/plugin-or-extension/PROFILE.md
+intended_artifacts: [Host-loaded plugins and extensions with independent compatibility needs.]
+selection:
+  artifact_types: [plugin-or-extension]
+  exposure: [extension-platform]
+  signals: [a host owns loading lifecycle configuration and extension contracts]
+  exclusions: [ordinary application code that merely uses a framework]
+priority_order: [compatibility, correctness, security, maintainability, reliability, performance]
+skill_modes:
+  code-clarity: balanced
+  abstraction-and-reuse: extensible-public-library
+  modular-design: library-oriented
+  contracts-and-errors: strict-boundaries
+  dependencies-and-boundaries: component-based
+  state-and-side-effects: single-owner-mutation
+  api-and-compatibility: public-library
+  testing-strategy: integration-balanced
+  safe-change: compatibility-first
+typical_risks: [Host lifecycle misuse or leaked resources., Host-version drift breaking an independently released extension., Shared-process failures or authority affecting other extensions.]
+recommended_modifiers: [public-api, strict-backward-compatibility, security-sensitive]
+prohibited_defaults: [Do not bypass supported extension points., Do not assume control of the host lifecycle., Do not expose host internals as the extension API.]
+non_goals: [Defining a particular host framework or marketplace policy.]
+requires: []
+conflicts_with: []

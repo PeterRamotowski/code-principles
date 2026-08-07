@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: legacy-modernization
 name: Legacy Modernization
-version: 0.8.0
+version: 0.10.0
 type: project-profile
 status: candidate
 description: Configures bounded evolution of a difficult existing system where behavior, history, and reversibility constrain change.

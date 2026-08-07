@@ -1,0 +1,54 @@
+schema_version: 0.10.0
+id: api-and-compatibility
+name: API and Compatibility
+version: 0.10.0
+type: core-skill
+status: candidate
+description: Defines intentional public surfaces, observable compatibility, deprecation, and migration policy.
+normative_document: core/api-and-compatibility/SKILL.md
+applies_to: [api-design, implementation, release, review]
+activation:
+  default: task-relevant
+  signals: [independent consumers observe behavior, a supported contract or compatibility boundary changes]
+  exclusions: [private changes proven to have no observable consumer effect]
+requires: [contracts-and-errors]
+conflicts_with:
+- id: code-clarity
+  resolution: Keep the public contract small even when compatibility needs an internal translation layer.
+  escalate_when: [compatibility code materially obscures current behavior]
+- id: safe-change
+  resolution: Use compatibility evidence and migration authority to select preservation, deprecation, or a break.
+  escalate_when: [consumer impact cannot be bounded]
+- id: performance-and-resources
+  resolution: Do not silently change supported semantics for performance; version or migrate the contract.
+  escalate_when: [a compatibility promise conflicts with a hard operational limit]
+modes:
+- id: internal-application
+  description: Evolve internal contracts atomically while preserving externally observable behavior.
+  emphasizes: [information-hiding, explicit-over-implicit]
+  constrains: [backward-compatibility, semantic-versioning]
+  suppressed_behaviours: [versioning every private function, treating incidental internals as supported API]
+- id: public-library
+  description: Maintain a small documented source-level contract for independently upgrading consumers.
+  emphasizes: [backward-compatibility, semantic-versioning, principle-of-least-astonishment]
+  constrains: [hyrums-law]
+  suppressed_behaviours: [exporting implementation details, breaking supported imports in a minor release]
+- id: external-api
+  description: Govern requests, responses, errors, and deprecation as an explicit external contract.
+  emphasizes: [backward-compatibility, semantic-versioning, design-by-contract]
+  constrains: [postels-law, hyrums-law]
+  suppressed_behaviours: [silent semantic changes, indefinite undocumented tolerance]
+- id: stable-abi
+  description: Treat binary layout, calling, ownership, and toolchain constraints as versioned promises.
+  emphasizes: [backward-compatibility, semantic-versioning, information-hiding]
+  constrains: [open-closed-principle]
+  suppressed_behaviours: [exposing unstable layout, assuming source compatibility implies binary compatibility]
+default_mode: internal-application
+priority: 850
+outputs: [public-surface, compatibility-policy, deprecation-policy, migration-plan]
+principles:
+  primary: [backward-compatibility, semantic-versioning]
+  supporting: [design-by-contract, information-hiding, principle-of-least-astonishment]
+  constrains: [hyrums-law, postels-law, open-closed-principle]
+self_contained: true
+tags: [api, compatibility, evolution, versioning]

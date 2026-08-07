@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: latency-sensitive
+name: Latency Sensitive
+version: 0.10.0
+status: candidate
+description: Activates end-to-end latency budgets, tail analysis, critical-path control, and overload policy.
+normative_document: modifiers/latency-sensitive/MODIFIER.md
+activation: [a verified response deadline or latency percentile is material, delay changes correctness or usability]
+effects:
+  skill_modes: {performance-and-resources: budget-constrained}
+  required_decisions: [define end-to-end percentile workload and saturation budget, measure critical-path contributors]
+  prohibited_decisions: [optimize averages when tail behavior matters, move work off-path without bounding its queue]
+conflicts: []

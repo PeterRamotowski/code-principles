@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: framework-nextjs-server-client-cache
 description: Verify Next.js execution boundaries, cache ownership, secret isolation, and server-action trust checks.
 input:

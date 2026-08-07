@@ -1,5 +1,5 @@
-schema_version: 0.8.0
-status: core-skills-mvp
+schema_version: 0.10.0
+status: extended-core-skills-complete
 skills:
 - id: code-clarity
   name: Code Clarity and Simplicity

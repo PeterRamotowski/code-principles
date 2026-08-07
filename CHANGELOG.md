@@ -6,6 +6,27 @@ All notable changes to the foundation package are documented here.
 
 No changes yet.
 
+## [0.10.0] — 2026-08-07
+
+### Added
+
+- six extended Core Skill packages covering dependency boundaries, state and side effects, API compatibility,
+  performance and resources, distributed reliability, and engineering review lenses;
+- eight artifact profiles for plugins, data pipelines, background workers, distributed systems, real-time
+  systems, prototypes, CLI applications, and infrastructure tools;
+- ten normative modifier packages with explicit activation, machine-readable Skill-mode effects, required
+  decisions, prohibited decisions, and evaluation coverage;
+- component scenarios covering every new Core Skill mode family, extended profile, and modifier;
+- Milestone 9 and 10 validation for package completeness, catalogue parity, documentation, references,
+  examples, and evaluation coverage.
+
+### Changed
+
+- the orchestrator recognizes all extended artifact profiles, selects prototype work from lifecycle evidence,
+  loads modifier effects from package metadata, and includes required decisions and prohibitions in resolved policy;
+- controlled distributions and project documentation now include modifiers and all extended packages;
+- foundation, schema, and component metadata versions advance to `0.10.0`.
+
 ## [0.8.0] — 2026-08-01
 
 ### Added

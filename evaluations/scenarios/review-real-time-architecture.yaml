@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: review-real-time-architecture
+description: Review incremental evolution and failure assumptions for a latency-sensitive real-time system.
+input: {skill: engineering-review-lenses, mode: architecture-review, profile: real-time-system, modifier: latency-sensitive, task: Review a staged replacement of a timing-critical component.}
+expected:
+  active_principles: [galls-law, hyrums-law, murphys-law, worse-is-better]
+  constrained_principles: [clean-code, solid]
+  suppressed_principles: []
+forbidden: [Assume a greenfield replacement is safer., Approve architecture by slogan.]
+principles_under_test: [galls-law, hyrums-law, murphys-law, worse-is-better]

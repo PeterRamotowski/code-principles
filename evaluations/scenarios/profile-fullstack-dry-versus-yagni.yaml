@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: profile-fullstack-dry-versus-yagni
 description: Centralize one authoritative cross-boundary policy without coupling client and server implementation mechanics.
 input:

@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: reliability-offline-convergence
+description: Define ordering conflict and repair semantics for offline synchronized state.
+input: {skill: distributed-reliability, mode: eventually-consistent, profile: distributed-system, modifier: offline-first, task: Synchronize independently edited local records after reconnection.}
+expected:
+  active_principles: [eventual-consistency, idempotency, command-query-separation]
+  constrained_principles: [single-source-of-truth]
+  suppressed_principles: []
+forbidden: [Promise immediate consistency., Use silent last-write-wins without domain justification.]
+principles_under_test: [eventual-consistency, idempotency, command-query-separation]

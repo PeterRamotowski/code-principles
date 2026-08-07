@@ -1,0 +1,54 @@
+schema_version: 0.10.0
+id: performance-and-resources
+name: Performance and Resource Efficiency
+version: 0.10.0
+type: core-skill
+status: candidate
+description: Applies measurable budgets and bounded resource policy without speculative optimization.
+normative_document: core/performance-and-resources/SKILL.md
+applies_to: [implementation, architecture, operations, review]
+activation:
+  default: task-relevant
+  signals: [latency throughput memory allocation energy or timing is material, a resource budget exists]
+  exclusions: [changes with no plausible resource impact and no stated budget]
+requires: []
+conflicts_with:
+- id: code-clarity
+  resolution: Prefer clear code until evidence identifies a critical path, then document necessary complexity.
+  escalate_when: [the verified budget cannot be met clearly]
+- id: contracts-and-errors
+  resolution: Retain semantic and safety guarantees while changing the implementation of expensive checks.
+  escalate_when: [a required guarantee conflicts with a hard timing bound]
+- id: state-and-side-effects
+  resolution: Optimize ownership, allocation, or synchronization without introducing uncontrolled shared state.
+  escalate_when: [safe ownership exceeds a hard resource budget]
+modes:
+- id: clarity-first
+  description: Implement correct clear behavior and collect evidence before optimizing.
+  emphasizes: [make-it-work-right-fast, measure-dont-guess, premature-optimization]
+  constrains: [performance-budgeting]
+  suppressed_behaviours: [speculative caches, complexity justified by intuition alone]
+- id: budget-constrained
+  description: Define measurable end-to-end budgets and verify representative workloads.
+  emphasizes: [performance-budgeting, measure-dont-guess]
+  constrains: [premature-optimization]
+  suppressed_behaviours: [unbounded queues, optimizing a proxy metric without a user budget]
+- id: hot-path-optimized
+  description: Optimize measured critical paths while containing and documenting complexity.
+  emphasizes: [measure-dont-guess, performance-budgeting, locality-of-behaviour]
+  constrains: [make-it-work-right-fast]
+  suppressed_behaviours: [system-wide low-level tuning, benchmarks unlike production workloads]
+- id: hard-real-time
+  description: Bound worst-case execution, allocation, blocking, and resource use on critical paths.
+  emphasizes: [performance-budgeting, defensive-programming, explicit-over-implicit]
+  constrains: [premature-optimization, worse-is-better]
+  suppressed_behaviours: [unbounded critical-path work, average latency as timing proof]
+default_mode: clarity-first
+priority: 700
+outputs: [resource-budgets, measurement-plan, critical-paths, optimization-constraints]
+principles:
+  primary: [make-it-work-right-fast, measure-dont-guess, performance-budgeting, premature-optimization]
+  supporting: [locality-of-behaviour, explicit-over-implicit]
+  constrains: [kiss, defensive-programming]
+self_contained: true
+tags: [performance, resources, measurement, real-time]

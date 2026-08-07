@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: code-clarity
 name: Code Clarity and Simplicity
-version: 0.8.0
+version: 0.10.0
 type: core-skill
 status: candidate
 description: Guides proportionate local structure, naming, explicitness, and simplicity without prescribing language syntax.

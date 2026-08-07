@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: real-time
+name: Real Time
+version: 0.10.0
+status: candidate
+description: Makes deterministic timing and bounded critical-path resource use correctness requirements.
+normative_document: modifiers/real-time/MODIFIER.md
+activation: [missing a deadline is a correctness failure, critical-path worst-case timing is explicitly constrained]
+effects:
+  skill_modes: {contracts-and-errors: safety-critical, performance-and-resources: hard-real-time, state-and-side-effects: single-owner-mutation}
+  required_decisions: [define deadlines worst-case work blocking and allocation, verify behavior in the target environment]
+  prohibited_decisions: [use average latency as deadline proof, perform unbounded critical-path work]
+conflicts: []

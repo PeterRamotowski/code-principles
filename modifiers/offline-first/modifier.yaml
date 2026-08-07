@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: offline-first
+name: Offline First
+version: 0.10.0
+status: candidate
+description: Makes local operation, durable synchronization, conflict handling, and recovery explicit.
+normative_document: modifiers/offline-first/MODIFIER.md
+activation: [core behavior must remain useful without connectivity, local and remote state synchronize after interruption]
+effects:
+  skill_modes: {distributed-reliability: eventually-consistent, state-and-side-effects: single-owner-mutation}
+  required_decisions: [define local authority operation identity ordering conflicts convergence and repair, communicate pending rejected and synchronized state]
+  prohibited_decisions: [use last write wins without domain justification, imply synchronization before durable acknowledgement]
+conflicts: []

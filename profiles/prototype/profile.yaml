@@ -1,0 +1,30 @@
+schema_version: 0.10.0
+id: prototype
+name: Prototype
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures temporary learning artifacts for rapid evidence gathering and reversible decisions.
+normative_document: profiles/prototype/PROFILE.md
+intended_artifacts: [Experiments and spikes whose primary output is validated learning rather than a stable product.]
+selection:
+  artifact_types: [unknown]
+  project_stages: [prototype]
+  signals: [the artifact exists to test a bounded hypothesis quickly]
+  exclusions: [production operation or external compatibility is already promised]
+priority_order: [delivery-speed, correctness, simplicity, maintainability, performance]
+skill_modes:
+  code-clarity: minimal
+  abstraction-and-reuse: conservative
+  modular-design: feature-oriented
+  contracts-and-errors: strict-boundaries
+  dependencies-and-boundaries: framework-native
+  performance-and-resources: clarity-first
+  testing-strategy: unit-focused
+  safe-change: redesign-authorized
+typical_risks: [Temporary shortcuts silently become production dependencies., Speculative architecture delays learning., Missing boundary checks invalidates experiment results.]
+recommended_modifiers: []
+prohibited_defaults: [Do not build extension points for hypothetical production needs., Do not label unstable contracts as supported., Do not retain a prototype in production without reassessment.]
+non_goals: [Excusing unsafe handling of real users secrets or irreversible data.]
+requires: []
+conflicts_with: []

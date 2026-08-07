@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: performance-pipeline-budget
+description: Meet explicit memory and throughput budgets with bounded pipeline processing.
+input: {skill: performance-and-resources, mode: budget-constrained, profile: data-pipeline, modifier: memory-sensitive, task: Process files larger than the process memory ceiling.}
+expected:
+  active_principles: [performance-budgeting, measure-dont-guess]
+  constrained_principles: [premature-optimization]
+  suppressed_principles: []
+forbidden: [Materialize the entire file., Optimize a proxy without an end-to-end budget.]
+principles_under_test: [performance-budgeting, measure-dont-guess, premature-optimization]

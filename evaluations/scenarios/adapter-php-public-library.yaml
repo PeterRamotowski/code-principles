@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: adapter-php-public-library
 description: Refine one reusable-library profile into PHP value-object, exception, and Composer-contract guidance.
 input:

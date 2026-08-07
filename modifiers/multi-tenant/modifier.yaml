@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: multi-tenant
+name: Multi-tenant
+version: 0.10.0
+status: candidate
+description: Strengthens tenant identity, authorization, isolation, resource fairness, and operational controls.
+normative_document: modifiers/multi-tenant/MODIFIER.md
+activation: [multiple security principals share execution storage or infrastructure, tenant-scoped authority affects every operation]
+effects:
+  skill_modes: {contracts-and-errors: safety-critical, state-and-side-effects: single-owner-mutation}
+  required_decisions: [propagate authoritative tenant context, enforce data cache queue and observability isolation]
+  prohibited_decisions: [trust caller-selected tenant scope, use unscoped cache or storage access]
+conflicts: []

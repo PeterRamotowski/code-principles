@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: reliability-worker-simple
+description: Reject speculative messaging layers where one bounded transactional worker operation suffices.
+input: {skill: distributed-reliability, mode: synchronous-transactional, profile: background-worker, modifier: high-throughput, task: Update one local record per job inside one transaction.}
+expected:
+  active_principles: [fail-fast, design-by-contract]
+  constrained_principles: [eventual-consistency, idempotency]
+  suppressed_principles: []
+forbidden: [Add asynchronous hops for hypothetical scale., Retry unknown effects indefinitely.]
+principles_under_test: [fail-fast, design-by-contract, eventual-consistency]

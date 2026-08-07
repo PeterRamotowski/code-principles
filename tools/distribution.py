@@ -28,6 +28,7 @@ DISTRIBUTION_DIRECTORIES = {
     "evaluations",
     "frameworks",
     "languages",
+    "modifiers",
     "orchestrator",
     "principles",
     "profiles",

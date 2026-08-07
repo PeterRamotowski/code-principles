@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: abstraction-and-reuse
 name: Abstraction and Reuse
-version: 0.8.0
+version: 0.10.0
 type: core-skill
 status: candidate
 description: Resolves duplication, reuse, extension points, and independent changeability from demonstrated evidence.

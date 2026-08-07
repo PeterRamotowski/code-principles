@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: memory-sensitive
+name: Memory Sensitive
+version: 0.10.0
+status: candidate
+description: Requires explicit memory budgets, bounded materialization, ownership, and allocation review.
+normative_document: modifiers/memory-sensitive/MODIFIER.md
+activation: [input size is large or unbounded, a verified memory ceiling or allocation constraint exists]
+effects:
+  skill_modes: {performance-and-resources: budget-constrained}
+  required_decisions: [define peak and steady-state memory budgets, bound buffers caches and retained state]
+  prohibited_decisions: [materialize unbounded input, retain caches without eviction and ownership policy]
+conflicts: []

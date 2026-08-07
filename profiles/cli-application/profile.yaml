@@ -1,0 +1,28 @@
+schema_version: 0.10.0
+id: cli-application
+name: CLI Application
+version: 0.10.0
+type: project-profile
+status: candidate
+description: Configures command-line tools with stable invocation, exit, output, and automation behavior.
+normative_document: profiles/cli-application/PROFILE.md
+intended_artifacts: [Interactive and automation-facing command-line programs.]
+selection:
+  artifact_types: [cli-application]
+  signals: [arguments standard streams exit status and process effects define the consumer contract]
+  exclusions: [the command only starts another dominant artifact]
+priority_order: [correctness, usability, compatibility, reliability, security, maintainability, performance]
+skill_modes:
+  code-clarity: balanced
+  contracts-and-errors: strict-boundaries
+  state-and-side-effects: single-owner-mutation
+  api-and-compatibility: external-api
+  dependencies-and-boundaries: framework-native
+  testing-strategy: integration-balanced
+  safe-change: compatibility-first
+typical_risks: [Output or exit changes break automation., Partial filesystem or remote effects survive failure., Secrets leak through arguments logs or diagnostics.]
+recommended_modifiers: [public-api, strict-backward-compatibility, security-sensitive]
+prohibited_defaults: [Do not mix machine output with diagnostics., Do not treat prompts as safe in noninteractive use., Do not change exit semantics without compatibility analysis.]
+non_goals: [Prescribing argument syntax a terminal UI or packaging system.]
+requires: []
+conflicts_with: []

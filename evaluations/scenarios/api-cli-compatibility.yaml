@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: api-cli-compatibility
+description: Preserve documented command output and exit behavior for automation consumers.
+input: {skill: api-and-compatibility, mode: external-api, profile: cli-application, modifier: strict-backward-compatibility, task: Replace a command while preserving automation compatibility.}
+expected:
+  active_principles: [backward-compatibility, semantic-versioning, design-by-contract]
+  constrained_principles: [postels-law, hyrums-law]
+  suppressed_principles: []
+forbidden: [Silently repurpose an exit status., Mix diagnostics into stable machine output.]
+principles_under_test: [backward-compatibility, semantic-versioning, design-by-contract, hyrums-law]

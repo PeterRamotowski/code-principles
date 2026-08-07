@@ -20,16 +20,16 @@ The repository is a useful human-readable compendium and the foundation of a pla
 
 ## Status
 
-- Foundation version: `0.8.0`
-- Status: `Framework Adapters Complete`
+- Foundation version: `0.10.0`
+- Status: `Extended Profiles and Modifiers Complete`
 - Content language: English
 - Schema dialect: JSON Schema Draft 2020-12
 - External Skill dependencies: none
 - Repository name: `code-principles`
 
 This repository defines the knowledge model, canonical principle catalogue, schemas, validation tooling,
-an executable deterministic orchestrator, six production-shaped language-independent Core Skills, five
-operational project profiles, complete JavaScript, TypeScript, Python, PHP, Go, and C++ language adapters,
+an executable deterministic orchestrator, twelve production-shaped language-independent Core Skills, thirteen
+operational project profiles, ten cross-cutting modifiers, complete JavaScript, TypeScript, Python, PHP, Go, and C++ language adapters,
 and complete React, Next.js, Vue, Nuxt, Angular, Symfony, and Drupal framework adapters.
 
 ## Resolution model
@@ -118,6 +118,7 @@ External resources MAY be cited for history or further reading, but:
 ├── orchestrator/
 ├── core/                 # implemented Core Skills
 ├── profiles/             # implemented project profiles
+├── modifiers/            # implemented cross-cutting modifiers
 ├── languages/            # implemented language adapters
 ├── frameworks/           # implemented framework adapters
 ├── tools/
@@ -145,7 +146,7 @@ make validate-normative
 
 ## Resolve a policy
 
-The Orchestrator MVP inspects bounded repository evidence, automatically loads
+The orchestrator inspects bounded repository evidence, automatically loads
 `engineering-context.yaml` when present, and accepts a higher-precedence partial user context:
 
 ```bash
@@ -177,10 +178,10 @@ make package
 
 ## Important scope boundary
 
-Not every blueprint is a finished production component. The six Milestone 4 Core Skills, five Milestone 5
-project profiles, all six target language adapters, all seven framework adapters, and orchestrator have
-detailed guidance. Modifiers and extended Core Skills remain scheduled for later milestones. The canonical
-principle catalogue is usable immediately as a compendium and as the source for resolved Skill behavior.
+All twelve controlled Core Skills, thirteen artifact profiles, ten modifiers, six target language adapters,
+seven framework adapters, and the orchestrator have production-shaped metadata and guidance. The conservative
+`general-software` fallback remains orchestrator-owned. Milestone 11 expands whole-system scenario breadth;
+the current component scenarios already validate every implemented Skill, profile, modifier, and adapter.
 
 ## License
 

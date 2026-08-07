@@ -55,5 +55,5 @@
 
 - `CONTRIBUTING.md` — contribution requirements.
 - `ROADMAP.md` — implementation milestones.
-- `catalogs/` — controlled component identifiers, modes, and remaining blueprints.
+- `catalogs/` — controlled component identifiers, modes, and implementation status.
 - `schemas/` — machine-readable contracts.

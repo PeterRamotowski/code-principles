@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: performance-real-time-bound
+description: Verify worst-case critical-path work for a deterministic embedded deadline.
+input: {skill: performance-and-resources, mode: hard-real-time, profile: real-time-system, modifier: real-time, task: Keep a control operation within its hard deadline.}
+expected:
+  active_principles: [performance-budgeting, defensive-programming, explicit-over-implicit]
+  constrained_principles: [premature-optimization, worse-is-better]
+  suppressed_principles: []
+forbidden: [Use average latency as timing proof., Perform unbounded allocation on the critical path.]
+principles_under_test: [performance-budgeting, defensive-programming, explicit-over-implicit]

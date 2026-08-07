@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: framework-react-state-and-effects
 description: Verify React state locality, render derivation, effect ownership, and behavior-focused testing.
 input:

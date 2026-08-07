@@ -1,4 +1,4 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: framework-drupal-cache-extension
 description: Verify Drupal extension contracts, entity and configuration ownership, upgrades, and cacheability.
 input:

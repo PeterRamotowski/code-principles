@@ -1,7 +1,7 @@
-schema_version: 0.8.0
+schema_version: 0.10.0
 id: angular
 name: Angular
-version: 0.8.0
+version: 0.10.0
 type: framework-adapter
 status: candidate
 description: Refines engineering policy for Angular dependency injection, standalone components, signals and RxJS, forms, and service boundaries.

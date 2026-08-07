@@ -1,0 +1,10 @@
+schema_version: 0.10.0
+id: api-plugin-deprecation
+description: Provide an additive deprecation path for independently upgraded plugin hosts.
+input: {skill: api-and-compatibility, mode: public-library, profile: plugin-or-extension, modifier: public-api, task: Replace a supported extension callback.}
+expected:
+  active_principles: [backward-compatibility, semantic-versioning, principle-of-least-astonishment]
+  constrained_principles: [hyrums-law]
+  suppressed_principles: []
+forbidden: [Remove the callback in a compatible release., Export private host state as the replacement.]
+principles_under_test: [backward-compatibility, semantic-versioning, principle-of-least-astonishment, hyrums-law]

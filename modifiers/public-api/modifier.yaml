@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: public-api
+name: Public API
+version: 0.10.0
+status: candidate
+description: Strengthens intentional external contracts, runtime boundaries, documentation, and deprecation policy.
+normative_document: modifiers/public-api/MODIFIER.md
+activation: [an API or library is consumed independently, external integrations rely on documented behavior]
+effects:
+  skill_modes: {api-and-compatibility: external-api, contracts-and-errors: strict-boundaries}
+  required_decisions: [identify supported consumers and observable contract, define compatibility and deprecation policy]
+  prohibited_decisions: [expose implementation details as API by accident, silently change supported semantics]
+conflicts: []

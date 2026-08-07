@@ -1,0 +1,59 @@
+schema_version: 0.10.0
+id: state-and-side-effects
+name: State and Side Effects
+version: 0.10.0
+type: core-skill
+status: candidate
+description: Defines state ownership, mutation scope, effect sequencing, and consistency semantics.
+normative_document: core/state-and-side-effects/SKILL.md
+applies_to: [implementation, architecture, concurrency, review]
+activation:
+  default: task-relevant
+  signals: [state is mutated or shared, external effects or consistency semantics are material]
+  exclusions: [pure documentation or stateless formatting changes]
+requires: []
+conflicts_with:
+- id: code-clarity
+  resolution: Keep mutation and effect order explicit even when a compact expression is possible.
+  escalate_when: [clarity and atomicity cannot both be preserved locally]
+- id: performance-and-resources
+  resolution: Prefer safe ownership first and optimize copying or synchronization from measurements.
+  escalate_when: [a verified resource budget requires a different state model]
+- id: distributed-reliability
+  resolution: Local ownership governs mutation while distributed policy governs cross-boundary delivery and convergence.
+  escalate_when: [no component can be the authoritative owner]
+modes:
+- id: pragmatic-mutable
+  description: Permit mutation with explicit scope, invariants, and effect order.
+  emphasizes: [command-query-separation, locality-of-behaviour]
+  constrains: [immutability]
+  suppressed_behaviours: [hidden shared mutation, setters that bypass invariants]
+- id: immutable-core
+  description: Represent core transitions as values and isolate effects at boundaries.
+  emphasizes: [immutability, command-query-separation]
+  constrains: [cqrs]
+  suppressed_behaviours: [in-place mutation of shared values, effectful domain queries]
+- id: localized-state
+  description: Keep state at the narrowest owner that coordinates all legitimate consumers.
+  emphasizes: [encapsulation, locality-of-behaviour, information-hiding]
+  constrains: [single-source-of-truth]
+  suppressed_behaviours: [global state for local concerns, duplicated writable sources]
+- id: single-owner-mutation
+  description: Route consequential transitions through one authoritative owner and explicit commands.
+  emphasizes: [command-query-separation, encapsulation, single-source-of-truth]
+  constrains: [immutability]
+  suppressed_behaviours: [multiple writers without arbitration, read operations with hidden effects]
+- id: cqrs-event-driven
+  description: Separate command and read models only when independent scale or consistency needs justify it.
+  emphasizes: [cqrs, command-query-separation, eventual-consistency]
+  constrains: [kiss, single-source-of-truth]
+  suppressed_behaviours: [CQRS for simple CRUD, unspecified projection lag]
+default_mode: pragmatic-mutable
+priority: 800
+outputs: [state-ownership, mutation-policy, effect-sequencing, consistency-policy]
+principles:
+  primary: [command-query-separation, cqrs, immutability]
+  supporting: [encapsulation, locality-of-behaviour, single-source-of-truth]
+  constrains: [kiss, performance-budgeting, eventual-consistency]
+self_contained: true
+tags: [state, mutation, effects, consistency]

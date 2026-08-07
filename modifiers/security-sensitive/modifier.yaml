@@ -1,0 +1,13 @@
+schema_version: 0.10.0
+id: security-sensitive
+name: Security Sensitive
+version: 0.10.0
+status: candidate
+description: Raises trust-boundary, least-authority, secret-handling, isolation, and audit requirements.
+normative_document: modifiers/security-sensitive/MODIFIER.md
+activation: [the task handles credentials authority personal data payments or exposed attack surfaces, compromise has elevated consequence]
+effects:
+  skill_modes: {contracts-and-errors: safety-critical}
+  required_decisions: [map trust and authority boundaries, define abuse failure secret and audit handling]
+  prohibited_decisions: [trust client declarations, expose secrets in output, grant ambient broad authority]
+conflicts: []
