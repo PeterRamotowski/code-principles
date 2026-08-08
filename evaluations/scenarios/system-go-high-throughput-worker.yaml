@@ -1,0 +1,25 @@
+schema_version: 0.10.0
+id: system-go-high-throughput-worker
+description: Resolve a Go queue worker with measured throughput and bounded overload behavior.
+input:
+  request: Implement a high throughput queue consumer in this background worker.
+  repository_signals:
+    go.mod: |
+      module example.com/worker
+    worker.go: package main
+expected:
+  context:
+    artifact_type: background-worker
+    constraints: {throughput_sensitivity: high}
+  profile: background-worker
+  modifiers: [high-throughput]
+  language_adapters: [go]
+  framework_adapters: []
+  significant_decisions: [modifier-high-throughput-1, modifier-high-throughput-2]
+  skill_modes:
+    performance-and-resources: budget-constrained
+    distributed-reliability: idempotent-ingress
+  conflicts: {}
+forbidden:
+- use unbounded buffering to hide overload
+principles_under_test: [performance-budgeting, idempotency]

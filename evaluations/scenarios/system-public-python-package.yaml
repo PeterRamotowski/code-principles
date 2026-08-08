@@ -1,0 +1,28 @@
+schema_version: 0.10.0
+id: system-public-python-package
+description: Resolve a public Python package whose supported API must remain backward compatible.
+input:
+  request: Add a feature to this public Python library without changing the public API.
+  repository_signals:
+    pyproject.toml: |
+      [project]
+      name = "public-package"
+    src/public_package.py: ""
+expected:
+  context:
+    artifact_type: reusable-library
+    exposure: [external-integration, public-library]
+    constraints: {backward_compatibility: high}
+  profile: reusable-library
+  modifiers: [public-api, strict-backward-compatibility]
+  language_adapters: [python]
+  framework_adapters: []
+  significant_decisions: [preserve-public-contracts]
+  skill_modes:
+    api-and-compatibility: external-api
+    safe-change: compatibility-first
+  conflicts:
+    static-types-vs-runtime-validation: require-runtime-validation
+forbidden:
+- break supported consumers for internal cleanup
+principles_under_test: [backward-compatibility, semantic-versioning, hyrums-law]

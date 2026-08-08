@@ -1,0 +1,30 @@
+schema_version: 0.10.0
+id: system-legacy-drupal-module
+description: Resolve legacy modernization of a Drupal module while preserving undocumented behavior.
+input:
+  request: Perform legacy modernization of this Drupal plugin while preserving behavior.
+  repository_signals:
+    composer.json: |
+      {"require": {"php": "^8.3", "drupal/core": "^11"}}
+    legacy.module: "<?php"
+  repository_context:
+    project:
+      artifact_type: plugin-or-extension
+      architecture_authority: incremental-improvement
+expected:
+  context:
+    artifact_type: plugin-or-extension
+    project_stage: legacy-modernization
+  profile: legacy-modernization
+  modifiers: []
+  language_adapters: [php]
+  framework_adapters: [drupal]
+  significant_decisions: [artifact-driven-profile, incremental-architecture-change]
+  skill_modes:
+    safe-change: incremental-modernization
+    testing-strategy: characterization-first
+  conflicts:
+    cleanup-vs-behavior-preservation: prefer-bounded-compatible-change
+forbidden:
+- cleanup without migration evidence
+principles_under_test: [chestertons-fence, boy-scout-rule]

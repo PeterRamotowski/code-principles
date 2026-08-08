@@ -1,0 +1,27 @@
+schema_version: 0.10.0
+id: system-python-large-file-pipeline
+description: Resolve a Python large-file pipeline with an explicit bounded-memory constraint.
+input:
+  request: Implement a data pipeline that processes a large file with bounded memory.
+  repository_signals:
+    pyproject.toml: |
+      [project]
+      name = "pipeline"
+    pipeline.py: ""
+expected:
+  context:
+    artifact_type: data-pipeline
+    architecture_authority: incremental-improvement
+    constraints: {memory_sensitivity: high}
+  profile: data-pipeline
+  modifiers: [memory-sensitive]
+  language_adapters: [python]
+  framework_adapters: []
+  significant_decisions: [bound-memory-use]
+  skill_modes:
+    performance-and-resources: budget-constrained
+  conflicts:
+    materialization-vs-bounded-memory: prefer-bounded-processing
+forbidden:
+- materialize unbounded input
+principles_under_test: [performance-budgeting, measure-dont-guess]

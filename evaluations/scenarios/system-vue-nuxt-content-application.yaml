@@ -1,0 +1,25 @@
+schema_version: 0.10.0
+id: system-vue-nuxt-content-application
+description: Resolve a server-rendered Vue and Nuxt content application without speculative layering.
+input:
+  request: Add server-rendered content to this Nuxt full-stack application.
+  repository_signals:
+    package.json: |
+      {"private": true, "dependencies": {"nuxt": "4", "vue": "3"}}
+    pages/index.vue: <template />
+expected:
+  context:
+    artifact_type: fullstack-application
+    architecture_authority: incremental-improvement
+  profile: fullstack-web-application
+  modifiers: []
+  language_adapters: [javascript]
+  framework_adapters: [nuxt, vue]
+  significant_decisions: [artifact-driven-profile, incremental-architecture-change]
+  skill_modes:
+    modular-design: feature-oriented
+    testing-strategy: integration-balanced
+  conflicts: {}
+forbidden:
+- top-level technical-layer fragmentation
+principles_under_test: [separation-of-concerns, test-behaviour-not-implementation]

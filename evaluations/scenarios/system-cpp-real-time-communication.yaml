@@ -1,0 +1,30 @@
+schema_version: 0.10.0
+id: system-cpp-real-time-communication
+description: Resolve a C++ embedded communication module with explicit real-time state and determinism.
+input:
+  request: Implement an embedded system real-time communication module.
+  repository_signals:
+    CMakeLists.txt: project(comm)
+    src/comm.cpp: ""
+  repository_context:
+    project:
+      state_model: [real-time]
+    constraints:
+      determinism: high
+expected:
+  context:
+    artifact_type: embedded-system
+    state_model: [real-time]
+    constraints: {determinism: high}
+  profile: real-time-system
+  modifiers: [real-time]
+  language_adapters: [cpp]
+  framework_adapters: []
+  significant_decisions: [bound-critical-path]
+  skill_modes:
+    performance-and-resources: hard-real-time
+    state-and-side-effects: single-owner-mutation
+  conflicts: {}
+forbidden:
+- perform unbounded critical-path work
+principles_under_test: [performance-budgeting, immutability]

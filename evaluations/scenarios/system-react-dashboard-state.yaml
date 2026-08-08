@@ -1,0 +1,24 @@
+schema_version: 0.10.0
+id: system-react-dashboard-state
+description: Resolve a React browser dashboard with deliberately local and shared state ownership.
+input:
+  request: Add local and shared state to this browser dashboard.
+  repository_signals:
+    package.json: |
+      {"private": true, "dependencies": {"react": "19"}}
+    src/App.tsx: export function App() {}
+expected:
+  context:
+    artifact_type: frontend-application
+    architecture_authority: incremental-improvement
+  profile: browser-web-application
+  modifiers: []
+  language_adapters: [typescript]
+  framework_adapters: [react]
+  significant_decisions: [artifact-driven-profile, incremental-architecture-change]
+  skill_modes:
+    state-and-side-effects: localized-state
+  conflicts: {}
+forbidden:
+- global state for local concerns
+principles_under_test: [single-source-of-truth, locality-of-behaviour]

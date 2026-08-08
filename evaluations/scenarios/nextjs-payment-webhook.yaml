@@ -1,29 +1,30 @@
 schema_version: 0.10.0
 id: nextjs-payment-webhook
-description: Verify strict runtime parsing, idempotency, and rejection of speculative CQRS for a Next.js
-  payment webhook.
+description: Resolve a Next.js SaaS public API and payment webhook from repository and request evidence.
 input:
-  artifact_type: fullstack-application
-  language: typescript
-  framework: nextjs
-  exposure:
-  - public-api
-  - external-integration
-  task: Implement a payment webhook.
+  request: Implement a public API payment webhook for this full-stack SaaS.
+  repository_signals:
+    package.json: |
+      {"private": true, "dependencies": {"next": "15", "react": "19"}}
+    app/page.tsx: export default function Page() {}
 expected:
-  active_principles:
-  - parse-dont-validate
-  - idempotency
-  constrained_principles:
-  - postels-law
-  suppressed_principles:
-  - cqrs
+  context:
+    artifact_type: fullstack-application
+    architecture_authority: incremental-improvement
+    exposure: [external-integration]
+    constraints: {security: high}
+  profile: fullstack-web-application
+  modifiers: [public-api, security-sensitive]
+  language_adapters: [typescript]
+  framework_adapters: [nextjs, react]
+  significant_decisions:
+  - preserve-public-contracts
+  - enforce-trust-boundaries
+  skill_modes:
+    api-and-compatibility: external-api
+    contracts-and-errors: safety-critical
+  conflicts:
+    static-types-vs-runtime-validation: require-runtime-validation
 forbidden:
-- Trust TypeScript types as runtime validation.
-- Process duplicate provider events twice.
-- Introduce CQRS without demonstrated need.
-principles_under_test:
-- parse-dont-validate
-- idempotency
-- cqrs
-- yagni
+- trust client declarations
+principles_under_test: [parse-dont-validate, idempotency, cqrs, yagni]

@@ -1,0 +1,25 @@
+schema_version: 0.10.0
+id: system-angular-enterprise-form
+description: Resolve an Angular enterprise form with accessibility as a correctness requirement.
+input:
+  request: Implement an accessible enterprise form in this browser application with a WCAG requirement.
+  repository_signals:
+    package.json: |
+      {"private": true, "dependencies": {"@angular/core": "20"}}
+    src/app/app.ts: export class App {}
+expected:
+  context:
+    artifact_type: frontend-application
+    constraints: {accessibility: high}
+  profile: browser-web-application
+  modifiers: [accessibility-required]
+  language_adapters: [typescript]
+  framework_adapters: [angular]
+  significant_decisions: [verify-accessibility]
+  skill_modes:
+    state-and-side-effects: localized-state
+    testing-strategy: integration-balanced
+  conflicts: {}
+forbidden:
+- treat automated checks as complete accessibility evidence
+principles_under_test: [test-behaviour-not-implementation, locality-of-behaviour]

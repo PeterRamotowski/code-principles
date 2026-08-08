@@ -1,0 +1,25 @@
+schema_version: 0.10.0
+id: system-go-http-api
+description: Resolve a Go HTTP API service with an independently consumed public contract.
+input:
+  request: Implement a public API endpoint in this Go HTTP service.
+  repository_signals:
+    go.mod: |
+      module example.com/service
+    main.go: package main
+expected:
+  context:
+    artifact_type: backend-service
+    exposure: [external-integration]
+  profile: backend-service
+  modifiers: [public-api]
+  language_adapters: [go]
+  framework_adapters: []
+  significant_decisions: [preserve-public-contracts]
+  skill_modes:
+    api-and-compatibility: external-api
+    distributed-reliability: synchronous-transactional
+  conflicts: {}
+forbidden:
+- expose implementation details as API by accident
+principles_under_test: [backward-compatibility, parse-dont-validate]

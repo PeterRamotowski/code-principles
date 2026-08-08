@@ -1,0 +1,25 @@
+schema_version: 0.10.0
+id: system-symfony-business-application
+description: Resolve a Symfony business workflow as a backend service with framework refinement.
+input:
+  request: Implement an approval workflow in this Symfony backend service business application.
+  repository_signals:
+    composer.json: |
+      {"require": {"php": "^8.3", "symfony/framework-bundle": "^7"}}
+    src/Kernel.php: "<?php"
+expected:
+  context:
+    artifact_type: backend-service
+    architecture_authority: incremental-improvement
+  profile: backend-service
+  modifiers: []
+  language_adapters: [php]
+  framework_adapters: [symfony]
+  significant_decisions: [artifact-driven-profile, incremental-architecture-change]
+  skill_modes:
+    modular-design: service-oriented
+    distributed-reliability: synchronous-transactional
+  conflicts: {}
+forbidden:
+- messaging without a failure need
+principles_under_test: [high-cohesion-low-coupling, idempotency]

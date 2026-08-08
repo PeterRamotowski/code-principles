@@ -1,0 +1,27 @@
+schema_version: 0.10.0
+id: system-public-php-library
+description: Resolve a public PHP reusable library under strict backward-compatibility requirements.
+input:
+  request: Add a feature to this public reusable library with strict backward compatibility.
+  repository_signals:
+    composer.json: |
+      {"name": "example/library", "type": "library", "require": {"php": "^8.3"}}
+    src/Library.php: "<?php"
+expected:
+  context:
+    artifact_type: reusable-library
+    exposure: [public-library]
+    constraints: {backward_compatibility: high}
+  profile: reusable-library
+  modifiers: [public-api, strict-backward-compatibility]
+  language_adapters: [php]
+  framework_adapters: []
+  significant_decisions: [preserve-public-contracts]
+  skill_modes:
+    api-and-compatibility: external-api
+    abstraction-and-reuse: extensible-public-library
+  conflicts:
+    static-types-vs-runtime-validation: require-runtime-validation
+forbidden:
+- infer compatibility from signatures alone
+principles_under_test: [backward-compatibility, hyrums-law]
