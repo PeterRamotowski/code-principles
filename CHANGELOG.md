@@ -4,7 +4,16 @@ All notable changes to the foundation package are documented here.
 
 ## [Unreleased]
 
-No changes yet.
+### Added
+
+- twelve executable Milestone 11 whole-system scenarios spanning the documented web, package, service,
+  worker, pipeline, embedded, framework, and legacy contexts;
+- a deterministic evaluation runner with semantic assertions, scenario selection, and JSON reports.
+
+### Changed
+
+- `make validate` now executes the whole-system evaluation suite and repository validation enforces complete
+  Milestone 11 scenario structure and coverage.
 
 ## [0.10.0] — 2026-08-07
 

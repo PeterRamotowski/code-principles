@@ -134,9 +134,12 @@ make validate
 
 The validation command parses every distributed YAML and JSON document with duplicate-key detection,
 validates schemas and known instances, checks identifier uniqueness, verifies references and dependency
-graphs, confirms generated output and manifest freshness, and validates local Markdown links. It does not
-rewrite the repository. The same command runs negative fixtures that prove malformed documents, schema
+graphs, confirms generated output and manifest freshness, validates local Markdown links, and executes the
+twelve whole-system evaluation scenarios. It does not rewrite the repository. The same command runs negative fixtures that prove malformed documents, schema
 violations, duplicate identifiers, dependency cycles, broken references, and broken links are rejected.
+
+To run only the prompt-like whole-system scenarios, use `make evaluate`. These checks compare structured policy
+semantics rather than exact prose; `python3 tools/evaluate.py --format json` emits a machine-readable report.
 
 To additionally reject inconsistently cased normative keywords:
 
@@ -180,8 +183,8 @@ make package
 
 All twelve controlled Core Skills, thirteen artifact profiles, ten modifiers, six target language adapters,
 seven framework adapters, and the orchestrator have production-shaped metadata and guidance. The conservative
-`general-software` fallback remains orchestrator-owned. Milestone 11 expands whole-system scenario breadth;
-the current component scenarios already validate every implemented Skill, profile, modifier, and adapter.
+`general-software` fallback remains orchestrator-owned. Twelve whole-system scenarios complement the component
+scenarios that validate every implemented Skill, profile, modifier, and adapter.
 
 ## License
 

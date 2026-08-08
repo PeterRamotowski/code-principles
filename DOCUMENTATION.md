@@ -22,6 +22,7 @@
 - `orchestrator/resolver.py` — deterministic context and policy resolver implementation.
 - `orchestrator/principle-selection.md` — activation and interpretation of principles.
 - `tools/orchestrate.py` — command-line policy resolution and visible summaries.
+- `tools/evaluate.py` — executable whole-system scenarios and machine-readable evaluation reports.
 
 ## Core Skills
 
@@ -30,6 +31,7 @@
 - `core/*/skill.yaml` — machine-readable activation, conflicts, modes, outputs, and principle selection.
 - `core/*/examples/` — positive and negative decisions.
 - `evaluations/scenarios/` — policy-selection and forbidden-behavior scenarios.
+- `evaluations/README.md` — deterministic request testing and LLM-evaluation integration guidance.
 
 ## Project profiles
 

@@ -395,6 +395,8 @@ Completion evidence:
 
 ## Milestone 11 — Evaluation Suite
 
+Status: `complete`
+
 Initial scenarios:
 
 - Next.js SaaS with public API and payment webhooks;
@@ -420,6 +422,14 @@ Each scenario should define:
 - expected significant decisions;
 - forbidden overengineering decisions;
 - conflict-resolution expectations.
+
+Completion evidence:
+
+- all twelve initial scenarios are executable from natural-language requests and synthetic repository signals;
+- scenarios assert context, profiles, modifiers, adapters, significant decisions, Skill modes, prohibitions, and
+  conflict outcomes without depending on rendered wording;
+- `tools/evaluate.py` produces human-readable or JSON reports and supports selecting scenarios by stable ID;
+- repository validation enforces complete Milestone 11 scenario coverage, and `make validate` executes the suite.
 
 ## Milestone 12 — Stable Release Candidate
 
