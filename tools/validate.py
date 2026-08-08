@@ -74,6 +74,20 @@ MILESTONE_6_ADAPTERS = {"typescript", "python", "cpp"}
 MILESTONE_7_ADAPTERS = {"javascript", "php", "go"}
 IMPLEMENTED_LANGUAGE_ADAPTERS = MILESTONE_6_ADAPTERS | MILESTONE_7_ADAPTERS
 MILESTONE_8_ADAPTERS = {"react", "nextjs", "vue", "nuxt", "angular", "symfony", "drupal"}
+MILESTONE_11_SCENARIOS = {
+    "nextjs-payment-webhook",
+    "system-react-dashboard-state",
+    "system-python-large-file-pipeline",
+    "system-public-python-package",
+    "system-go-http-api",
+    "system-go-high-throughput-worker",
+    "system-cpp-real-time-communication",
+    "system-public-php-library",
+    "system-symfony-business-application",
+    "system-legacy-drupal-module",
+    "system-vue-nuxt-content-application",
+    "system-angular-enterprise-form",
+}
 
 
 class DuplicateKeyError(ValueError):
@@ -1008,10 +1022,37 @@ class RepositoryValidator:
                 self.require_reference(source, "active_principles.source", active.get("source"), skills)
 
         scenario_ids = []
+        executable_scenarios = set()
         for path in sorted((ROOT / "evaluations/scenarios").glob("*.yaml")):
             data = self.documents.get(path, {})
             source = self.relative(path)
             scenario_ids.append((data.get("id"), source))
+            scenario_input = data.get("input", {})
+            if "request" in scenario_input:
+                identifier = data.get("id")
+                executable_scenarios.add(identifier)
+                if not isinstance(scenario_input.get("request"), str):
+                    self.error(f"{source}: input.request must be a string")
+                signals = scenario_input.get("repository_signals")
+                if not isinstance(signals, dict) or not signals:
+                    self.error(f"{source}: input.repository_signals must be a non-empty mapping")
+                required_expected = {
+                    "context",
+                    "profile",
+                    "modifiers",
+                    "language_adapters",
+                    "framework_adapters",
+                    "significant_decisions",
+                    "conflicts",
+                }
+                missing_expected = required_expected - set(data.get("expected", {}))
+                if missing_expected:
+                    self.error(
+                        f"{source}: executable scenario is missing expected fields: "
+                        + ", ".join(sorted(missing_expected))
+                    )
+                if not data.get("forbidden"):
+                    self.error(f"{source}: executable scenario requires forbidden decisions")
             profile = data.get("input", {}).get("profile")
             if profile is not None:
                 self.require_reference(source, "input.profile", profile, profiles)
@@ -1036,6 +1077,12 @@ class RepositoryValidator:
         ]
         for identifier in sorted(duplicate_scenarios):
             self.error(f"duplicate evaluation scenario id: {identifier}")
+        missing_milestone_scenarios = MILESTONE_11_SCENARIOS - executable_scenarios
+        if missing_milestone_scenarios:
+            self.error(
+                "Milestone 11: missing executable scenarios: "
+                + ", ".join(sorted(missing_milestone_scenarios))
+            )
 
     def check_profiles_are_language_independent(self, profile_items, adapters) -> None:
         technology_re = re.compile(
