@@ -7,6 +7,10 @@
 - `ARCHITECTURE.md` — component and dependency architecture.
 - `KNOWLEDGE-MODEL.md` — separation between canonical knowledge and operational Skills.
 - `SELF-CONTAINMENT.md` — prohibition of normative external Skill dependencies.
+- `COMPATIBILITY.md` — candidate technology scope and policy-output compatibility.
+- `MIGRATION.md` — stable identifier and incompatible-change migration requirements.
+- `GOVERNANCE.md` — review authority and release decisions.
+- `MANUAL-TESTING.md` — real-repository testing procedure and priority technology paths.
 
 ## Knowledge base
 
@@ -21,7 +25,7 @@
 - `orchestrator/SKILL.md` — orchestrator behavior.
 - `orchestrator/resolver.py` — deterministic context and policy resolver implementation.
 - `orchestrator/principle-selection.md` — activation and interpretation of principles.
-- `tools/orchestrate.py` — command-line policy resolution and visible summaries.
+- `tools/orchestrate.py` — command-line policy resolution, visible summaries, and manual test bundles.
 - `tools/evaluate.py` — executable whole-system scenarios and machine-readable evaluation reports.
 
 ## Core Skills

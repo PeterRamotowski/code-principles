@@ -92,6 +92,12 @@ The implementation MUST remain deterministic for the same repository evidence, t
 explicit contexts. Lists in an explicit higher-precedence context replace the corresponding lower-level
 list; mapping fields merge by key. Explicit user skill modes override repository skill modes.
 
+Selected adapters are operational policy, not labels. The implementation resolves inherited language and required
+framework adapters transitively, adds adapter runtime constraints to significant decisions, adds common misuse to
+prohibited decisions, and applies language then framework principle refinements. `--format manual` renders the
+resolved task policy and every selected normative source into one self-contained Markdown bundle for manual agent
+testing against a real repository.
+
 ## Selection modes
 
 ### Automatic with visible result
@@ -282,7 +288,7 @@ Examples:
 - a React state-management task needs React and the underlying JavaScript or TypeScript adapter;
 - a Next.js server/client boundary task needs Next.js, React, and TypeScript or JavaScript;
 - a Symfony service configuration task needs PHP and Symfony;
-- a Drupal cache invalidation task needs PHP, Symfony where relevant, and Drupal;
+- a Drupal cache invalidation task needs PHP, Symfony, and Drupal;
 - a Python packaging task needs Python but not a web-framework adapter.
 
 ### Step 9: Activate core skills

@@ -21,7 +21,7 @@ The repository is a useful human-readable compendium and the foundation of a pla
 ## Status
 
 - Foundation version: `0.10.0`
-- Status: `Extended Profiles and Modifiers Complete`
+- Status: `Milestone 11 Complete; Manual Candidate Testing`
 - Content language: English
 - Schema dialect: JSON Schema Draft 2020-12
 - External Skill dependencies: none
@@ -160,7 +160,19 @@ python3 tools/orchestrate.py \
 ```
 
 Use `--format summary` for the compact visible result, or `--format json` for JSON instead of the
-default schema-validated YAML. Direct user overrides are also available for common manual cases:
+default schema-validated YAML. Use `--format manual` to generate a self-contained Markdown bundle containing
+the resolved policy and selected normative sources for a real implementation or review task:
+
+```bash
+python3 tools/orchestrate.py \
+  --repository /absolute/path/to/target \
+  --task "Implement one concrete change" \
+  --format manual \
+  --output /tmp/code-principles-manual.md
+```
+
+See [`MANUAL-TESTING.md`](MANUAL-TESTING.md) for the PHP, Symfony, Drupal, JavaScript, TypeScript, Vue, and Nuxt
+test paths and review protocol. Direct user overrides are also available for common manual cases:
 
 ```bash
 python3 tools/orchestrate.py \

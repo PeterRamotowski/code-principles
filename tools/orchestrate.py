@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from orchestrator.resolver import OrchestrationError, load_context, resolve_policy  # noqa: E402
+from orchestrator.manual import render_manual_bundle  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -35,7 +36,12 @@ def parse_args() -> argparse.Namespace:
         metavar="SKILL=MODE",
         help="explicit user skill-mode override; repeatable",
     )
-    parser.add_argument("--format", choices=("yaml", "json", "summary"), default="yaml")
+    parser.add_argument(
+        "--format",
+        choices=("yaml", "json", "summary", "manual"),
+        default="yaml",
+        help="output a resolved policy or a self-contained manual-testing bundle",
+    )
     parser.add_argument("--output", type=Path, help="write output to a file instead of stdout")
     return parser.parse_args()
 
@@ -79,6 +85,8 @@ def main() -> int:
         rendered = json.dumps(policy, indent=2, ensure_ascii=False) + "\n"
     elif arguments.format == "summary":
         rendered = "\n".join(f"- {item}" for item in policy["visible_summary"]["items"]) + "\n"
+    elif arguments.format == "manual":
+        rendered = render_manual_bundle(repository, arguments.task, policy)
     else:
         rendered = yaml.safe_dump(policy, sort_keys=False, allow_unicode=True)
     if arguments.output:
