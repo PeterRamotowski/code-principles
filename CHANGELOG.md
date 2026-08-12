@@ -9,11 +9,18 @@ All notable changes to the foundation package are documented here.
 - twelve executable Milestone 11 whole-system scenarios spanning the documented web, package, service,
   worker, pipeline, embedded, framework, and legacy contexts;
 - a deterministic evaluation runner with semantic assertions, scenario selection, and JSON reports.
+- transitive framework dependency resolution and executable language/framework runtime refinements;
+- self-contained manual-testing bundles for real repository paths and tasks;
+- compatibility, migration, governance, and stack-specific manual-testing documentation.
 
 ### Changed
 
 - `make validate` now executes the whole-system evaluation suite and repository validation enforces complete
   Milestone 11 scenario structure and coverage.
+- executable evaluations now verify adapter dependency completeness, applied runtime constraints, and active
+  technology-specific principle refinements;
+- Next.js and Nuxt depend on JavaScript runtime policy so JavaScript and TypeScript projects are both supported;
+- Drupal resolution now includes its required Symfony adapter.
 
 ## [0.10.0] — 2026-08-07
 

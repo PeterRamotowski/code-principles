@@ -433,6 +433,8 @@ Completion evidence:
 
 ## Milestone 12 — Stable Release Candidate
 
+Status: `in progress — manual candidate testing`
+
 Requirements:
 
 - complete validation tooling;
@@ -443,6 +445,17 @@ Requirements:
 - at least one external review from practitioners in web, Python, Go, and C++ ecosystems;
 - complete license and governance decision;
 - release notes and compatibility policy.
+
+Implemented candidate-release infrastructure:
+
+- deterministic adapter dependency closure and applied technology refinements;
+- self-contained manual test bundles for real repository paths and tasks;
+- documented compatibility, migration, governance, and manual review policies;
+- executable evaluation checks that selected adapter runtime guidance is applied.
+
+Remaining external gate:
+
+- complete and record the required independent practitioner reviews before promoting components or the release to stable.
 
 ## Future possibilities
 
@@ -457,19 +470,3 @@ After the stable foundation:
 - policy-diff output when configuration changes;
 - machine-generated evaluation reports;
 - adapters for safety-critical or regulated domains.
-
-
-## Foundation v0.2.0 additions
-
-Completed in this package:
-
-- canonical registry with 72 entries;
-- generated human-readable compendium;
-- principle classification and authoring model;
-- relationship registry;
-- self-containment policy;
-- Core Skill, profile, modifier, language, and framework blueprints;
-- principle and relationship schemas;
-- validation and generation tooling.
-
-The next implementation milestone should create complete normative Core Skills from the blueprints, beginning with `abstraction-and-reuse` and `code-clarity`.
