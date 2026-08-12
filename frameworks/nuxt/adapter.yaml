@@ -14,7 +14,7 @@ activation:
   file_patterns: [nuxt.config.ts, nuxt.config.js]
   manifest_dependencies: [nuxt]
 extends: []
-requires: [typescript, vue]
+requires: [javascript, vue]
 refines:
 - skill: dependencies-and-boundaries
   topics: [server-client-boundary, routing, auto-imports]

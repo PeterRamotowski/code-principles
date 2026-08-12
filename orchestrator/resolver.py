@@ -86,6 +86,24 @@ MODIFIER_MODES = {
     for identifier, effects in MODIFIER_EFFECTS.items()
 }
 
+
+def _load_adapter_metadata() -> dict[str, dict[str, Any]]:
+    """Load implemented language and framework adapters by stable identifier."""
+    adapters = {}
+    paths = sorted((ROOT / "languages").glob("*/adapter.yaml")) + sorted(
+        (ROOT / "frameworks").glob("*/adapter.yaml")
+    )
+    for path in paths:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if isinstance(data, dict) and isinstance(data.get("id"), str):
+            item = dict(data)
+            item["metadata_path"] = path.relative_to(ROOT).as_posix()
+            adapters[item["id"]] = item
+    return adapters
+
+
+ADAPTER_METADATA = _load_adapter_metadata()
+
 SKILL_PRINCIPLES = {
     "code-clarity": ("kiss", "explicit-over-implicit"),
     "abstraction-and-reuse": ("yagni", "dry"),
@@ -185,9 +203,22 @@ def detect_repository_context(repository: Path, task: str = "") -> dict[str, Any
             php_dependencies = {**composer_data.get("require", {}), **composer_data.get("require-dev", {})}
         except (OSError, json.JSONDecodeError, TypeError):
             php_dependencies = {}
-        for identifier, prefix in (("symfony", "symfony/"), ("drupal", "drupal/")):
-            if any(name.startswith(prefix) for name in php_dependencies):
-                frameworks.append(evidenced(identifier, "observed", [f"composer dependency {prefix}*"]))
+        if any(name in php_dependencies for name in ("symfony/framework-bundle", "symfony/symfony")):
+            frameworks.append(
+                evidenced("symfony", "observed", ["Symfony framework Composer dependency"])
+            )
+        if any(name == "drupal/core" or name.startswith("drupal/core-") for name in php_dependencies):
+            frameworks.append(evidenced("drupal", "observed", ["Drupal core Composer dependency"]))
+    if not any(item["value"] == "symfony" for item in frameworks) and any(
+        (repository / path).exists()
+        for path in ("symfony.lock", "config/bundles.php", "config/services.yaml")
+    ):
+        frameworks.append(evidenced("symfony", "observed", ["Symfony configuration files"]))
+    if not any(item["value"] == "drupal" for item in frameworks) and (
+        next(repository.rglob("*.info.yml"), None) is not None
+        or next(repository.rglob("*.module"), None) is not None
+    ):
+        frameworks.append(evidenced("drupal", "observed", ["Drupal extension files"]))
 
     artifact = "unknown"
     artifact_evidence: list[str] = []
@@ -409,6 +440,116 @@ def _selected_adapters(context: dict[str, Any], field: str) -> list[dict[str, An
     return sorted({item["id"]: item for item in selected}.values(), key=lambda item: item["id"])
 
 
+def _language_ancestors(identifier: str) -> set[str]:
+    ancestors = set()
+    stack = [identifier]
+    while stack:
+        current = stack.pop()
+        for parent in ADAPTER_METADATA.get(current, {}).get("extends", []):
+            if parent not in ancestors:
+                ancestors.add(parent)
+                stack.append(parent)
+    return ancestors
+
+
+def _resolve_adapter_selection(
+    context: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Resolve framework requirements and return selected and applied adapters.
+
+    Selected language output remains concise: inherited runtime adapters are applied but
+    not repeated in language_adapters. Framework requirements are explicit in output
+    because each framework contributes its own policy.
+    """
+    languages = {item["id"]: item for item in _selected_adapters(context, "languages")}
+    frameworks = {item["id"]: item for item in _selected_adapters(context, "frameworks")}
+
+    def effective_languages() -> set[str]:
+        result = set(languages)
+        for identifier in tuple(result):
+            result.update(_language_ancestors(identifier))
+        return result
+
+    pending = list(frameworks)
+    visited = set()
+    while pending:
+        identifier = pending.pop()
+        if identifier in visited:
+            continue
+        visited.add(identifier)
+        metadata = ADAPTER_METADATA.get(identifier)
+        if not metadata or metadata.get("type") != "framework-adapter":
+            raise OrchestrationError(f"unknown framework adapter: {identifier}")
+        for dependency in metadata.get("requires", []):
+            dependency_metadata = ADAPTER_METADATA.get(dependency)
+            if not dependency_metadata:
+                raise OrchestrationError(
+                    f"adapter {identifier} requires unknown adapter {dependency}"
+                )
+            if dependency_metadata.get("type") == "framework-adapter":
+                if dependency not in frameworks:
+                    frameworks[dependency] = {"id": dependency}
+                pending.append(dependency)
+            elif dependency not in effective_languages():
+                languages[dependency] = {"id": dependency}
+
+    # A child language adapter applies its parent runtime policy without duplicating
+    # the parent in the concise selected-adapter list.
+    for identifier in tuple(languages):
+        if any(identifier in _language_ancestors(other) for other in languages if other != identifier):
+            languages.pop(identifier)
+
+    applied_ids: list[str] = []
+
+    def apply_language(identifier: str) -> None:
+        metadata = ADAPTER_METADATA.get(identifier)
+        if not metadata or metadata.get("type") != "language-adapter":
+            raise OrchestrationError(f"unknown language adapter: {identifier}")
+        for parent in metadata.get("extends", []):
+            apply_language(parent)
+        if identifier not in applied_ids:
+            applied_ids.append(identifier)
+
+    for identifier in sorted(languages):
+        apply_language(identifier)
+
+    applied_frameworks = set()
+
+    def apply_framework(identifier: str) -> None:
+        metadata = ADAPTER_METADATA[identifier]
+        for dependency in metadata.get("requires", []):
+            dependency_metadata = ADAPTER_METADATA[dependency]
+            if dependency_metadata.get("type") == "framework-adapter":
+                apply_framework(dependency)
+        if identifier not in applied_frameworks:
+            applied_frameworks.add(identifier)
+            applied_ids.append(identifier)
+
+    for identifier in sorted(frameworks):
+        apply_framework(identifier)
+
+    selected_languages = [languages[item] for item in sorted(languages)]
+    selected_frameworks = [frameworks[item] for item in sorted(frameworks)]
+    applied = [ADAPTER_METADATA[item] for item in applied_ids]
+    return selected_languages, selected_frameworks, applied
+
+
+def _adapter_decisions(adapters: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    decisions = []
+    for adapter in adapters:
+        for index, statement in enumerate(adapter.get("runtime_constraints", []), start=1):
+            decisions.append({
+                "id": f"adapter-{adapter['id']}-runtime-{index}",
+                "statement": statement,
+                "rationale": (
+                    f"The selected {adapter['id']} adapter makes this runtime constraint "
+                    "part of the task policy."
+                ),
+                "scope": ["technology"],
+            })
+    return decisions
+
+
 def _skill_modes(
     profile: str, modifiers: list[str], repository_overrides: dict[str, Any], user_overrides: dict[str, Any]
 ) -> list[dict[str, Any]]:
@@ -592,8 +733,7 @@ def resolve_policy(
     if profile not in PROFILE_MODES:
         raise OrchestrationError(f"unsupported base profile: {profile or artifact}")
     modifiers = _activate_modifiers(normalized, task)
-    languages = _selected_adapters(normalized, "languages")
-    frameworks = _selected_adapters(normalized, "frameworks")
+    languages, frameworks, applied_adapters = _resolve_adapter_selection(normalized)
     repository_overrides = repository_context.get("overrides", {})
     user_overrides = user_context.get("overrides", {})
     active_skills = _skill_modes(profile, modifiers, repository_overrides, user_overrides)
@@ -616,6 +756,14 @@ def resolve_policy(
                 "source": skill["id"],
                 "status": "active",
             })
+    for adapter in applied_adapters:
+        for refinement in adapter.get("principle_refinements", []):
+            principles_by_id[refinement["principle"]] = {
+                "id": refinement["principle"],
+                "interpretation": refinement["interpretation"],
+                "source": adapter["id"],
+                "status": "active",
+            }
     active_principles = [principles_by_id[item] for item in sorted(principles_by_id)]
     language_ids = {item["id"] for item in languages}
     authority = normalized["project"]["architecture_authority"]["value"]
@@ -624,6 +772,11 @@ def resolve_policy(
         + user_overrides.get("prohibited_patterns", [])
         + skill_prohibitions
         + [
+            misuse
+            for adapter in applied_adapters
+            for misuse in adapter.get("common_misuse", [])
+        ]
+        + [
             item
             for modifier in modifiers
             for item in MODIFIER_EFFECTS.get(modifier, {}).get("prohibited_decisions", [])
@@ -631,7 +784,7 @@ def resolve_policy(
     ))
     decisions = _decisions(
         profile, modifiers, authority, explicitly_configured=bool(explicit_profile)
-    )
+    ) + _adapter_decisions(applied_adapters)
     profile_summary = (
         f"{profile} profile selected by explicit engineering context."
         if explicit_profile

@@ -18,7 +18,7 @@ expected:
   profile: legacy-modernization
   modifiers: []
   language_adapters: [php]
-  framework_adapters: [drupal]
+  framework_adapters: [drupal, symfony]
   significant_decisions: [artifact-driven-profile, incremental-architecture-change]
   skill_modes:
     safe-change: incremental-modernization

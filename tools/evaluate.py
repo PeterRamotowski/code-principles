@@ -15,7 +15,12 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from orchestrator.resolver import OrchestrationError, resolve_policy  # noqa: E402
+from orchestrator.resolver import (  # noqa: E402
+    ADAPTER_METADATA,
+    OrchestrationError,
+    _language_ancestors,
+    resolve_policy,
+)
 
 
 class EvaluationError(ValueError):
@@ -121,6 +126,45 @@ def evaluate(scenario: dict[str, Any]) -> tuple[dict[str, Any] | None, list[str]
                 expected[expected_name],
                 f"expected.{expected_name}",
                 failures,
+            )
+
+    selected_languages = set(_ids(policy["language_adapters"]))
+    effective_languages = set(selected_languages)
+    for identifier in selected_languages:
+        effective_languages.update(_language_ancestors(identifier))
+    selected_frameworks = set(_ids(policy["framework_adapters"]))
+    selected_adapters = selected_languages | effective_languages | selected_frameworks
+    for identifier in sorted(selected_frameworks):
+        for dependency in ADAPTER_METADATA[identifier].get("requires", []):
+            dependency_type = ADAPTER_METADATA[dependency]["type"]
+            available = (
+                dependency in selected_frameworks
+                if dependency_type == "framework-adapter"
+                else dependency in effective_languages
+            )
+            if not available:
+                failures.append(
+                    f"adapter dependencies: {identifier!r} requires missing {dependency!r}"
+                )
+
+    decisions_by_id = {item["id"]: item for item in policy["significant_decisions"]}
+    principle_sources = {item["source"] for item in policy["active_principles"]}
+    for identifier in sorted(selected_adapters):
+        metadata = ADAPTER_METADATA[identifier]
+        for index, statement in enumerate(metadata.get("runtime_constraints", []), start=1):
+            decision_id = f"adapter-{identifier}-runtime-{index}"
+            decision = decisions_by_id.get(decision_id)
+            if not decision:
+                failures.append(f"adapter guidance: missing decision {decision_id!r}")
+            elif decision.get("statement") != statement:
+                failures.append(f"adapter guidance: altered runtime constraint {decision_id!r}")
+        if (
+            identifier in selected_languages | selected_frameworks
+            and metadata.get("principle_refinements")
+            and identifier not in principle_sources
+        ):
+            failures.append(
+                f"adapter guidance: {identifier!r} contributes no active principle refinement"
             )
 
     if "significant_decisions" in expected:

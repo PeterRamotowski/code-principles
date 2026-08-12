@@ -10,7 +10,7 @@ frameworks:
   name: Next.js
   scope: client/server boundaries, rendering, caching, server actions, routing, and secret handling
   requires:
-  - typescript
+  - javascript
   - react
 - id: angular
   name: Angular
@@ -26,7 +26,7 @@ frameworks:
   name: Nuxt
   scope: SSR, server/client boundaries, data fetching, caching, routing, and auto-import conventions
   requires:
-  - typescript
+  - javascript
   - vue
 - id: symfony
   name: Symfony

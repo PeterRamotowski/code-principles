@@ -14,7 +14,7 @@ activation:
   file_patterns: [next.config.js, next.config.mjs, next.config.ts]
   manifest_dependencies: [next]
 extends: []
-requires: [typescript, react]
+requires: [javascript, react]
 refines:
 - skill: dependencies-and-boundaries
   topics: [server-client-boundary, routing, secrets]
