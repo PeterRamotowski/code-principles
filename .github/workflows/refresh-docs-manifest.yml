@@ -1,0 +1,32 @@
+name: Refresh docs branch manifest
+
+on:
+  push:
+    branches:
+      - docs/github-pages-site
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: docs/github-pages-site
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: python tools/update_manifest.py
+      - name: Commit refreshed manifest
+        run: |
+          if git diff --quiet -- MANIFEST.sha256; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MANIFEST.sha256
+          git commit -m "chore: refresh distribution manifest"
+          git push origin HEAD:docs/github-pages-site
