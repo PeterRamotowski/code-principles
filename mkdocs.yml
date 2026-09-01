@@ -1,0 +1,105 @@
+site_name: Code Principles
+site_description: A human-readable software engineering knowledge base and policy system for AI coding agents.
+site_url: https://peterramotowski.github.io/code-principles/
+repo_url: https://github.com/PeterRamotowski/code-principles
+repo_name: PeterRamotowski/code-principles
+edit_uri: edit/main/
+docs_dir: .site-docs
+site_dir: .site-build
+use_directory_urls: true
+
+nav:
+  - Home: index.md
+  - Principles:
+      - Browse principles: principles/index.md
+      - Classification: principles/CLASSIFICATION.md
+      - Authoring guide: principles/AUTHORING-GUIDE.md
+  - Decision system:
+      - Core Skills: core/index.md
+      - Project profiles: profiles/index.md
+      - Modifiers: modifiers/index.md
+      - Conflict resolution: CONFLICT-RESOLUTION.md
+      - Orchestrator: orchestrator/SKILL.md
+  - Technologies:
+      - Languages: languages/index.md
+      - Frameworks: frameworks/index.md
+  - Examples:
+      - Evaluation scenarios: evaluations/index.md
+  - Reference:
+      - Repository overview: README.md
+      - Specification: SPECIFICATION.md
+      - Architecture: ARCHITECTURE.md
+      - Knowledge model: KNOWLEDGE-MODEL.md
+      - Terminology: TERMINOLOGY.md
+      - Self-containment: SELF-CONTAINMENT.md
+      - Contributing: CONTRIBUTING.md
+      - Roadmap: ROADMAP.md
+      - Changelog: CHANGELOG.md
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/catalog-filter.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/PeterRamotowski/code-principles
+      name: Code Principles on GitHub
+
+validation:
+  omitted_files: warn
+  absolute_links: relative_to_docs
+  unrecognized_links: warn

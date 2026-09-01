@@ -1,9 +1,17 @@
-.PHONY: evaluate generate test validate validate-normative manifest package resolve
+.PHONY: docs docs-serve evaluate generate test validate validate-normative manifest package resolve
 
 PYTHON ?= python3
 
 generate:
 	$(PYTHON) tools/generate_compendium.py
+
+docs:
+	$(PYTHON) tools/generate_site_docs.py
+	mkdocs build
+
+docs-serve:
+	$(PYTHON) tools/generate_site_docs.py
+	mkdocs serve
 
 test:
 	$(PYTHON) -m unittest discover -s tests -p 'test_*.py'
