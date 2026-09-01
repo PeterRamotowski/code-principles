@@ -58,7 +58,7 @@ def write(relative: str, content: str) -> None:
     path.write_text(content.rstrip() + "\n", encoding="utf-8")
 
 
-def cards(items: Iterable[dict], href_prefix: str, document_name: str, details_key: str = "description") -> str:
+def cards(items: Iterable[dict], details_key: str = "description") -> str:
     rendered = []
     for item in sorted(items, key=lambda value: value.get("name", value["id"])):
         item_id = item["id"]
@@ -66,8 +66,7 @@ def cards(items: Iterable[dict], href_prefix: str, document_name: str, details_k
         description = html.escape(str(item.get(details_key, "")))
         search_text = html.escape(f"{name} {description} {item_id}".lower(), quote=True)
         rendered.append(
-            f'<a class="catalog-card" data-catalog-item data-search="{search_text}" '
-            f'href="{href_prefix}/{item_id}/{document_name}">'
+            f'<a class="catalog-card" data-catalog-item data-search="{search_text}" href="{item_id}/">'
             f'<span class="catalog-card__title">{name}</span>'
             f'<span class="catalog-card__description">{description}</span>'
             f'<span class="catalog-card__id">{html.escape(item_id)}</span>'
@@ -119,7 +118,7 @@ def generate_principles() -> None:
             )
             rows.append(
                 f'<a class="catalog-card" data-catalog-item data-search="{search_text}" '
-                f'href="compendium/{entry["id"]}.md">'
+                f'href="compendium/{entry["id"]}/">'
                 f'<span class="catalog-card__title">{name}</span>'
                 f'<span class="catalog-card__description">{summary}</span>'
                 f'<span class="catalog-card__meta">{classification}</span>'
@@ -165,7 +164,7 @@ def generate_component_hubs() -> None:
         catalog_page(
             "Core Skills",
             "Core Skills turn canonical principles into language-independent decision procedures. Choose a Skill to inspect its modes, conflicts, and review rules.",
-            cards(skills, "", "SKILL.md"),
+            cards(skills),
             len(skills),
         ),
     )
@@ -176,7 +175,7 @@ def generate_component_hubs() -> None:
         catalog_page(
             "Project profiles",
             "Profiles configure the dominant artifact and failure model before language or framework refinements are applied.",
-            cards(profiles, "", "PROFILE.md"),
+            cards(profiles),
             len(profiles),
         ),
     )
@@ -187,7 +186,7 @@ def generate_component_hubs() -> None:
         catalog_page(
             "Engineering modifiers",
             "Modifiers strengthen policy when a verified cross-cutting constraint applies. They never replace the base project profile.",
-            cards(modifiers, "", "MODIFIER.md"),
+            cards(modifiers),
             len(modifiers),
         ),
     )
@@ -198,7 +197,7 @@ def generate_component_hubs() -> None:
         catalog_page(
             "Language adapters",
             "Language adapters refine generic engineering policy with runtime, type-system, packaging, concurrency, and resource semantics.",
-            cards(languages, "", "SKILL.md"),
+            cards(languages),
             len(languages),
         ),
     )
@@ -209,7 +208,7 @@ def generate_component_hubs() -> None:
         catalog_page(
             "Framework adapters",
             "Framework adapters refine project policy with lifecycle, boundary, state, extension, and convention decisions.",
-            cards(frameworks, "", "SKILL.md"),
+            cards(frameworks),
             len(frameworks),
         ),
     )
