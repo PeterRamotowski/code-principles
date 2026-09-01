@@ -1,5 +1,8 @@
 :root {
   --cp-radius: 0.75rem;
+}
+
+:root > * {
   --cp-border: color-mix(in srgb, var(--md-default-fg-color) 16%, transparent);
   --cp-surface: color-mix(in srgb, var(--md-default-bg-color) 94%, var(--md-primary-fg-color) 6%);
   --cp-surface-hover: color-mix(in srgb, var(--md-default-bg-color) 86%, var(--md-primary-fg-color) 14%);
