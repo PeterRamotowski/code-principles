@@ -230,7 +230,8 @@ def generate_component_hubs() -> None:
 
 
 def inline_code(value) -> str:
-    return f"`{str(value).replace('`', '\\`')}`"
+    text = str(value).replace("`", "\\`")
+    return f"`{text}`"
 
 
 def render_value(value) -> str:
@@ -269,13 +270,6 @@ def scenario_page(path: Path, data: dict) -> str:
     forbidden = data.get("forbidden") or []
     principles = data.get("principles_under_test") or []
 
-    summary_rows = {
-        "Profile": expected.get("profile"),
-        "Modifiers": expected.get("modifiers"),
-        "Language adapters": expected.get("language_adapters"),
-        "Framework adapters": expected.get("framework_adapters"),
-    }
-
     repository_sections = []
     for filename, content in repository_signals.items():
         repository_sections.append(f"### `{filename}`\n\n```text\n{str(content).rstrip()}\n```")
@@ -306,10 +300,10 @@ def scenario_page(path: Path, data: dict) -> str:
 
 | Resolution layer | Expected |
 | --- | --- |
-| Profile | {render_value(summary_rows['Profile'])} |
-| Modifiers | {render_value(summary_rows['Modifiers'])} |
-| Language adapters | {render_value(summary_rows['Language adapters'])} |
-| Framework adapters | {render_value(summary_rows['Framework adapters'])} |
+| Profile | {render_value(expected.get('profile'))} |
+| Modifiers | {render_value(expected.get('modifiers'))} |
+| Language adapters | {render_value(expected.get('language_adapters'))} |
+| Framework adapters | {render_value(expected.get('framework_adapters'))} |
 
 ### Normalized context
 
