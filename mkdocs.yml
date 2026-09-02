@@ -8,33 +8,8 @@ docs_dir: .site-docs
 site_dir: .site-build
 use_directory_urls: true
 
-nav:
-  - Home: index.md
-  - Principles:
-      - Browse principles: principles/index.md
-      - Classification: principles/CLASSIFICATION.md
-      - Authoring guide: principles/AUTHORING-GUIDE.md
-  - Decision system:
-      - Core Skills: core/index.md
-      - Project profiles: profiles/index.md
-      - Modifiers: modifiers/index.md
-      - Conflict resolution: CONFLICT-RESOLUTION.md
-      - Orchestrator: orchestrator/SKILL.md
-  - Technologies:
-      - Languages: languages/index.md
-      - Frameworks: frameworks/index.md
-  - Examples:
-      - Evaluation scenarios: evaluations/index.md
-  - Reference:
-      - Repository overview: README.md
-      - Specification: SPECIFICATION.md
-      - Architecture: ARCHITECTURE.md
-      - Knowledge model: KNOWLEDGE-MODEL.md
-      - Terminology: TERMINOLOGY.md
-      - Self-containment: SELF-CONTAINMENT.md
-      - Contributing: CONTRIBUTING.md
-      - Roadmap: ROADMAP.md
-      - Changelog: CHANGELOG.md
+hooks:
+  - tools/docs_nav.py
 
 theme:
   name: material
